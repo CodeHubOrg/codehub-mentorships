@@ -16,3 +16,8 @@ mix.ts('resources/js/app.ts', 'public/js')
     require('tailwindcss'),
     require('postcss-import')
   ])
+.webpackConfig({
+  output: {
+    chunkFilename: 'js/[name].js?id=[chunkhash]',
+  }
+});
