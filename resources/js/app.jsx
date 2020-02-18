@@ -1,8 +1,8 @@
-import { InertiaApp } from '@inertiajs/inertia-react'
-import React from 'react'
-import { render } from 'react-dom'
+import React from 'react';
+import { InertiaApp } from '@inertiajs/inertia-react';
+import { render } from 'react-dom';
 
-const app = document.getElementById('app')
+const app = document.getElementById('app');
 
 render(
   <InertiaApp
@@ -10,4 +10,4 @@ render(
     resolveComponent={name => import(`./Pages/${name}`).then(module => module.default)}
   />,
   app
-)
+);
