@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-    content: string
+    content: any
 }
 
 export default function Heading({content}: Props) {
