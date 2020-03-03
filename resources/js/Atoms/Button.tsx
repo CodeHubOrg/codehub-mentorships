@@ -1,9 +1,14 @@
 import React from 'react';
 
-export default function Button({content, size}) {
+
+interface Props {
+    children: React.ReactChildren
+    size: "small" | "medium" | "large"
+}
+
+export default function Button({children, size}: Props) {
 
     let styling;
-
     switch (size) {
         case "small":
             styling = "bg-blue-700";
@@ -16,6 +21,6 @@ export default function Button({content, size}) {
     }
 
     return (
-        <button className={styling}>{content}</button>
+        <button type="button" className={styling}>{children}</button>
     );
 }
