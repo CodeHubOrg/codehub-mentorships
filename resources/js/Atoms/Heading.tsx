@@ -1,6 +1,10 @@
 import React from 'react';
 
-export default function Heading({content}) {
+interface Props {
+    content: string
+}
+
+export default function Heading({content}: Props) {
 
     return (
         <div className="box-border p-4 border-4 border-gray-400 bg-gray-200">
