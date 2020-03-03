@@ -1,11 +1,21 @@
 import React from 'react';
 
-export default function Button({content}) {
+export default function Button({content, size}) {
+
+    let styling;
+
+    switch (size) {
+        case "small":
+            styling = "bg-blue-700";
+        break;
+        case "medium":
+            styling = "bg-green-700";
+        break;
+        default:
+            styling = "";
+    }
 
     return (
-        <button
-            className="p-10 transition duration-500 ease-in-out bg-blue-500 hover:bg-red-500 transform hover:-translate-y-1 hover:scale-110 ...">
-            {content}
-        </button>
+        <button className={styling}>{content}</button>
     );
 }

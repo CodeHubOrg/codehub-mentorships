@@ -8,7 +8,7 @@ export default function Index({message, button}) {
         <div>
             <Heading content={message}/>
             <div className="container mx-auto p-20">
-                <Button content={button}/>
+                <Button content={button} size="medium" />
             </div>
         </div>
     );
