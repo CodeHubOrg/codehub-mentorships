@@ -1,6 +1,7 @@
 import React from 'react';
 import Heading from '@/Atoms/Heading';
 import Button from '@/Atoms/Button';
+import Card from '@/Molecules/Card'; 
 
 interface Props {
     message: string;
@@ -17,6 +18,7 @@ export default function Index({message, button}: Props) {
                     {button}
                 </Button>
             </div>
+            <Card heading="Card heading" hasPadding={true} />
         </div>
     );
 }
