@@ -6,7 +6,7 @@ import SampleForm from "@/Organisms/SampleForm";
 
 interface Props {
     message: string;
-    button: string;
+    button: React.ReactChildren;
 }
 
 export default function Index({ message, button }: Props) {
