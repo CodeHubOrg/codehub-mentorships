@@ -1,6 +1,7 @@
 import React from 'react';
 import Heading from '@/Atoms/Heading';
 import Button from '@/Atoms/Button';
+import Card from '@/Molecules/Card'; 
 
 interface Props {
     message:React.ReactChildren;
