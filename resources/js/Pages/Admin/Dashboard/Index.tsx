@@ -5,16 +5,18 @@ import Card from "@/Molecules/Card";
 import SampleForm from "@/Organisms/SampleForm";
 
 interface Props {
-    message: string;
+    message: React.ReactChildren;
     button: React.ReactChildren;
 }
 
 export default function Index({ message, button }: Props) {
     return (
         <div>
-            <Heading content={message} />
+            <Heading type="h3">
+                {message}
+            </Heading>
             <div className="container mx-auto p-20">
-                <Button>{button}</Button>
+                <Button size="medium">{button}</Button>
 
                 <Card heading="Card heading" hasPadding={true} />
 
