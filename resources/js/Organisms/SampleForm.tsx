@@ -1,5 +1,5 @@
 import React from "react";
-import { Form } from "@/Organisms/Form";
+import Form from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 
 const SampleForm: React.FC = () => {
