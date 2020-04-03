@@ -1,12 +1,12 @@
 import React from 'react';
 
-type Props = {
+interface IProps {
 	heading?: String,
 	hasPadding?: Boolean
 }
 
 
-const Card: React.FC<Props> = ({ heading, hasPadding }) => {
+const Card: React.FC<IProps> = ({ heading, hasPadding }) => {
   return (
     <section>
     	<div className="bg-white shadow overflow-hidden sm:rounded-lg">
