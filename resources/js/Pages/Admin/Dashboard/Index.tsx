@@ -12,18 +12,18 @@ interface Props {
 }
 
 export default function Index({ message, button }: Props) {
-	return (
-		<div>
-			<AuthLayout heading="Auth Layout" message="">
-				<SampleForm />
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
+    return (
+        <div>
+            <AuthLayout heading="Auth Layout" message="">
+                <SampleForm />
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
 
-				<Heading type="h3">{message}</Heading>
-				<Card heading="Card heading" hasPadding={true} />
-				<Button size="medium">{button}</Button>
-				<Textarea placeholder="text area" />
-			</AuthLayout>
-		</div>
-	);
+                <Heading type="h3">{message}</Heading>
+                <Card heading="Card heading" hasPadding={true} />
+                <Button size="medium">{button}</Button>
+                <Textarea placeholder="text area" />
+            </AuthLayout>
+        </div>
+    );
 }
