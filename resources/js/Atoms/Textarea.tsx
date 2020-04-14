@@ -10,18 +10,16 @@ export const Textarea: React.FC<iFieldProps> = ({
 }) => {
     return (
         <div>
-            <h1>Text Area</h1>
+            <label className="block text-sm font-medium text-gray-700">
+                Textarea
+            </label>
              <textarea
              placeholder={placeholder}
              onChange={
                  (e: React.FormEvent<HTMLTextAreaElement>) =>
                      console.log(e)
              }
-             onBlur={
-                 (e: React.FormEvent<HTMLTextAreaElement>) =>
-                     console.log(e)
-             }
-             className="form-control"
+             className="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
              />
         </div>
     );
