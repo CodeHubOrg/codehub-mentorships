@@ -7,13 +7,16 @@ interface IFormProps {
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
-    handleChange: (e: React.FormEvent<HTMLInputElement>) => void
+    handleChange: (e: React.FormEvent<HTMLInputElement>) => void,
+    sel:string,
+    radioButtonChange: (e: React.FormEvent<HTMLInputElement>) => void
   ) => React.ReactNode;
 }
 
 export interface IValues {
   /* Key value pairs for all the field values with key being the field name */
   [key: string]: any;
+  
 }
 
 export interface IErrors {
@@ -35,6 +38,7 @@ export interface IFormState {
 const Form: React.FC<IFormProps> = ({ action, render }) => {
   const [errors, setErrors] = useState<IErrors>({});
   const [values, setValues] = useState<IValues>({ fullname: "" });
+  const [selected, setSelected] = useState<string|null>('');
   const [submitSuccess, setSuccess] = useState(undefined);
 
   const haveErrors = (errors: IErrors) => {
@@ -50,6 +54,11 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
   const updateState = (target: HTMLInputElement) => {
     const { name, value } = target;
     setValues({ [name]: value });
+  };
+
+  const updateRedioButtonState = (target: HTMLInputElement) => {
+    const { value } = target;
+    setSelected(value);
   };
 
   const validateForm = (): boolean => {
@@ -81,7 +90,7 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
       <div className="container">
         {/* in the component where Form is used, the render prop will have form fields
         assigned to it */}
-        {render(values, (e) => updateState(e.target as HTMLInputElement))}
+        {render(values,(e) => updateState(e.target as HTMLInputElement),selected,(e)=>updateRedioButtonState(e.target as HTMLInputElement))}
 
         <div className="form-group">
           <button
