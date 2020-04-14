@@ -15,6 +15,6 @@ export default function Index(_a) {
             React.createElement(Heading, { type: "h3" }, message),
             React.createElement(Card, { heading: "Card heading", hasPadding: true }),
             React.createElement(Button, { size: "medium" }, button),
-            React.createElement(Textarea, { label: "text area", editor: "Editor", value: "textbox" }))));
+            React.createElement(Textarea, { placeholder: "text area" }))));
 }
 //# sourceMappingURL=Index.js.map

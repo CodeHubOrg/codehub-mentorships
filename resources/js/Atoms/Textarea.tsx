@@ -1,23 +1,18 @@
 import * as React from "react";
 
-type Editor = "textbox";
 
 interface iFieldProps {
-    label?: string;
-    editor?: Editor;
-    value?: any;
+    placeholder?: string;
 }
 
 export const Textarea: React.FC<iFieldProps> = ({
-    label
-    editor,
-    value
+    placeholder
 }) => {
     return (
         <div>
-            {editor!.toLowerCase() === "multilinetextbox" && (
+            <h1>Text Area</h1>
              <textarea
-             value={value}
+             placeholder={placeholder}
              onChange={
                  (e: React.FormEvent<HTMLTextAreaElement>) =>
                      console.log(e)
@@ -28,7 +23,6 @@ export const Textarea: React.FC<iFieldProps> = ({
              }
              className="form-control"
              />
-            )}
         </div>
     );
 };

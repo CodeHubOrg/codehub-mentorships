@@ -23,7 +23,7 @@ export default function Index({ message, button }: Props) {
                 <Heading type="h3">{message}</Heading>
                 <Card heading="Card heading" hasPadding={true} />
                 <Button size="medium">{button}</Button>
-                <Textarea label="text area" editor="Editor" value="textbox"/>
+                <Textarea placeholder="text area" />
             </AuthLayout>
         </div>
     );
