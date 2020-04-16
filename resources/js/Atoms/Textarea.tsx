@@ -17,7 +17,7 @@ export const Textarea: React.FC<iFieldProps> = ({
              placeholder={placeholder}
              onChange={
                  (e: React.FormEvent<HTMLTextAreaElement>) =>
-                     console.log(e)
+                     console.log(e.currentTarget.value)
              }
              className="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
              />
