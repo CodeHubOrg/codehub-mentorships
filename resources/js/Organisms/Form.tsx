@@ -3,7 +3,7 @@ import React, { useState } from "react";
 interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
-
+  initialValues: IValues;
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
@@ -32,9 +32,9 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, render }) => {
+const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
   const [errors, setErrors] = useState<IErrors>({});
-  const [values, setValues] = useState<IValues>({ fullname: "" });
+  const [values, setValues] = useState<IValues>(initialValues);
   const [submitSuccess, setSuccess] = useState(undefined);
 
   const haveErrors = (errors: IErrors) => {
@@ -49,7 +49,7 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
 
   const updateState = (target: HTMLInputElement) => {
     const { name, value } = target;
-    setValues({ [name]: value });
+    setValues({ ...values, [name]: value });
   };
 
   const validateForm = (): boolean => {
@@ -97,18 +97,16 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
             The form was successfully submitted!
           </div>
         )}
-        {submitSuccess === false &&
-          !haveErrors(errors) && (
-            <div className="alert alert-danger" role="alert">
-              Sorry, an unexpected error has occurred
-            </div>
-          )}
-        {submitSuccess === false &&
-          haveErrors(errors) && (
-            <div className="alert alert-danger" role="alert">
-              Sorry, the form is invalid. Please review, adjust and try again
-            </div>
-          )}
+        {submitSuccess === false && !haveErrors(errors) && (
+          <div className="alert alert-danger" role="alert">
+            Sorry, an unexpected error has occurred
+          </div>
+        )}
+        {submitSuccess === false && haveErrors(errors) && (
+          <div className="alert alert-danger" role="alert">
+            Sorry, the form is invalid. Please review, adjust and try again
+          </div>
+        )}
       </div>
     </form>
   );
