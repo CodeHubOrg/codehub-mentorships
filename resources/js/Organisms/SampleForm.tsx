@@ -7,7 +7,8 @@ const SampleForm: React.FC = () => {
 	return (
 		<Form
 			action=""
-			render={(values,handleChange,selected,radioChange) => (
+			initialValues={{ fullname: "", contact: "" }}
+			render={(values, handleChange) => (
 				<React.Fragment>
 					<FormTextInput
 						name="fullname"
@@ -18,10 +19,21 @@ const SampleForm: React.FC = () => {
 					/>
 					<FormRedioButton
 						label="Contact"
-						selected={selected}
-						choices={[{label:'email',helptext:'Email',value:'email'},{label:'phone',helptext:'Phone',value:'phone'}]}
+						selected={values["contact"]}
+						choices={[
+							{
+								label: "email",
+								helptext: "Email",
+								value: "email",
+							},
+							{
+								label: "phone",
+								helptext: "Phone",
+								value: "phone",
+							},
+						]}
 						helpText="Prefered way to contact"
-						onChange={radioChange}
+						onChange={handleChange}
 						name="contact"
 					/>
 				</React.Fragment>

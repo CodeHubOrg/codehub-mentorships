@@ -3,20 +3,17 @@ import React, { useState } from "react";
 interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
-
+  initialValues: IValues;
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
-    handleChange: (e: React.FormEvent<HTMLInputElement>) => void,
-    sel:string,
-    radioButtonChange: (e: React.FormEvent<HTMLInputElement>) => void
+    handleChange: (e: React.FormEvent<HTMLInputElement>) => void
   ) => React.ReactNode;
 }
 
 export interface IValues {
   /* Key value pairs for all the field values with key being the field name */
   [key: string]: any;
-  
 }
 
 export interface IErrors {
@@ -35,10 +32,9 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, render }) => {
+const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
   const [errors, setErrors] = useState<IErrors>({});
-  const [values, setValues] = useState<IValues>({ fullname: "" });
-  const [selected, setSelected] = useState<string|null>('');
+  const [values, setValues] = useState<IValues>(initialValues);
   const [submitSuccess, setSuccess] = useState(undefined);
 
   const haveErrors = (errors: IErrors) => {
@@ -53,12 +49,7 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
 
   const updateState = (target: HTMLInputElement) => {
     const { name, value } = target;
-    setValues({ [name]: value });
-  };
-
-  const updateRedioButtonState = (target: HTMLInputElement) => {
-    const { value } = target;
-    setSelected(value);
+    setValues({ ...values, [name]: value });
   };
 
   const validateForm = (): boolean => {
@@ -90,7 +81,7 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
       <div className="container">
         {/* in the component where Form is used, the render prop will have form fields
         assigned to it */}
-        {render(values,(e) => updateState(e.target as HTMLInputElement),selected,(e)=>updateRedioButtonState(e.target as HTMLInputElement))}
+        {render(values, (e) => updateState(e.target as HTMLInputElement))}
 
         <div className="form-group">
           <button
@@ -106,18 +97,16 @@ const Form: React.FC<IFormProps> = ({ action, render }) => {
             The form was successfully submitted!
           </div>
         )}
-        {submitSuccess === false &&
-          !haveErrors(errors) && (
-            <div className="alert alert-danger" role="alert">
-              Sorry, an unexpected error has occurred
-            </div>
-          )}
-        {submitSuccess === false &&
-          haveErrors(errors) && (
-            <div className="alert alert-danger" role="alert">
-              Sorry, the form is invalid. Please review, adjust and try again
-            </div>
-          )}
+        {submitSuccess === false && !haveErrors(errors) && (
+          <div className="alert alert-danger" role="alert">
+            Sorry, an unexpected error has occurred
+          </div>
+        )}
+        {submitSuccess === false && haveErrors(errors) && (
+          <div className="alert alert-danger" role="alert">
+            Sorry, the form is invalid. Please review, adjust and try again
+          </div>
+        )}
       </div>
     </form>
   );
