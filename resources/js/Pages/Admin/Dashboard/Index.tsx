@@ -4,6 +4,8 @@ import Button from "@/Atoms/Button";
 import Card from "@/Molecules/Card";
 import SampleForm from "@/Organisms/SampleForm";
 import AuthLayout from "@/Atoms/AuthLayout";
+import {Textarea} from "@/Atoms/Textarea";
+
 
 interface Props {
     message: React.ReactChildren;
@@ -21,6 +23,7 @@ export default function Index({ message, button }: Props) {
                 <Heading type="h3">{message}</Heading>
                 <Card heading="Card heading" hasPadding={true} />
                 <Button size="medium">{button}</Button>
+                <Textarea placeholder="text area" />
             </AuthLayout>
         </div>
     );
