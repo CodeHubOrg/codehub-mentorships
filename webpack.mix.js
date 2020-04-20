@@ -1,5 +1,5 @@
-const mix = require('laravel-mix');
-const path = require('path');
+const mix = require("laravel-mix");
+const path = require("path");
 
 /*
  |--------------------------------------------------------------------------
@@ -12,16 +12,21 @@ const path = require('path');
  |
  */
 
-mix.ts('resources/js/app.tsx', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
-        require('tailwindcss'),
-        require('postcss-import')
-    ])
-    .webpackConfig({
-        output: {
-            chunkFilename: 'js/[name].js?id=[chunkhash]',
-        },
-        resolve: {
-            alias: {'@': path.resolve('resources/js')},
-        }
-    });
+mix.ts("resources/js/app.tsx", "public/js")
+	.postCss("resources/css/app.css", "public/css", [
+		require("tailwindcss"),
+		require("postcss-import"),
+	])
+	.webpackConfig({
+		output: {
+			chunkFilename: "js/[name].js?id=[chunkhash]",
+		},
+		resolve: {
+			alias: { "@": path.resolve("resources/js") },
+		},
+	});
+
+mix.react("resources/js/app.js", "public/js").sass(
+	"resources/sass/app.scss",
+	"public/css"
+);
