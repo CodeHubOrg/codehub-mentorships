@@ -1,4 +1,8 @@
-@extends('layouts.app')
+<?php 
+
+// leaving this in for reference when building the form
+
+/* @extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -75,3 +79,5 @@
     </div>
 </div>
 @endsection
+
+*/
