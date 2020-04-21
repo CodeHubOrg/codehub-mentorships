@@ -1,27 +1,31 @@
 import React from "react";
-import Heading from "@/Atoms/Heading";
-import Button from "@/Atoms/Button";
-import Card from "@/Molecules/Card";
-import SampleForm from "@/Organisms/SampleForm";
 import AuthLayout from "@/Atoms/AuthLayout";
 
-interface Props {
-    message: React.ReactChildren;
-    button: React.ReactChildren;
-}
+const LoginForm: React.FC = () => {
+	return (
+		<AuthLayout heading="Login" message="Log into your account">
+			<p>Form to go here with fields:</p>
 
-export default function Index({ message, button }: Props) {
-    return (
-        <div>
-            <AuthLayout heading="Auth Layout" message="">
-                <SampleForm />
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
+			<div>
+				E-Mail Address
+				<br />
+				Password
+				<br />
+				Remember Me (checkbox)
+				<p>&nbsp;</p>
+				Forgot your password?
+				<p>&nbsp;</p>
+				<button
+					className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+					type="submit"
+				>
+					Login
+				</button>
+				<p>&nbsp;</p>
+				<a href="/register">Register</a>
+			</div>
+		</AuthLayout>
+	);
+};
 
-                <Heading type="h3">{message}</Heading>
-                <Card heading="Card heading" hasPadding={true} />
-                <Button size="medium">{button}</Button>
-            </AuthLayout>
-        </div>
-    );
-}
+export default LoginForm;

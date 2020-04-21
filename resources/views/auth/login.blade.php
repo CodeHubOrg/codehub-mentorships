@@ -1,3 +1,6 @@
+<?php 
+// leaving in for reference
+/*
 @extends('layouts.app')
 
 @section('content')
@@ -71,3 +74,4 @@
     </div>
 </div>
 @endsection
+*/
