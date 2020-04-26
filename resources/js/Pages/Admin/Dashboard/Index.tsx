@@ -32,7 +32,7 @@ export default function Index({ message, button }: Props) {
 
 
 import React from "react";
-import MenteeForm from "@/Organisms/MenteeForm";
+import MentorForm from "@/Organisms/MentorForm";
 import FormLayout from "@/Atoms/FormLayout";
 
 
@@ -45,8 +45,8 @@ interface Props {
 export default function Index({  }: Props) {
     return (
         <div>
-            <FormLayout heading="Mentee Form" message="Please fill out the questionnaire below if you are interested in finding someone to mentor you">
-                <MenteeForm />
+            <FormLayout heading="Mentor Form" message="Please fill out the questionnaire below if you are interested in finding someone to mentor you">
+                <MentorForm />
             </FormLayout>
         </div>
     );
