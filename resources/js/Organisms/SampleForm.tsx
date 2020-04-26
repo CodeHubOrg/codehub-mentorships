@@ -18,6 +18,7 @@ const SampleForm: React.FC = () => {
 						onChange={handleChange}
 					/>
 					<FormRadioButton
+						type="radio"
 						label="Contact"
 						selected={values["contact"]}
 						choices={[

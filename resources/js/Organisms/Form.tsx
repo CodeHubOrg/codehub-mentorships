@@ -50,12 +50,26 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, formErrors, render 
   };
 
   const updateState = (target: HTMLInputElement) => {
-    const { name, value } = target;
-    setValues({ ...values, [name]: value });
+    const { name, value,type } = target;
+    if(type==='checkbox'){
+      let newSelection: any[];
+      if(values[name].indexOf(value) > -1) 
+      {
+        newSelection = values[name].filter(s => s !== value)
+      }else 
+      {
+        newSelection = [...values[name], value];
+      }
+      setValues({ ...values, [name]: newSelection }); 
+    }else
+      {
+        setValues({ ...values, [name]: value });
+      }
+
     if(haveErrors(errors))
-    {
-      validateForm();
-    }
+      {
+        validateForm();
+      }
   };
 
   const validateForm = (): boolean => {

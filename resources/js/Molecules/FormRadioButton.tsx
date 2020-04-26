@@ -6,14 +6,16 @@ interface choice {
 	value: string;
 }
 interface IProps {
+	type:string;
 	label: string;
 	selected: string;
 	choices: choice[];
-	helpText: string;
+	helpText?: string;
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 	name: string;
 }
 const FormRadioButton: React.FC<IProps> = ({
+	type,
 	label,
 	selected,
 	choices,
@@ -23,7 +25,7 @@ const FormRadioButton: React.FC<IProps> = ({
 }) => {
 	return (
 		<div>
-			<label className="block text-sm leading-5 font-medium text-gray-700">{label}:</label>
+			<label className="block text-sm leading-5 font-medium text-gray-700">{label}</label>
 			<p className="text-sm leading-5 font-medium text-gray-400">
 				{helpText}
 			</p>
@@ -31,12 +33,12 @@ const FormRadioButton: React.FC<IProps> = ({
 				choices.map((choice, index) => (
 					<div key={index} className="mt-4 flex items-center">
 						<input
-							type="radio"
+							type={type}
 							id={choice.value}
 							name={name}
 							value={choice.value}
-							checked={selected == choice.value}
-							className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+							checked={type==="radio"?selected == choice.value:selected.indexOf(choice.value) > -1}
+							className={`form-${type} h-4 w-4 text-indigo-600 transition duration-150 ease-in-out`}
 							onChange={onChange}
 						/>
 						<label htmlFor={choice.value} className="ml-3">

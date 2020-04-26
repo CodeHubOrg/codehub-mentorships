@@ -9,7 +9,7 @@ const MenteeForm: React.FC = () => {
 		<Form
 			action=""
 			initialValues={{ fullname: "",email:"",currentstatus:"",
-							 previousexp:"",interest:"",optionalint:"",
+							 previousexp:"",interest:"",specinterest:"",
 			                 mentortype: "",timeframe:"",suitabletime:"",extrainfo:"" }}
             formErrors={{fullname:"",email:""}}
 			render={(values,handleChange,errors) => (
@@ -53,14 +53,15 @@ const MenteeForm: React.FC = () => {
 					/>
 					<div className="block text-sm font-medium text-red-500 pb-5"></div>
 					<Textarea
-						name="optionalint"
+						name="specinterest"
 						label="Is there something specific you want to learn and want mentoring in?"
-						value={values["optionalint"]}
+						value={values["specinterest"]}
 						helpText="(e.g. programming language, framework, project, etc.)"
 						onChange={handleChange}
 					/>
 					<div className="block text-sm font-medium text-red-500 pb-5"></div>
 					<FormRadioButton
+						type="radio"
 						label="Are you after some more general mentoring?"
 						selected={values["mentortype"]}
 						choices={[
