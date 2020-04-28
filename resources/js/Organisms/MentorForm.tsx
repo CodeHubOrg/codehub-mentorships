@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
-import FormRadioButton from "@/Molecules/FormRadioButton";
+import FormChoiceField from "@/Molecules/FormChoiceField";
 import {Textarea} from "@/Atoms/Textarea";
 
 const MentorForm: React.FC = () => {
@@ -10,7 +10,6 @@ const MentorForm: React.FC = () => {
 			action=""
 			initialValues={{ fullname: "",email:"",
 			                 interests:[],skillsets:"",suitabletime:"",extrainfo:"" }}
-            formErrors={{fullname:"",email:""}}
 			render={(values,handleChange,errors) => (
 				<React.Fragment>
 					<FormTextInput
@@ -27,7 +26,7 @@ const MentorForm: React.FC = () => {
 						onChange={handleChange}
 					/>
                     <div className="block text-sm font-medium text-red-500 pb-5">{errors["email"]}</div>
-					<FormRadioButton
+					<FormChoiceField
                         type="radio"
 						label="Have you mentored anyone before?"
 						selected={values["mentorexp"]}
@@ -52,7 +51,7 @@ const MentorForm: React.FC = () => {
 						name="mentorexp"
 					/>
                      <div className="block text-sm font-medium text-red-500 pb-5"></div>
-                     <FormRadioButton
+                     <FormChoiceField
                         type="checkbox"
 						label="Which concepts would you be happy to cover?"
 						selected={values["interests"]}
