@@ -6,7 +6,7 @@ interface choice {
 	value: string;
 }
 interface IProps {
-	type:string;
+	type:"checkbox" | "radio";
 	label: string;
 	selected: string;
 	choices: choice[];
@@ -14,7 +14,7 @@ interface IProps {
 	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 	name: string;
 }
-const FormRadioButton: React.FC<IProps> = ({
+const FormChoiceField: React.FC<IProps> = ({
 	type,
 	label,
 	selected,
@@ -37,7 +37,7 @@ const FormRadioButton: React.FC<IProps> = ({
 							id={choice.value}
 							name={name}
 							value={choice.value}
-							checked={type==="radio"?selected == choice.value:selected.indexOf(choice.value) > -1}
+							checked={type==="radio"?selected === choice.value:selected.indexOf(choice.value) > -1}
 							className={`form-${type} h-4 w-4 text-indigo-600 transition duration-150 ease-in-out`}
 							onChange={onChange}
 						/>
@@ -52,4 +52,4 @@ const FormRadioButton: React.FC<IProps> = ({
 	);
 };
 
-export default FormRadioButton;
+export default FormChoiceField;
