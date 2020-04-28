@@ -4,7 +4,6 @@ interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
   initialValues: IValues;
-  formErrors ?:IErrors;
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
@@ -34,8 +33,8 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues, formErrors, render }) => {
-  const [errors, setErrors] = useState<IErrors>(formErrors);
+const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
+  const [errors, setErrors] = useState<IErrors>({});
   const [values, setValues] = useState<IValues>(initialValues);
   const [submitSuccess, setSuccess] = useState(undefined);
 
