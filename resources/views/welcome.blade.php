@@ -72,10 +72,13 @@
     @endif
 
     <div class="content">
-        <div class="title m-b-md">
+      <!--   <div class="title m-b-md">
             Laravel
-        </div>
+        </div> -->
 
+        <div class="title m-b-md">
+           Mentorships
+        </div>
         <div class="links">
             <a href="https://laravel.com/docs">Docs</a>
             <a href="https://laracasts.com">Laracasts</a>
