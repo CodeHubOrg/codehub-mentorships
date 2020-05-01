@@ -1,11 +1,11 @@
 import React from "react";
 
 interface IProps {
-	name: string;
-	label?: string;
-	value?: string;
-	helpText?: string;
-	onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  name: string;
+  label?: string;
+  value?: string;
+  helpText?: string;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const FormTextInput: React.FC<IProps> = ({
@@ -13,7 +13,7 @@ const FormTextInput: React.FC<IProps> = ({
     label,
     value,
     onChange,
-    helpText
+    helpText,
 }) => {
     return (
         <div>
@@ -32,8 +32,8 @@ const FormTextInput: React.FC<IProps> = ({
                 value={value}
                 className="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
                 onChange={onChange}
+                placeholder={helpText}
             />
-            {helpText && <div>{helpText}</div>}
         </div>
     );
 };

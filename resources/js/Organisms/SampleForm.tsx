@@ -1,7 +1,7 @@
 import React from "react";
 import Form from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
-import FormRedioButton from "@/Molecules/FormRedioButton";
+import FormChoiceField from "@/Molecules/FormChoiceField";
 
 const SampleForm: React.FC = () => {
     return (
@@ -17,7 +17,8 @@ const SampleForm: React.FC = () => {
                         helpText="Please enter your full name"
                         onChange={handleChange}
                     />
-                    <FormRedioButton
+                    <FormChoiceField
+                        type="radio"
                         label="Contact"
                         selected={values["contact"]}
                         choices={[
