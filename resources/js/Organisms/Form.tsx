@@ -7,7 +7,8 @@ interface IFormProps {
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
-    handleChange: (e: React.FormEvent<HTMLInputElement>) => void
+    handleChange: (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
+    errors:IErrors
   ) => React.ReactNode;
 }
 
@@ -32,7 +33,7 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
+const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
   const [errors, setErrors] = useState<IErrors>({});
   const [values, setValues] = useState<IValues>(initialValues);
   const [submitSuccess, setSuccess] = useState(undefined);
@@ -48,15 +49,49 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
   };
 
   const updateState = (target: HTMLInputElement) => {
-    const { name, value } = target;
-    setValues({ ...values, [name]: value });
+    const { name, value,type } = target;
+    if(type==='checkbox'){
+      let newSelection: any[];
+      if(values[name].indexOf(value) > -1) 
+      {
+        newSelection = values[name].filter(s => s !== value)
+      }else 
+      {
+        newSelection = [...values[name], value];
+      }
+      setValues({ ...values, [name]: newSelection }); 
+    }else
+      {
+        setValues({ ...values, [name]: value });
+      }
+
+    if(haveErrors(errors))
+      {
+        validateForm();
+      }
   };
 
   const validateForm = (): boolean => {
-    // TODO - validate form
-    // (set errors? for now just set as empty object)
-    setErrors({});
-    return true;
+    let newErrors:IErrors = errors;
+    let formisValid:boolean = true;
+    newErrors.fullname ='';
+    newErrors.email ='';
+
+    if (!values["fullname"] || values["fullname"].trim().length==0) 
+      {
+        newErrors.fullname ='Please enter your fullname';
+        formisValid=false;
+      }
+
+    let validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; 
+    if (!validEmail.test(values["email"])) 
+      {
+        errors.email = 'Please enter valid email id';
+        formisValid = false;
+      }  
+      
+    setErrors({...errors,["fullname"]:newErrors.fullname,["email"]:newErrors.email});  
+    return formisValid;
   };
 
   const submitForm = async (): Promise<boolean> => {
@@ -70,9 +105,14 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
     e.preventDefault();
     console.log(values);
 
-    if (validateForm()) {
+    if (validateForm()) 
+    {
       await submitForm();
       setSuccess(true);
+      setValues(initialValues);
+    }else
+    {
+      setSuccess(false);
     }
   };
 
@@ -81,12 +121,12 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
       <div className="container">
         {/* in the component where Form is used, the render prop will have form fields
         assigned to it */}
-        {render(values, (e) => updateState(e.target as HTMLInputElement))}
+        {render(values, (e) => updateState(e.target as HTMLInputElement),errors)}
 
         <div className="form-group">
           <button
-            type="submit"
-            className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+            type="submit"  
+            className="block px-4 py-2 mx-auto border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
             disabled={haveErrors(errors)}
           >
             Submit

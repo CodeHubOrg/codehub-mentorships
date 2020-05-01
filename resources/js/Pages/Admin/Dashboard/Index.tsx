@@ -1,4 +1,4 @@
-import React from "react";
+{/*import React from "react";
 import Heading from "@/Atoms/Heading";
 import Button from "@/Atoms/Button";
 import Card from "@/Molecules/Card";
@@ -26,4 +26,27 @@ export default function Index({ message, button }: Props) {
 			</AuthLayout>
 		</div>
 	);
+}
+*/}
+
+
+import React from "react";
+import MentorForm from "@/Organisms/MentorForm";
+import FormLayout from "@/Atoms/FormLayout";
+
+
+
+interface Props {
+    message: React.ReactChildren;
+    button: React.ReactChildren;
+}
+
+export default function Index({  }: Props) {
+    return (
+        <div>
+            <FormLayout heading="Mentor Form" message="Please fill out the questionnaire below if you are interested in finding someone to mentor you">
+                <MentorForm />
+            </FormLayout>
+        </div>
+    );
 }
