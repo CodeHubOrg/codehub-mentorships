@@ -50,7 +50,7 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
 
   const updateState = (target: HTMLInputElement) => {
     const { name, value,type } = target;
-    if(type==='checkbox'){
+    if(type ==='checkbox'){
       let newSelection: any[];
       if(values[name].indexOf(value) > -1) 
       {
@@ -83,14 +83,16 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
     newErrors.email ='';
     newErrors.password ='';
     newErrors.confirmpwd ='';
+   
+    if(values.hasOwnProperty("fullname")){
+      if (!values["fullname"] || values["fullname"].trim().length==0) 
+        {
+          newErrors.fullname ='Please enter your fullname.';
+          formisValid=false;
+        }
+      }    
 
-    if (!values["fullname"] || values["fullname"].trim().length==0) 
-      {
-        newErrors.fullname ='Please enter your fullname.';
-        formisValid=false;
-      }
-
-    let validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; 
+    let validEmail = /^.+@.+\..+$/; 
     if (!validEmail.test(values["email"])) 
       {
         errors.email = 'Please enter valid email address.';
@@ -101,12 +103,13 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
         errors.password = 'password length should be atleast 8 characters.';
         formisValid = false;
       }
-    if (values["password"] !== values["confirmpwd"]) 
-      {
-        errors.confirmpwd = 'Passwords do not match.';
-        formisValid = false;
-      }     
-      
+    if(values.hasOwnProperty("confirmpwd")){  
+      if (values["password"] !== values["confirmpwd"]) 
+        {
+          errors.confirmpwd = 'Passwords do not match.';
+          formisValid = false;
+        }     
+    }  
     setErrors({...errors,
                fullname:newErrors.fullname,
                email:newErrors.email,
