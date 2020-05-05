@@ -1,4 +1,4 @@
-import React, { useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 interface IFormProps {
   /* The http path that the form will be posted to */
@@ -36,93 +36,92 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues,button,render }) => {
-  const [errors, setErrors] = useState<IErrors>({});
-  const [values, setValues] = useState<IValues>(initialValues);
-  const [submitSuccess, setSuccess] = useState(undefined);
+const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) => {
+    const [errors, setErrors] = useState<IErrors>({});
+    const [values, setValues] = useState<IValues>(initialValues);
+    const [submitSuccess, setSuccess] = useState(undefined);
 
-  const haveErrors = (errors: IErrors) => {
-    let haveError: boolean = false;
-    Object.keys(errors).map((key: string) => {
-      if (errors[key].length > 0) {
-        haveError = true;
-      }
-    });
-    return haveError;
-  };
+    const haveErrors = (errors: IErrors) => {
+        let haveError: boolean = false;
+        Object.keys(errors).map((key: string) => {
+            if (errors[key].length > 0) {
+                haveError = true;
+            }
+        });
+        return haveError;
+    };
 
-  const updateState = (target: HTMLInputElement) => {
-    const { name, value,type } = target;
-    if(type ==='checkbox'){
-      let newSelection: any[];
-      if(values[name].indexOf(value) > -1) 
-      {
-        newSelection = values[name].filter(s => s !== value)
-      }else 
-      {
-        newSelection = [...values[name], value];
-      }
-      setValues({ ...values, [name]: newSelection}); 
-    }else
-      {
-        setValues({ ...values, [name]: value });
-      }
-      
-  };
-
-  useEffect(() => {
-    if (haveErrors(errors))
-      {
-        validateForm();
-      }
-    }, [values]  
-  );
-
-
-  const validateForm = (): boolean => {
-    let newErrors:IErrors = errors;
-    let formisValid:boolean = true;
-    newErrors.fullname ='';
-    newErrors.email ='';
-    newErrors.password ='';
-    newErrors.confirmpwd ='';
-   
-    if(values.hasOwnProperty("fullname")){
-      if (!values["fullname"] || values["fullname"].trim().length==0) 
-        {
-          newErrors.fullname ='Please enter your fullname.';
-          formisValid=false;
+    const updateState = (target: HTMLInputElement) => {
+        const { name, value, type } = target;
+        if (type === "checkbox") {
+            let newSelection: any[];
+            if (values[name].indexOf(value) > -1) {
+                newSelection = values[name].filter((s) => s !== value);
+            } else {
+                newSelection = [...values[name], value];
+            }
+            setValues({ ...values, [name]: newSelection });
+        } else {
+            setValues({ ...values, [name]: value });
         }
-      }    
 
-    let validEmail = /^.+@.+\..+$/; 
-    if (!validEmail.test(values["email"])) 
-      {
-        errors.email = 'Please enter valid email address.';
-        formisValid = false;
-      } 
-    if (values["password"].trim().length<8) 
-      {
-        errors.password = 'password length should be atleast 8 characters.';
-        formisValid = false;
-      }
-    if(values.hasOwnProperty("confirmpwd")){  
-      if (values["password"] !== values["confirmpwd"]) 
-        {
-          errors.confirmpwd = 'Passwords do not match.';
-          formisValid = false;
-        }     
-    }  
-    setErrors({...errors,
-               fullname:newErrors.fullname,
-               email:newErrors.email,
-               password:newErrors.password,
-               confirmpwd:newErrors.confirmpwd});  
-               
-    return formisValid;
-  };
+        if (haveErrors(errors)) {
+            validateForm();
+        }
+    };
 
-  const submitForm = async (): Promise<boolean> => {
+    useEffect(() => {
+        if (haveErrors(errors)) {
+            validateForm();
+        }}, [values]  
+    );
+    
+
+    const validateForm = (): boolean => {
+        let newErrors: IErrors = errors;
+        let formisValid: boolean = true;
+        newErrors.fullname = "";
+        newErrors.email = "";
+        newErrors.password ='';
+        newErrors.confirmpwd ='';
+
+        if(values.hasOwnProperty("fullname")){
+            if (!values["fullname"] || values["fullname"].trim().length == 0) {
+                newErrors.fullname = "Please enter your fullname";
+                formisValid = false;
+            }
+        }
+
+        let validEmail = /^.+@.+\..+$/;
+        if (!validEmail.test(values["email"])) {
+            errors.email = "Please enter valid email address";
+            formisValid = false;
+        }
+
+        if (values["password"].trim().length<8) {
+            errors.password = 'password length should be atleast 8 characters.';
+            formisValid = false;
+        }
+
+        if(values.hasOwnProperty("confirmpwd")) {  
+            if (values["password"] !== values["confirmpwd"]) {
+                errors.confirmpwd = 'Passwords do not match.';
+                formisValid = false;
+            }     
+        }  
+
+
+        setErrors({
+            ...errors,
+            fullname:newErrors.fullname,
+            email:newErrors.email,
+            password:newErrors.password,
+            confirmpwd:newErrors.confirmpwd
+        });
+        return formisValid;
+    };
+
+    const submitForm = async (): Promise<boolean> => {
     // TODO - submit the form
         return true;
     };
@@ -147,19 +146,23 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,button,render }) => 
             <div className="container">
                 {/* in the component where Form is used, the render prop will have form fields
         assigned to it */}
-        {render(values, (e) => updateState(e.target as HTMLInputElement),errors)}
+                {render(
+                    values,
+                    (e) => updateState(e.target as HTMLInputElement),
+                    errors
+                )}
 
-        <div className="form-group">
-          <button
-            type="submit"  
-            className={button!=="Login"? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150":"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"}
-            disabled={haveErrors(errors)}
-          >
+                <div className="form-group">
+                    <button
+                        type="submit"
+                        className={button!=="Login"? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150":"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"}
+                        disabled={haveErrors(errors)}
+                    >
             {button}
-          </button>
-        </div>
-        {submitSuccess && (
-          <div className="alert alert-info" role="alert">
+                    </button>
+                </div>
+                {submitSuccess && (
+                    <div className="alert alert-info" role="alert">
             The form was successfully submitted!
                     </div>
                 )}
