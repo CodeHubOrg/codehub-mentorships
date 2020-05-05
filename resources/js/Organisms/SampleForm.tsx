@@ -8,6 +8,7 @@ const SampleForm: React.FC = () => {
 		<Form
 			action=""
 			initialValues={{ fullname: "", contact: "" }}
+			button="Submit"
 			render={(values, handleChange) => (
 				<React.Fragment>
 					<FormTextInput

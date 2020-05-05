@@ -4,6 +4,7 @@ interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
   initialValues: IValues;
+  button:string;
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
@@ -33,7 +34,7 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
+const Form: React.FC<IFormProps> = ({ action, initialValues,button,render }) => {
   const [errors, setErrors] = useState<IErrors>({});
   const [values, setValues] = useState<IValues>(initialValues);
   const [submitSuccess, setSuccess] = useState(undefined);
@@ -151,10 +152,10 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
         <div className="form-group">
           <button
             type="submit"  
-            className="block px-4 py-2 mx-auto border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+            className={button!=="Login"? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150":"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"}
             disabled={haveErrors(errors)}
           >
-            Submit
+            {button}
           </button>
         </div>
         {submitSuccess && (

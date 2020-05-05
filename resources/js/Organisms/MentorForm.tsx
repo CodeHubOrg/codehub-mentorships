@@ -9,7 +9,8 @@ const MentorForm: React.FC = () => {
 		<Form
 			action=""
 			initialValues={{ fullname: "",email:"",
-			                 interests:[],skillsets:"",suitabletime:"",extrainfo:"" }}
+							 interests:[],skillsets:"",suitabletime:"",extrainfo:"" }}
+			button="Submit"				 
 			render={(values,handleChange,errors) => (
 				<React.Fragment>
 					<FormTextInput

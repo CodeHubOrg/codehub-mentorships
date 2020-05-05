@@ -10,6 +10,7 @@ const RegisterForm: React.FC = () => {
 			<Form
 				action=""
 				initialValues={{ fullname:"",email: "", password: "",confirmpwd:"" }}
+				button="Register"
 				render={(values, handleChange,errors) => (
 					<React.Fragment>
 						<FormTextInput

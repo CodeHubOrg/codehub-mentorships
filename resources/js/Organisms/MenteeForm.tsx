@@ -10,7 +10,8 @@ const MenteeForm: React.FC = () => {
 			action=""
 			initialValues={{ fullname: "",email:"",currentstatus:"",
 							 previousexp:"",interest:"",specinterest:"",
-			                 mentortype: "",timeframe:"",suitabletime:"",extrainfo:"" }}
+							 mentortype: "",timeframe:"",suitabletime:"",extrainfo:"" }}
+			button="Submit"				 
 			render={(values,handleChange,errors) => (
 				<React.Fragment>
 					<FormTextInput

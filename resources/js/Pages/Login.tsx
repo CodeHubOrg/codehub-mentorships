@@ -11,6 +11,7 @@ const LoginForm: React.FC = () => {
 			<Form
 				action=""
 				initialValues={{ email: "", password: "",rememberme:[] }}
+				button="Login"
 				render={(values, handleChange) => (
 					<React.Fragment>
 						<FormTextInput
