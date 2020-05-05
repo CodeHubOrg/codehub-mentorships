@@ -1,32 +1,63 @@
 import React from "react";
+import Form from "@/Organisms/Form";
+import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
+
 
 const RegisterForm: React.FC = () => {
 	return (
-		<AuthLayout
-			heading="Register"
-			message="Please register to create a profile"
-		>
-			<p>Form to go here with fields:</p>
-
-			<div>
-				Name
-				<br />
-				E-Mail Address
-				<br />
-				Password
-				<br />
-				Confirm Password
-				<p>&nbsp;</p>
-				<button
-					className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-					type="submit"
-				>
-					Register
-				</button>
-				<p>&nbsp;</p>
+		<AuthLayout heading="Register" message="Please register to create a profile">
+			<Form
+				action=""
+				initialValues={{ fullname:"",email: "", password: "",confirmpwd:"" }}
+				render={(values, handleChange,errors) => (
+					<React.Fragment>
+						<FormTextInput
+							type = "text"
+							name ="fullname"
+							label="Full Name"
+							value={values["fullname"]}
+							helpText=""
+							onChange={handleChange}
+						/>
+						<div className="block text-sm font-medium text-red-500 pb-5">{errors["fullname"]}</div>
+						<FormTextInput
+							type="email"
+							name="email"
+							label="Email address"
+							value={values["email"]}
+							helpText=""
+							onChange={handleChange}
+						/>
+						<div className="block text-sm font-medium text-red-500 pb-5">{errors["email"]}</div>
+						<FormTextInput
+						    type="password"
+							name="password"
+							label="Password"
+							value={values["password"]}
+							helpText=""
+							onChange={handleChange}
+						/>
+		
+						<div className="block text-sm font-medium text-red-500 pb-5">{errors["password"]}</div>
+						<FormTextInput
+							type="password"
+							name="confirmpwd"
+							label="Confirm Password"
+							value={values["confirmpwd"]}
+							helpText=""
+							onChange={handleChange}
+						/>
+		
+						<div className="block text-sm font-medium text-red-500 pb-5">{errors["confirmpwd"]}</div>	
+				
+					</React.Fragment>
+				)}
+			/>
+			<div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
 				<a href="/login">Login</a>
 			</div>
+		
 		</AuthLayout>
 	);
 };

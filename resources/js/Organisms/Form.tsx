@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 
 interface IFormProps {
   /* The http path that the form will be posted to */
@@ -59,38 +59,60 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,render }) => {
       {
         newSelection = [...values[name], value];
       }
-      setValues({ ...values, [name]: newSelection }); 
+      setValues({ ...values, [name]: newSelection}); 
     }else
       {
         setValues({ ...values, [name]: value });
       }
+      
+  };
 
-    if(haveErrors(errors))
+  useEffect(() => {
+    if (haveErrors(errors))
       {
         validateForm();
       }
-  };
+    }, [values]  
+  );
+
 
   const validateForm = (): boolean => {
     let newErrors:IErrors = errors;
     let formisValid:boolean = true;
     newErrors.fullname ='';
     newErrors.email ='';
+    newErrors.password ='';
+    newErrors.confirmpwd ='';
 
     if (!values["fullname"] || values["fullname"].trim().length==0) 
       {
-        newErrors.fullname ='Please enter your fullname';
+        newErrors.fullname ='Please enter your fullname.';
         formisValid=false;
       }
 
     let validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; 
     if (!validEmail.test(values["email"])) 
       {
-        errors.email = 'Please enter valid email id';
+        errors.email = 'Please enter valid email address.';
         formisValid = false;
-      }  
+      } 
+    if (values["password"].trim().length<8) 
+      {
+        errors.password = 'password length should be atleast 8 characters.';
+        formisValid = false;
+      }
+    if (values["password"] !== values["confirmpwd"]) 
+      {
+        errors.confirmpwd = 'Passwords do not match.';
+        formisValid = false;
+      }     
       
-    setErrors({...errors,["fullname"]:newErrors.fullname,["email"]:newErrors.email});  
+    setErrors({...errors,
+               fullname:newErrors.fullname,
+               email:newErrors.email,
+               password:newErrors.password,
+               confirmpwd:newErrors.confirmpwd});  
+               
     return formisValid;
   };
 
