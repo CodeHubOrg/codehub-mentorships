@@ -11,6 +11,7 @@ const SampleForm: React.FC = () => {
 			render={(values, handleChange) => (
 				<React.Fragment>
 					<FormTextInput
+						type="text"
 						name="fullname"
 						label="Full name"
 						value={values["fullname"]}

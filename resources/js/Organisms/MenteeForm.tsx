@@ -14,6 +14,7 @@ const MenteeForm: React.FC = () => {
 			render={(values,handleChange,errors) => (
 				<React.Fragment>
 					<FormTextInput
+					    type="text"
 						name="fullname"
 						label="Full name"
 						value={values["fullname"]}
@@ -21,6 +22,7 @@ const MenteeForm: React.FC = () => {
 					/>
                     <div className="block text-sm font-medium text-red-500 pb-5">{errors["fullname"]}</div>
                     <FormTextInput
+					    type="email"
 						name="email"
 						label="Email address"
 						value={values["email"]}
@@ -28,6 +30,7 @@ const MenteeForm: React.FC = () => {
 					/>
                     <div className="block text-sm font-medium text-red-500 pb-5">{errors["email"]}</div>
                     <FormTextInput
+					    type="text"
 						name="currentstatus"
 						label="What is your current situation?"
 						value={values["currentstatus"]}
@@ -81,6 +84,7 @@ const MenteeForm: React.FC = () => {
 					/>
                      <div className="block text-sm font-medium text-red-500 pb-5"></div>
                     <FormTextInput
+						type="text"
 						name="timeframe"
 						label="Roughly how much time are you planning to dedicate each week?"
 						value={values["timeframe"]}
@@ -89,6 +93,7 @@ const MenteeForm: React.FC = () => {
 					/>
                      <div className="block text-sm font-medium text-red-500 pb-5"></div>
                     <FormTextInput
+						type="text"
 						name="suitabletime"
 						label="Which timing is suitable for you?"
 						value={values["suitabletime"]}
