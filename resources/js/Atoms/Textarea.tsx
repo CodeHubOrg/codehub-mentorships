@@ -24,7 +24,7 @@ export const Textarea: React.FC<iFieldProps> = ({
         id={name}
         name={name}
         value={value}
-        className="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
+        className="form-input block bg-gray-100 w-full pl-7 pr-12 sm:text-sm sm:leading-5"
         onChange={onChange}
         placeholder={helpText}
       />
