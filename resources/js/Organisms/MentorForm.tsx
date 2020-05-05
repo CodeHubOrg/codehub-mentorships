@@ -82,7 +82,7 @@ const MentorForm: React.FC = () => {
                             {
                                 label: "Industry/Career Advice",
                                 helptext: "Industry/Career Advice",
-                                value: "careearadvise",
+                                value: "careeradvise",
                             },
                         ]}
                         onChange={handleChange}
