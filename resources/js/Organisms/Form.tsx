@@ -86,7 +86,7 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) =
         newErrors.confirmpwd ='';
 
         if(values.hasOwnProperty("fullname")){
-            if (!values["fullname"] || values["fullname"].trim().length == 0) {
+            if (!values["fullname"] || values["fullname"].trim().length === 0) {
                 newErrors.fullname = "Please enter your fullname";
                 formisValid = false;
             }
@@ -98,9 +98,11 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) =
             formisValid = false;
         }
 
-        if (values["password"].trim().length<8) {
-            errors.password = 'password length should be atleast 8 characters.';
-            formisValid = false;
+        if(values.hasOwnProperty("confirmpwd")) {  
+            if (values["password"].trim().length<8) {
+                errors.password = 'password length should be atleast 8 characters.';
+                formisValid = false;
+            }
         }
 
         if(values.hasOwnProperty("confirmpwd")) {  

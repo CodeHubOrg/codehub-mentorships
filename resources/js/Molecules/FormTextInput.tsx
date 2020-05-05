@@ -32,7 +32,7 @@ const FormTextInput: React.FC<IProps> = ({
                 name={name}
                 type={type}
                 value={value}
-                className="form-input bg-gray-100 block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
+                className="form-input bg-gray-100 block w-full pl-3 pr-12 sm:text-sm sm:leading-5"
                 onChange={onChange}
                 placeholder={helpText}
             />
