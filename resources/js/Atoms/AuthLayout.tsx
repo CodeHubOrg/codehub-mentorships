@@ -1,9 +1,9 @@
 import React from "react";
 
 interface Props {
-    children: React.ReactNode;
-    heading: string;
-    message: string;
+  children: React.ReactNode;
+  heading: string;
+  message: string;
 }
 
 export default function AuthLayout({ children, heading, message }: Props) {
@@ -11,7 +11,7 @@ export default function AuthLayout({ children, heading, message }: Props) {
         <>
             <div className="box-border p-4 border-4 border-gray-400 bg-gray-200">
                 <h1 className="text-2xl text-gray-800 text-center font-extrabold">
-                    CodeHub Mentorship App
+          CodeHub Mentorship App
                 </h1>
             </div>
             <div className="min-h-screen bg-gray-50 flex flex-col py-12 sm:px-6 lg:px-8">

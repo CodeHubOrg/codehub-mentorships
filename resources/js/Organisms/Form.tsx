@@ -8,8 +8,10 @@ interface IFormProps {
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
-    handleChange: (e: React.FormEvent<HTMLInputElement|HTMLTextAreaElement>) => void,
-    errors:IErrors
+    handleChange: (
+      e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+    ) => void,
+    errors: IErrors
   ) => React.ReactNode;
 }
 
@@ -122,30 +124,28 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,button,render }) => 
 
   const submitForm = async (): Promise<boolean> => {
     // TODO - submit the form
-    return true;
-  };
+        return true;
+    };
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-    console.log(values);
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>
+    ): Promise<void> => {
+        e.preventDefault();
+        console.log(values);
 
-    if (validateForm()) 
-    {
-      await submitForm();
-      setSuccess(true);
-      setValues(initialValues);
-    }else
-    {
-      setSuccess(false);
-    }
-  };
+        if (validateForm()) {
+            await submitForm();
+            setSuccess(true);
+            setValues(initialValues);
+        } else {
+            setSuccess(false);
+        }
+    };
 
-  return (
-    <form onSubmit={handleSubmit} noValidate={true} action={action}>
-      <div className="container">
-        {/* in the component where Form is used, the render prop will have form fields
+    return (
+        <form onSubmit={handleSubmit} noValidate={true} action={action}>
+            <div className="container">
+                {/* in the component where Form is used, the render prop will have form fields
         assigned to it */}
         {render(values, (e) => updateState(e.target as HTMLInputElement),errors)}
 
@@ -161,21 +161,21 @@ const Form: React.FC<IFormProps> = ({ action, initialValues,button,render }) => 
         {submitSuccess && (
           <div className="alert alert-info" role="alert">
             The form was successfully submitted!
-          </div>
-        )}
-        {submitSuccess === false && !haveErrors(errors) && (
-          <div className="alert alert-danger" role="alert">
+                    </div>
+                )}
+                {submitSuccess === false && !haveErrors(errors) && (
+                    <div className="alert alert-danger" role="alert">
             Sorry, an unexpected error has occurred
-          </div>
-        )}
-        {submitSuccess === false && haveErrors(errors) && (
-          <div className="alert alert-danger" role="alert">
+                    </div>
+                )}
+                {submitSuccess === false && haveErrors(errors) && (
+                    <div className="alert alert-danger" role="alert">
             Sorry, the form is invalid. Please review, adjust and try again
-          </div>
-        )}
-      </div>
-    </form>
-  );
+                    </div>
+                )}
+            </div>
+        </form>
+    );
 };
 
 export default Form;
