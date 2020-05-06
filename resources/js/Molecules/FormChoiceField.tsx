@@ -42,7 +42,7 @@ const FormChoiceField: React.FC<IProps> = ({
                             ? selected === choice.value
                             : selected.indexOf(choice.value) > -1
                     }
-                    className={`form-${type} h-4 w-4 text-indigo-600 transition duration-150 ease-in-out`}
+                    className={`form-${type} h-4 w-4 text-indigo-600 bg-gray-100 transition duration-150 ease-in-out`}
                     onChange={onChange}
                 />
                 <label htmlFor={choice.value} className="ml-3">

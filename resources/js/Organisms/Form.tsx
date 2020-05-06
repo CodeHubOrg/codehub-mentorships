@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface IFormProps {
   /* The http path that the form will be posted to */
   action: string;
   initialValues: IValues;
+  button:string;
   /* A prop which allows content to be injected */
   render: (
     val: IValues,
@@ -35,7 +36,7 @@ export interface IFormState {
   submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
+const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) => {
     const [errors, setErrors] = useState<IErrors>({});
     const [values, setValues] = useState<IValues>(initialValues);
     const [submitSuccess, setSuccess] = useState(undefined);
@@ -69,27 +70,55 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
         }
     };
 
+    useEffect(() => {
+        if (haveErrors(errors)) {
+            validateForm();
+        }}, [values]  
+    );
+    
+
     const validateForm = (): boolean => {
         let newErrors: IErrors = errors;
         let formisValid: boolean = true;
         newErrors.fullname = "";
         newErrors.email = "";
+        newErrors.password ='';
+        newErrors.confirmpwd ='';
 
-        if (!values["fullname"] || values["fullname"].trim().length == 0) {
-            newErrors.fullname = "Please enter your fullname";
-            formisValid = false;
+        if(values.hasOwnProperty("fullname")){
+            if (!values["fullname"] || values["fullname"].trim().length === 0) {
+                newErrors.fullname = "Please enter your fullname";
+                formisValid = false;
+            }
         }
 
-        let validEmail = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        let validEmail = /^.+@.+\..+$/;
         if (!validEmail.test(values["email"])) {
-            errors.email = "Please enter valid email id";
+            errors.email = "Please enter valid email address";
             formisValid = false;
         }
+
+        if(values.hasOwnProperty("confirmpwd")) {  
+            if (values["password"].trim().length<8) {
+                errors.password = 'password length should be atleast 8 characters.';
+                formisValid = false;
+            }
+        }
+
+        if(values.hasOwnProperty("confirmpwd")) {  
+            if (values["password"] !== values["confirmpwd"]) {
+                errors.confirmpwd = 'Passwords do not match.';
+                formisValid = false;
+            }     
+        }  
+
 
         setErrors({
             ...errors,
-            ["fullname"]: newErrors.fullname,
-            ["email"]: newErrors.email,
+            fullname:newErrors.fullname,
+            email:newErrors.email,
+            password:newErrors.password,
+            confirmpwd:newErrors.confirmpwd
         });
         return formisValid;
     };
@@ -128,10 +157,10 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, render }) => {
                 <div className="form-group">
                     <button
                         type="submit"
-                        className="block px-4 py-2 mx-auto border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+                        className={button!=="Login"? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150":"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"}
                         disabled={haveErrors(errors)}
                     >
-            Submit
+            {button}
                     </button>
                 </div>
                 {submitSuccess && (

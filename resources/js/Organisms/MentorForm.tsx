@@ -16,9 +16,11 @@ const MentorForm: React.FC = () => {
                 suitabletime: "",
                 extrainfo: "",
             }}
+            button="Submit"
             render={(values, handleChange, errors) => (
                 <React.Fragment>
                     <FormTextInput
+                        type="text"
                         name="fullname"
                         label="Your Name/Slack handle"
                         value={values["fullname"]}
@@ -28,6 +30,7 @@ const MentorForm: React.FC = () => {
                         {errors["fullname"]}
                     </div>
                     <FormTextInput
+                        type="email"
                         name="email"
                         label="Email address"
                         value={values["email"]}
@@ -79,7 +82,7 @@ const MentorForm: React.FC = () => {
                             {
                                 label: "Industry/Career Advice",
                                 helptext: "Industry/Career Advice",
-                                value: "careearadvise",
+                                value: "careeradvise",
                             },
                         ]}
                         onChange={handleChange}
@@ -95,6 +98,7 @@ const MentorForm: React.FC = () => {
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <FormTextInput
+                        type="text"
                         name="suitabletime"
                         label="Which timing is suitable for you?"
                         value={values["suitabletime"]}

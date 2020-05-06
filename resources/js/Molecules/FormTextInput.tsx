@@ -1,6 +1,7 @@
 import React from "react";
 
 interface IProps {
+  type:string;  
   name: string;
   label?: string;
   value?: string;
@@ -9,6 +10,7 @@ interface IProps {
 }
 
 const FormTextInput: React.FC<IProps> = ({
+    type,
     name,
     label,
     value,
@@ -28,9 +30,9 @@ const FormTextInput: React.FC<IProps> = ({
             <input
                 id={name}
                 name={name}
-                type="text"
+                type={type}
                 value={value}
-                className="form-input block w-full pl-7 pr-12 sm:text-sm sm:leading-5"
+                className="form-input bg-gray-100 block w-full pl-3 pr-12 sm:text-sm sm:leading-5"
                 onChange={onChange}
                 placeholder={helpText}
             />
