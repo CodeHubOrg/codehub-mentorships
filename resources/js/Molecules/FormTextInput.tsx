@@ -1,12 +1,12 @@
 import React from "react";
 
 interface IProps {
-  type:string;  
-  name: string;
-  label?: string;
-  value?: string;
-  helpText?: string;
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+    type: string;
+    name: string;
+    label?: string;
+    value?: string;
+    helpText?: string;
+    onChange: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 const FormTextInput: React.FC<IProps> = ({
