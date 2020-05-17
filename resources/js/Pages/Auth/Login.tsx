@@ -4,13 +4,12 @@ import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
 import FormChoiceField from "@/Molecules/FormChoiceField";
 
-
 const LoginForm: React.FC = () => {
 	return (
 		<AuthLayout heading="Login" message="Log into your account">
 			<Form
-				action=""
-				initialValues={{ email: "", password: "",rememberme:[] }}
+				action="/login"
+				initialValues={{ email: "", password: "", rememberme: [] }}
 				button="Login"
 				render={(values, handleChange) => (
 					<React.Fragment>
@@ -22,7 +21,7 @@ const LoginForm: React.FC = () => {
 							helpText=""
 							onChange={handleChange}
 						/>
-						<div className="block text-sm font-medium text-red-500 pb-5"></div>
+						<div className="block text-sm font-medium text-red-500 pb-5" />
 						<FormTextInput
 							type="password"
 							name="password"
@@ -32,7 +31,7 @@ const LoginForm: React.FC = () => {
 							onChange={handleChange}
 						/>
 						<div className="mt-6 flex items-center justify-between">
-							<div className="flex items-center">	
+							<div className="flex items-center">
 								<FormChoiceField
 									type="checkbox"
 									label=""
@@ -42,24 +41,28 @@ const LoginForm: React.FC = () => {
 											label: "Remember me",
 											helptext: "",
 											value: "yes",
-										}
+										},
 									]}
 									onChange={handleChange}
 									name="rememberme"
 								/>
 							</div>
 							<div className="text-sm leading-5">
-								<a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+								<a
+									href="#"
+									className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+								>
 									Forgot your password?
 								</a>
 							</div>
 						</div>
-						<div className="block text-sm font-medium text-red-500 pb-5"></div>		
+						<div className="block text-sm font-medium text-red-500 pb-5" />
 					</React.Fragment>
 				)}
 			/>
-			<div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"><a href="/register">Register</a></div>
-				
+			<div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+				<a href="/register">Register</a>
+			</div>
 		</AuthLayout>
 	);
 };

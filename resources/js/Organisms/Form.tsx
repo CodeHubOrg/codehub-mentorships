@@ -1,43 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Inertia } from "@inertiajs/inertia";
 
 interface IFormProps {
-  /* The http path that the form will be posted to */
-  action: string;
-  initialValues: IValues;
-  button:string;
-  /* A prop which allows content to be injected */
-  render: (
-    val: IValues,
-    handleChange: (
-      e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
-    ) => void,
-    errors: IErrors
-  ) => React.ReactNode;
+    /* The http path that the form will be posted to */
+    action: string;
+    initialValues: IValues;
+    button: string;
+    /* A prop which allows content to be injected */
+    render: (
+        val: IValues,
+        handleChange: (
+            e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+        ) => void,
+        errors: IErrors
+    ) => React.ReactNode;
 }
 
 export interface IValues {
-  /* Key value pairs for all the field values with key being the field name */
-  [key: string]: any;
+    /* Key value pairs for all the field values with key being the field name */
+    [key: string]: any;
 }
 
 export interface IErrors {
-  /* The validation error messages for each field (key is the field name */
-  [key: string]: string;
+    /* The validation error messages for each field (key is the field name */
+    [key: string]: string;
 }
 
 export interface IFormState {
-  /* The field values */
-  values: IValues;
+    /* The field values */
+    values: IValues;
 
-  /* The field validation error messages */
-  errors: IErrors;
+    /* The field validation error messages */
+    errors: IErrors;
 
-  /* Whether the form has been successfully submitted */
-  submitSuccess?: boolean;
+    /* Whether the form has been successfully submitted */
+    submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) => {
+const Form: React.FC<IFormProps> = ({
+    action,
+    initialValues,
+    button,
+    render,
+}) => {
+    const _isMounted = useRef(true);
+    //https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
     const [errors, setErrors] = useState<IErrors>({});
+    const [sending, setSending] = useState(false);
     const [values, setValues] = useState<IValues>(initialValues);
     const [submitSuccess, setSuccess] = useState(undefined);
 
@@ -73,19 +82,27 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) =
     useEffect(() => {
         if (haveErrors(errors)) {
             validateForm();
-        }}, [values]  
-    );
-    
+        }
+    }, [values]);
 
+    useEffect(() => {
+        return () => {
+            // ComponentWillUnmount in Class Component
+            _isMounted.current = false;
+        };
+    }, []);
+
+    // validateFrom specific to login form
+    // should be generic?
     const validateForm = (): boolean => {
         let newErrors: IErrors = errors;
         let formisValid: boolean = true;
         newErrors.fullname = "";
         newErrors.email = "";
-        newErrors.password ='';
-        newErrors.confirmpwd ='';
+        newErrors.password = "";
+        newErrors.confirmpwd = "";
 
-        if(values.hasOwnProperty("fullname")){
+        if (values.hasOwnProperty("fullname")) {
             if (!values["fullname"] || values["fullname"].trim().length === 0) {
                 newErrors.fullname = "Please enter your fullname";
                 formisValid = false;
@@ -98,46 +115,46 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) =
             formisValid = false;
         }
 
-        if(values.hasOwnProperty("confirmpwd")) {  
-            if (values["password"].trim().length<8) {
-                errors.password = 'password length should be atleast 8 characters.';
+        if (values.hasOwnProperty("confirmpwd")) {
+            if (values["password"].trim().length < 8) {
+                errors.password =
+                    "password length should be atleast 8 characters.";
                 formisValid = false;
             }
         }
 
-        if(values.hasOwnProperty("confirmpwd")) {  
+        if (values.hasOwnProperty("confirmpwd")) {
             if (values["password"] !== values["confirmpwd"]) {
-                errors.confirmpwd = 'Passwords do not match.';
+                errors.confirmpwd = "Passwords do not match.";
                 formisValid = false;
-            }     
-        }  
-
+            }
+        }
 
         setErrors({
             ...errors,
-            fullname:newErrors.fullname,
-            email:newErrors.email,
-            password:newErrors.password,
-            confirmpwd:newErrors.confirmpwd
+            fullname: newErrors.fullname,
+            email: newErrors.email,
+            password: newErrors.password,
+            confirmpwd: newErrors.confirmpwd,
         });
         return formisValid;
     };
 
-    const submitForm = async (): Promise<boolean> => {
-    // TODO - submit the form
-        return true;
-    };
 
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
         e.preventDefault();
-        console.log(values);
 
         if (validateForm()) {
-            await submitForm();
-            setSuccess(true);
-            setValues(initialValues);
+            setSending(true);
+            await Inertia.post(action, values).then(() => {
+                if (_isMounted.current) {
+                    setSending(false);
+                    setSuccess(true);
+                    setValues(initialValues);
+                }
+            });
         } else {
             setSuccess(false);
         }
@@ -155,27 +172,36 @@ const Form: React.FC<IFormProps> = ({ action, initialValues, button, render }) =
                 )}
 
                 <div className="form-group">
-                    <button
-                        type="submit"
-                        className={button!=="Login"? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150":"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"}
-                        disabled={haveErrors(errors)}
-                    >
-            {button}
-                    </button>
+                    {sending ? (
+                        <p>Sending...</p>
+                    ) : (
+                        <button
+                            type="submit"
+                            className={
+                                button !== "Login"
+                                    ? "block mx-auto px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+                                    : "w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                            }
+                            disabled={haveErrors(errors)}
+                        >
+                            {button}
+                        </button>
+                    )}
                 </div>
                 {submitSuccess && (
                     <div className="alert alert-info" role="alert">
-            The form was successfully submitted!
+                       Your form was submitted (but if it is the login form, your login probably went wrong)
                     </div>
                 )}
-                {submitSuccess === false && !haveErrors(errors) && (
+                {submitSuccess === false && !haveErrors(errors) &&
                     <div className="alert alert-danger" role="alert">
-            Sorry, an unexpected error has occurred
+                        Sorry, an unexpected error has occurred
                     </div>
                 )}
                 {submitSuccess === false && haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
-            Sorry, the form is invalid. Please review, adjust and try again
+                        Sorry, the form is invalid. Please review, adjust and
+                        try again
                     </div>
                 )}
             </div>

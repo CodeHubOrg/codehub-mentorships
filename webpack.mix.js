@@ -24,4 +24,6 @@ mix.ts("resources/js/app.tsx", "public/js")
 		resolve: {
 			alias: { "@": path.resolve("resources/js") },
 		},
-	});
+	})
+	.version()
+	.sourceMaps();
