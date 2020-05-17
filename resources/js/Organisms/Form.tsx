@@ -140,7 +140,6 @@ const Form: React.FC<IFormProps> = ({
         return formisValid;
     };
 
-
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
@@ -190,10 +189,11 @@ const Form: React.FC<IFormProps> = ({
                 </div>
                 {submitSuccess && (
                     <div className="alert alert-info" role="alert">
-                       Your form was submitted (but if it is the login form, your login probably went wrong)
+                        The form was successfully submitted (but in case of
+                        login form, you did not get logged in..)
                     </div>
                 )}
-                {submitSuccess === false && !haveErrors(errors) &&
+                {submitSuccess === false && !haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, an unexpected error has occurred
                     </div>
