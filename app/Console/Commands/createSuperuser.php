@@ -7,8 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-
-class CreateSuperuser extends Command
+class createSuperuser extends Command
 {
     /**
      * The name and signature of the console command.
@@ -33,7 +32,7 @@ class CreateSuperuser extends Command
     {
         parent::__construct();
     }
-    
+
     /**
      * Execute the console command.
      *
@@ -45,9 +44,9 @@ class CreateSuperuser extends Command
 
         $user = User::where(['email' => $email])->first();
 
-         if (!$user) {
+        if (! $user) {
             $user = new User();
-            $user->name = "Superuser";
+            $user->name = 'Superuser';
             $user->email = $email;
         } else {
             $this->info('Superuser already exists. Resetting password...');
@@ -58,7 +57,7 @@ class CreateSuperuser extends Command
         $user->save();
 
         $this->line('Superuser Created.');
-        $this->info('Email: ' . $user->email);
-        $this->info('Password: ' . $pass);
+        $this->info('Email: '.$user->email);
+        $this->info('Password: '.$pass);
     }
 }

@@ -34,7 +34,6 @@ class LoginController extends Controller
      *
      * @return void
      */
-
     public function showLoginForm()
     {
         return Inertia::render('Auth/Login');
