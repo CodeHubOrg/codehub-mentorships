@@ -17,5 +17,7 @@ Route::get('register')->name('register')->uses('Auth\RegisterController@showRegi
 // Dashboard
 Route::get('/admin', [AdminDashboardController::class, 'index']);
 
-// 
+// Member pages
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/mentor', 'MentorController@index')->name('mentor');
+Route::get('/mentee', 'MenteeController@index')->name('mentee');

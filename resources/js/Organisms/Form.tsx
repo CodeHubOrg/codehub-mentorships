@@ -65,7 +65,7 @@ const Form: React.FC<IFormProps> = ({
         if (type === "checkbox") {
             let newSelection: any[];
             if (values[name].indexOf(value) > -1) {
-                newSelection = values[name].filter(s => s !== value);
+                newSelection = values[name].filter((s) => s !== value);
             } else {
                 newSelection = [...values[name], value];
             }
@@ -102,7 +102,6 @@ const Form: React.FC<IFormProps> = ({
         newErrors.password = "";
         newErrors.confirmpwd = "";
 
-
         if (Object.prototype.hasOwnProperty.call(values, "fullname")) {
             if (!values["fullname"] || values["fullname"].trim().length === 0) {
                 newErrors.fullname = "Please enter your fullname";
@@ -125,8 +124,6 @@ const Form: React.FC<IFormProps> = ({
         }
 
         if (Object.prototype.hasOwnProperty.call(values, "confirmpwd")) {
-
-        if (values.hasOwnProperty("confirmpwd")) {
             if (values["password"] !== values["confirmpwd"]) {
                 errors.confirmpwd = "Passwords do not match.";
                 formisValid = false;
@@ -143,8 +140,8 @@ const Form: React.FC<IFormProps> = ({
         return formisValid;
     };
 
-   const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>,
+    const handleSubmit = async (
+        e: React.FormEvent<HTMLFormElement>
     ): Promise<void> => {
         e.preventDefault();
 
@@ -169,8 +166,8 @@ const Form: React.FC<IFormProps> = ({
         assigned to it */}
                 {render(
                     values,
-                    e => updateState(e.target as HTMLInputElement),
-                    errors,
+                    (e) => updateState(e.target as HTMLInputElement),
+                    errors
                 )}
 
                 <div className="form-group">
@@ -192,10 +189,11 @@ const Form: React.FC<IFormProps> = ({
                 </div>
                 {submitSuccess && (
                     <div className="alert alert-info" role="alert">
-                       Your form was submitted (but if it is the login form, your login probably went wrong)
+                        The form was successfully submitted (but in case of
+                        login form, you did not get logged in..)
                     </div>
                 )}
-                {submitSuccess === false && !haveErrors(errors) &&
+                {submitSuccess === false && !haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, an unexpected error has occurred
                     </div>
