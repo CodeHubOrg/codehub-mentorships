@@ -24,7 +24,7 @@ const RegisterForm: React.FC = () => {
 							type="text"
 							name="fullname"
 							label="Full Name"
-							value={values["fullname"]}
+							value={values.fullname}
 							helpText=""
 							onChange={handleChange}
 						/>
@@ -35,7 +35,7 @@ const RegisterForm: React.FC = () => {
 							type="email"
 							name="email"
 							label="Email address"
-							value={values["email"]}
+							value={values.email}
 							helpText=""
 							onChange={handleChange}
 						/>
@@ -46,7 +46,7 @@ const RegisterForm: React.FC = () => {
 							type="password"
 							name="password"
 							label="Password"
-							value={values["password"]}
+							value={values.password}
 							helpText=""
 							onChange={handleChange}
 						/>
@@ -58,13 +58,13 @@ const RegisterForm: React.FC = () => {
 							type="password"
 							name="confirmpwd"
 							label="Confirm Password"
-							value={values["confirmpwd"]}
+							value={values.confirmpwd}
 							helpText=""
 							onChange={handleChange}
 						/>
 
 						<div className="block text-sm font-medium text-red-500 pb-5">
-							{errors["confirmpwd"]}
+							{errors.confirmpwd}
 						</div>
 					</React.Fragment>
 				)}

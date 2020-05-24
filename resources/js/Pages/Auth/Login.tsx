@@ -17,7 +17,7 @@ const LoginForm: React.FC = () => {
 							type="email"
 							name="email"
 							label="Email address"
-							value={values["email"]}
+							value={values.email}
 							helpText=""
 							onChange={handleChange}
 						/>
@@ -26,7 +26,7 @@ const LoginForm: React.FC = () => {
 							type="password"
 							name="password"
 							label="Password"
-							value={values["password"]}
+							value={values.password}
 							helpText=""
 							onChange={handleChange}
 						/>
@@ -35,7 +35,7 @@ const LoginForm: React.FC = () => {
 								<FormChoiceField
 									type="checkbox"
 									label=""
-									selected={values["rememberme"]}
+									selected={values.rememberme}
 									choices={[
 										{
 											label: "Remember me",

@@ -7,7 +7,7 @@ export default function Index() {
         <div>
             <FormLayout
                 heading="Mentor Form"
-                message="Please fill out the questionnaire below if you are interested in finding someone to mentor you"
+                message="Please fill out the questionnaire below if you are interested in finding someone to mentor"
             >
                 <MentorForm />
             </FormLayout>

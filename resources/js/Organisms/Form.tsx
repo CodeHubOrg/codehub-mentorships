@@ -10,9 +10,9 @@ interface IFormProps {
     render: (
         val: IValues,
         handleChange: (
-            e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+            e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
         ) => void,
-        errors: IErrors
+        errors: IErrors,
     ) => React.ReactNode;
 }
 
@@ -65,7 +65,7 @@ const Form: React.FC<IFormProps> = ({
         if (type === "checkbox") {
             let newSelection: any[];
             if (values[name].indexOf(value) > -1) {
-                newSelection = values[name].filter((s) => s !== value);
+                newSelection = values[name].filter(s => s !== value);
             } else {
                 newSelection = [...values[name], value];
             }
@@ -110,13 +110,13 @@ const Form: React.FC<IFormProps> = ({
         }
 
         let validEmail = /^.+@.+\..+$/;
-        if (!validEmail.test(values["email"])) {
+        if (!validEmail.test(values.email)) {
             errors.email = "Please enter valid email address";
             formisValid = false;
         }
 
         if (Object.prototype.hasOwnProperty.call(values, "confirmpwd")) {
-            if (values["password"].trim().length < 8) {
+            if (values.password.trim().length < 8) {
                 errors.password =
                     "password length should be atleast 8 characters.";
                 formisValid = false;
@@ -124,7 +124,7 @@ const Form: React.FC<IFormProps> = ({
         }
 
         if (Object.prototype.hasOwnProperty.call(values, "confirmpwd")) {
-            if (values["password"] !== values["confirmpwd"]) {
+            if (values.password !== values.confirmpwd) {
                 errors.confirmpwd = "Passwords do not match.";
                 formisValid = false;
             }
@@ -141,7 +141,7 @@ const Form: React.FC<IFormProps> = ({
     };
 
     const handleSubmit = async (
-        e: React.FormEvent<HTMLFormElement>
+        e: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
         e.preventDefault();
 
@@ -166,8 +166,8 @@ const Form: React.FC<IFormProps> = ({
         assigned to it */}
                 {render(
                     values,
-                    (e) => updateState(e.target as HTMLInputElement),
-                    errors
+                    e => updateState(e.target as HTMLInputElement),
+                    errors,
                 )}
 
                 <div className="form-group">
