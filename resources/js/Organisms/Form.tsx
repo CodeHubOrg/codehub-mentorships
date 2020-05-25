@@ -1,56 +1,52 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
 
-interface IFormProps {
+interface IFormProps<IValues extends Record<string, any>> {
     /* The http path that the form will be posted to */
     action: string;
     initialValues: IValues;
     button: string;
+    validate: (values: IValues) => IErrors<IValues>;
     /* A prop which allows content to be injected */
     render: (
         val: IValues,
         handleChange: (
             e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
         ) => void,
-        errors: IErrors,
+        errors: IErrors<IValues>,
     ) => React.ReactNode;
 }
 
-export interface IValues {
-    /* Key value pairs for all the field values with key being the field name */
-    [key: string]: any;
-}
-
-export interface IErrors {
-    /* The validation error messages for each field (key is the field name */
-    [key: string]: string;
-}
-
-export interface IFormState {
+export interface IFormState<IValues extends Record<string, any>> {
     /* The field values */
     values: IValues;
 
     /* The field validation error messages */
-    errors: IErrors;
+    errors: IErrors<IValues>;
 
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
 }
 
-const Form: React.FC<IFormProps> = ({
+export type IErrors<IValues extends Record<string, any>> = {
+    [P in keyof IValues]?: string
+};
+
+const Form = <IValues extends Record<string, any>>({
     action,
     initialValues,
     button,
     render,
-}) => {
+    validate,
+}: IFormProps<IValues>) => {
     const _isMounted = useRef(true);
     //https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
-    const [errors, setErrors] = useState<IErrors>({});
+    const [errors, setErrors] = useState<IErrors<IValues>>({});
     const [sending, setSending] = useState(false);
     const [values, setValues] = useState<IValues>(initialValues);
     const [submitSuccess, setSuccess] = useState(undefined);
 
-    const haveErrors = (errors: IErrors) => {
+    const haveErrors = (errors: IErrors<IValues>) => {
         let haveError: boolean = false;
         Object.keys(errors).map((key: string) => {
             if (errors[key].length > 0) {
@@ -75,13 +71,13 @@ const Form: React.FC<IFormProps> = ({
         }
 
         if (haveErrors(errors)) {
-            validateForm();
+            setErrors(validate(values));
         }
     };
 
     useEffect(() => {
         if (haveErrors(errors)) {
-            validateForm();
+            setErrors(validate(values));
         }
     }, [values]);
 
@@ -92,68 +88,25 @@ const Form: React.FC<IFormProps> = ({
         };
     }, []);
 
-    // validateFrom specific to login form
-    // should be generic?
-    const validateForm = (): boolean => {
-        let newErrors: IErrors = errors;
-        let formisValid: boolean = true;
-        newErrors.fullname = "";
-        newErrors.email = "";
-        newErrors.password = "";
-        newErrors.confirmpwd = "";
-
-        if (Object.prototype.hasOwnProperty.call(values, "fullname")) {
-            if (!values["fullname"] || values["fullname"].trim().length === 0) {
-                newErrors.fullname = "Please enter your fullname";
-                formisValid = false;
-            }
-        }
-
-        let validEmail = /^.+@.+\..+$/;
-        if (!validEmail.test(values.email)) {
-            errors.email = "Please enter valid email address";
-            formisValid = false;
-        }
-
-        if (Object.prototype.hasOwnProperty.call(values, "confirmpwd")) {
-            if (values.password.trim().length < 8) {
-                errors.password =
-                    "password length should be atleast 8 characters.";
-                formisValid = false;
-            }
-        }
-
-        if (Object.prototype.hasOwnProperty.call(values, "confirmpwd")) {
-            if (values.password !== values.confirmpwd) {
-                errors.confirmpwd = "Passwords do not match.";
-                formisValid = false;
-            }
-        }
-
-        setErrors({
-            ...errors,
-            fullname: newErrors.fullname,
-            email: newErrors.email,
-            password: newErrors.password,
-            confirmpwd: newErrors.confirmpwd,
-        });
-        return formisValid;
-    };
-
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
         e.preventDefault();
 
-        if (validateForm()) {
+        const validated = validate(values);
+        setErrors(validated);
+
+        if (!haveErrors(validated)) {
             setSending(true);
-            await Inertia.post(action, values).then(() => {
-                if (_isMounted.current) {
-                    setSending(false);
-                    setSuccess(true);
-                    setValues(initialValues);
-                }
-            });
+            await Inertia.post(action, values)
+                .then(() => {
+                    if (_isMounted.current) {
+                        setSending(false);
+                        setSuccess(true);
+                        setValues(initialValues);
+                    }
+                })
+                .catch(err => console.log(err));
         } else {
             setSuccess(false);
         }

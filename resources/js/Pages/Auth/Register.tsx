@@ -1,7 +1,36 @@
 import React from "react";
-import Form from "@/Organisms/Form";
+import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
+
+type RegisterFormValues = {
+	email: string;
+	password: string;
+	confirmpwd: string;
+	fullname: string;
+};
+
+const validate = (values: RegisterFormValues) => {
+	let errors: IErrors<RegisterFormValues> = {};
+
+	if (!values.fullname || values.fullname.trim().length === 0) {
+		errors.fullname = "Please enter your fullname";
+	}
+
+	let validEmail = /^.+@.+\..+$/;
+	if (!validEmail.test(values.email)) {
+		errors.email = "Please enter valid email address";
+	}
+
+	if (values.password.trim().length < 8) {
+		errors.password = "password length should be at least 8 characters.";
+	}
+	if (values.password !== values.confirmpwd) {
+		errors.confirmpwd = "Passwords do not match.";
+	}
+
+	return errors;
+};
 
 const RegisterForm: React.FC = () => {
 	return (
@@ -9,7 +38,7 @@ const RegisterForm: React.FC = () => {
 			heading="Register"
 			message="Please register to create a profile"
 		>
-			<Form
+			<Form<RegisterFormValues>
 				action=""
 				initialValues={{
 					fullname: "",
@@ -17,6 +46,7 @@ const RegisterForm: React.FC = () => {
 					password: "",
 					confirmpwd: "",
 				}}
+				validate={validate}
 				button="Register"
 				render={(values, handleChange, errors) => (
 					<React.Fragment>
@@ -29,7 +59,7 @@ const RegisterForm: React.FC = () => {
 							onChange={handleChange}
 						/>
 						<div className="block text-sm font-medium text-red-500 pb-5">
-							{errors["fullname"]}
+							{errors.fullname}
 						</div>
 						<FormTextInput
 							type="email"
@@ -40,7 +70,7 @@ const RegisterForm: React.FC = () => {
 							onChange={handleChange}
 						/>
 						<div className="block text-sm font-medium text-red-500 pb-5">
-							{errors["email"]}
+							{errors.email}
 						</div>
 						<FormTextInput
 							type="password"
@@ -52,7 +82,7 @@ const RegisterForm: React.FC = () => {
 						/>
 
 						<div className="block text-sm font-medium text-red-500 pb-5">
-							{errors["password"]}
+							{errors.password}
 						</div>
 						<FormTextInput
 							type="password"

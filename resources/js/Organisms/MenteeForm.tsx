@@ -1,12 +1,40 @@
 import React from "react";
-import Form from "@/Organisms/Form";
+import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
+type MenteeFormValues = {
+    fullname: string;
+    email: string;
+    currentstatus: string;
+    previousexp: string;
+    interest: string;
+    specinterest: string;
+    mentortype: string;
+    timeframe: string;
+    suitabletime: string;
+    extrainfo: string;
+};
+
+const validate = (values: MenteeFormValues) => {
+    let errors: IErrors<MenteeFormValues> = {};
+
+    if (!values.fullname || values.fullname.trim().length === 0) {
+        errors.fullname = "Please enter your fullname";
+    }
+
+    let validEmail = /^.+@.+\..+$/;
+    if (!validEmail.test(values.email)) {
+        errors.email = "Please enter valid email address";
+    }
+
+    return errors;
+};
+
 const MenteeForm: React.FC = () => {
     return (
-        <Form
+        <Form<MenteeFormValues>
             action=""
             initialValues={{
                 fullname: "",
@@ -20,6 +48,7 @@ const MenteeForm: React.FC = () => {
                 suitabletime: "",
                 extrainfo: "",
             }}
+            validate={validate}
             button="Submit"
             render={(values, handleChange, errors) => (
                 <React.Fragment>
