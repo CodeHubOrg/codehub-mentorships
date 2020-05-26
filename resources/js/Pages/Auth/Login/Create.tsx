@@ -1,52 +1,75 @@
 import React from "react";
-import Form from "@/Organisms/Form";
+import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
-import FormChoiceField from "@/Molecules/FormChoiceField";
+
+type LoginFormValues = {
+    email: string;
+    password: string;
+};
+
+const validate = (values: LoginFormValues) => {
+    let errors: IErrors<LoginFormValues> = {};
+
+    let validEmail = /^.+@.+\..+$/;
+    if (!validEmail.test(values.email)) {
+        errors.email = "Please enter valid email address";
+    }
+
+    if (!values.password || values.password.trim().length === 0) {
+        errors.password = "Please enter a password.";
+    }
+    return errors;
+};
 
 const LoginForm: React.FC = () => {
     return (
         <AuthLayout heading="Login" message="Log into your account">
-            <Form
-                action=""
-                initialValues={{ email: "", password: "", rememberme: [] }}
+            <Form<LoginFormValues>
+                action="/login"
+                initialValues={{ email: "", password: "" }}
+                validate={validate}
                 button="Login"
-                render={(values, handleChange) => (
+                render={(values, handleChange, errors) => (
                     <React.Fragment>
                         <FormTextInput
                             type="email"
                             name="email"
                             label="Email address"
-                            value={values["email"]}
-                            helpText=""
+                            value={values.email}
                             onChange={handleChange}
                         />
-                        <div className="block text-sm font-medium text-red-500 pb-5"></div>
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {errors.email}
+                        </div>
                         <FormTextInput
                             type="password"
                             name="password"
                             label="Password"
-                            value={values["password"]}
+                            value={values.password}
                             helpText=""
                             onChange={handleChange}
                         />
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {errors.password}
+                        </div>
                         <div className="mt-6 flex items-center justify-between">
-                            <div className="flex items-center">
-                                <FormChoiceField
-                                    type="checkbox"
-                                    label=""
-                                    selected={values["rememberme"]}
-                                    choices={[
-                                        {
-                                            label: "Remember me",
-                                            helptext: "",
-                                            value: "yes",
-                                        },
-                                    ]}
-                                    onChange={handleChange}
-                                    name="rememberme"
-                                />
-                            </div>
+                            {/*<div className="flex items-center">
+								<FormChoiceField
+									type="checkbox"
+									label=""
+									selected={values.rememberme}
+									choices={[
+										{
+											label: "Remember me",
+											helptext: "",
+											value: "yes",
+										},
+									]}
+									onChange={handleChange}
+									name="rememberme"
+								/>
+								</div>*/}
                             <div className="text-sm leading-5">
                                 <a
                                     href="#"
@@ -56,7 +79,7 @@ const LoginForm: React.FC = () => {
                                 </a>
                             </div>
                         </div>
-                        <div className="block text-sm font-medium text-red-500 pb-5"></div>
+                        <div className="block text-sm font-medium text-red-500 pb-5" />
                     </React.Fragment>
                 )}
             />

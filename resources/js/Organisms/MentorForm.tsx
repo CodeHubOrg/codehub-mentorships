@@ -1,21 +1,48 @@
 import React from "react";
-import Form from "@/Organisms/Form";
+import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
+type MentorFormValues = {
+    email: string;
+    fullname: string;
+    mentorexp: string;
+    interests: string;
+    skillsets: string;
+    suitabletime: string;
+    extrainfo: string;
+};
+
+const validate = (values: MentorFormValues) => {
+    let errors: IErrors<MentorFormValues> = {};
+
+    if (!values.fullname || values.fullname.trim().length === 0) {
+        errors.fullname = "Please enter your fullname";
+    }
+
+    let validEmail = /^.+@.+\..+$/;
+    if (!validEmail.test(values.email)) {
+        errors.email = "Please enter valid email address";
+    }
+
+    return errors;
+};
+
 const MentorForm: React.FC = () => {
     return (
-        <Form
+        <Form<MentorFormValues>
             action=""
             initialValues={{
                 fullname: "",
                 email: "",
-                interests: [],
+                mentorexp: "",
+                interests: "",
                 skillsets: "",
                 suitabletime: "",
                 extrainfo: "",
             }}
+            validate={validate}
             button="Submit"
             render={(values, handleChange, errors) => (
                 <React.Fragment>
@@ -23,26 +50,26 @@ const MentorForm: React.FC = () => {
                         type="text"
                         name="fullname"
                         label="Your Name/Slack handle"
-                        value={values["fullname"]}
+                        value={values.fullname}
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors["fullname"]}
+                        {errors.fullname}
                     </div>
                     <FormTextInput
                         type="email"
                         name="email"
                         label="Email address"
-                        value={values["email"]}
+                        value={values.email}
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors["email"]}
+                        {errors.email}
                     </div>
                     <FormChoiceField
                         type="radio"
                         label="Have you mentored anyone before?"
-                        selected={values["mentorexp"]}
+                        selected={values.mentorexp}
                         choices={[
                             {
                                 label: "Yes (with CodeHub)",
@@ -67,7 +94,7 @@ const MentorForm: React.FC = () => {
                     <FormChoiceField
                         type="checkbox"
                         label="Which concepts would you be happy to cover?"
-                        selected={values["interests"]}
+                        selected={values.interests}
                         choices={[
                             {
                                 label: "Specific Programming Language",
@@ -92,7 +119,7 @@ const MentorForm: React.FC = () => {
                     <Textarea
                         name="skillsets"
                         label="Please list any languages, frameworks, etc. that you would be happy to cover"
-                        value={values["skillsets"]}
+                        value={values.skillsets}
                         helpText="Please go into as much detail as you'd like"
                         onChange={handleChange}
                     />
@@ -101,7 +128,7 @@ const MentorForm: React.FC = () => {
                         type="text"
                         name="suitabletime"
                         label="Which timing is suitable for you?"
-                        value={values["suitabletime"]}
+                        value={values.suitabletime}
                         helpText=""
                         onChange={handleChange}
                     />
@@ -109,7 +136,7 @@ const MentorForm: React.FC = () => {
                     <Textarea
                         name="extrainfo"
                         label="Anything else?"
-                        value={values["extrainfo"]}
+                        value={values.extrainfo}
                         helpText=""
                         onChange={handleChange}
                     />

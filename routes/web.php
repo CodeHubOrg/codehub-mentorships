@@ -1,22 +1,46 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
 use App\Http\Controllers\Profiles\ProfilesController;
 
-Auth::routes();
+Route::name('auth.')
+    ->group(function() {
+        Route::get('/login', [LoginController::class, 'create'])
+            ->name('login.create')
+            ->middleware('guest');
+        Route::post('/login', [LoginController::class, 'store'])
+            ->name('login.store')
+            ->middleware('guest');
+        Route::post('/logout', [LoginController::class, 'destroy'])
+            ->name('login.destroy')
+            ->middleware('auth');
+        Route::get('/register', [RegisterController::class, 'create'])
+            ->name('register.create')
+            ->middleware('guest');
+        Route::post('/register', [RegisterController::class, 'store'])
+            ->name('register.store')
+            ->middleware('guest');
+    });
+
+
+
 
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
 // User application routes
-Route::get('/dashboard', [DashboardController::class, 'show']);
+Route::get('/dashboard', [DashboardController::class, 'show'])
+    ->middleware('auth')
+    ->name('dashboard.index');
 
-Route::namespace('Profiles')
-    ->name('profiles.')
+Route::name('profiles.')
     ->prefix('profiles')
+    ->middleware('auth')
     ->group(function () {
         Route::get('/', [ProfilesController::class, 'index'])
             ->name('index');
@@ -31,4 +55,12 @@ Route::namespace('Profiles')
     });
 
 // Admin application routes
-Route::get('/admin', [AdminDashboardController::class, 'index']);
+Route::name('admin.')
+    ->prefix('admin')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])
+            ->name('dashboard.index');
+    });
+
+
