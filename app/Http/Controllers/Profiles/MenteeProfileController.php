@@ -7,7 +7,6 @@ use Inertia\Inertia;
 
 class MenteeProfileController
 {
-
     public function create()
     {
         return Inertia::render('Profiles/Mentee/Create');

@@ -30,6 +30,5 @@ Route::namespace('Profiles')
             ->name('mentee.store');
     });
 
-
 // Admin application routes
 Route::get('/admin', [AdminDashboardController::class, 'index']);

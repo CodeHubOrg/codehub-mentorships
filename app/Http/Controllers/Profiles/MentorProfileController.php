@@ -7,7 +7,6 @@ use Inertia\Inertia;
 
 class MentorProfileController
 {
-
     public function create()
     {
         return Inertia::render('Profiles/Mentor/Create');
