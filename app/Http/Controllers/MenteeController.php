@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Inertia\Inertia;
 
-class HomeController extends Controller
+class MenteeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -23,9 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //return view('home');
-        return Inertia::render('Home',
-            ['heading' => 'This will be the user account page.']
-        );
+        return Inertia::render('Mentee');
     }
 }
