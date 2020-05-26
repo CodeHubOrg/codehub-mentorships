@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
+use App\Http\Controllers\Profiles\ProfilesController;
 
 Auth::routes();
 
@@ -17,6 +18,8 @@ Route::namespace('Profiles')
     ->name('profiles.')
     ->prefix('profiles')
     ->group(function () {
+        Route::get('/', [ProfilesController::class, 'index'])
+            ->name('index');
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
             ->name('mentor.create');
         Route::post('/mentor/new', [MentorProfileController::class, 'store'])
