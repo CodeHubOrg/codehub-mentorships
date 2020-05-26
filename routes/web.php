@@ -9,7 +9,7 @@ use App\Http\Controllers\Profiles\MentorProfileController;
 use App\Http\Controllers\Profiles\ProfilesController;
 
 Route::name('auth.')
-    ->group(function() {
+    ->group(function () {
         Route::get('/login', [LoginController::class, 'create'])
             ->name('login.create')
             ->middleware('guest');
@@ -26,9 +26,6 @@ Route::name('auth.')
             ->name('register.store')
             ->middleware('guest');
     });
-
-
-
 
 // Marketing page routes
 Route::view('/', 'marketing.home');
@@ -62,5 +59,3 @@ Route::name('admin.')
         Route::get('/', [AdminDashboardController::class, 'index'])
             ->name('dashboard.index');
     });
-
-
