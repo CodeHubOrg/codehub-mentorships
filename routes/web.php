@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
-use App\Http\Controllers\Marketing\HomePageController;
+use App\Http\Controllers\Dashboard\DashboardController;
 
 Auth::routes();
 
@@ -9,6 +9,8 @@ Auth::routes();
 Route::view('/', 'marketing.home');
 
 // User application routes
+Route::get('/dashboard', [DashboardController::class, 'show']);
+
 
 // Admin application routes
 Route::get('/admin', [AdminDashboardController::class, 'index']);
