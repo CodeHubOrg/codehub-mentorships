@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
 
 Auth::routes();
@@ -20,6 +21,10 @@ Route::namespace('Profiles')
             ->name('mentor.create');
         Route::post('/mentor/new', [MentorProfileController::class, 'store'])
             ->name('mentor.store');
+        Route::get('/mentee/new', [MenteeProfileController::class, 'create'])
+            ->name('mentee.create');
+        Route::post('/mentee/new', [MenteeProfileController::class, 'store'])
+            ->name('mentee.store');
     });
 
 
