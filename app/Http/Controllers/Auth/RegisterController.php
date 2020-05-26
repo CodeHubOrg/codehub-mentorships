@@ -42,9 +42,15 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
-    public function showRegistrationForm()
+    public function create()
     {
-        return Inertia::render('Auth/Register');
+        return Inertia::render('Auth/Register/Create');
+    }
+
+    public function store()
+    {
+        // This is where we will create the new User model and run any
+        // other code required after successful registration
     }
 
     /**
@@ -62,18 +68,5 @@ class RegisterController extends Controller
         ]);
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-    }
+
 }

@@ -1,10 +1,16 @@
 import React from "react";
+import MenteeForm from "@/Organisms/MenteeForm";
+import FormLayout from "@/Atoms/FormLayout";
 
 export default function Create() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-            <p className="mb-8">The mentee profile creation form will go here.</p>
-            <p>Refer to App\Http\Controllers\Profiles\MenteeProfileController for more information</p>
+        <div>
+            <FormLayout
+                heading="Mentee Form"
+                message="Please fill out the questionnaire below if you are interested in finding someone to mentor you"
+            >
+                <MenteeForm />
+            </FormLayout>
         </div>
     );
 }

@@ -1,10 +1,41 @@
 import React from "react";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import FormLayout from "@/Atoms/FormLayout";
 
-export default function Index() {
+interface Props {
+    heading?: string;
+}
+
+const Index = ({ heading }: Props) => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-            <p className="mb-8">This page will summarise the profiles (mentor/mentee) for the logged in user including the profile status (in review, approved etc).</p>
-            <p>Refer to App\Http\Controllers\Profiles\MenteeProfileController for more information</p>
+        <div>
+            <FormLayout heading={heading} message="You are logged in.">
+                <>
+                    <p>
+                        If you would like to find a mentor, please fill out the
+                        <InertiaLink href="/profiles/mentee/new" className="text-blue-500">
+                            Mentee form
+                        </InertiaLink>
+                        .
+                    </p>
+                    <p>&nbsp;</p>
+                    <p>
+                        If you would like to sign up as a mentor, please fill
+                        out the
+                        <InertiaLink href="/profiles/mentor/new" className="text-blue-500">
+                            Mentor form
+                        </InertiaLink>
+                        .
+                    </p>
+                    <p>&nbsp;</p>
+                    <InertiaLink href="/logout" method="post" className="text-blue-500">
+                        Log out
+                    </InertiaLink>
+                    <p>&nbsp;</p>
+                </>
+            </FormLayout>
         </div>
     );
-}
+};
+
+export default Index;
