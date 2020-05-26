@@ -6,7 +6,6 @@ use Inertia\Inertia;
 
 class ProfilesController
 {
-
     public function index()
     {
         // We'll need to grab the mentor and mentee profiles (if they exist)
@@ -15,7 +14,7 @@ class ProfilesController
 
         return Inertia::render('Profiles/Index', [
             'mentor_profile' => null,
-            'mentee_profile' => null
+            'mentee_profile' => null,
         ]);
     }
 }
