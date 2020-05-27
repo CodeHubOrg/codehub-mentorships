@@ -32,7 +32,7 @@ const validate = (values: RegisterFormValues) => {
     return errors;
 };
 
-const RegisterForm: React.FC = () => {
+const Create: React.FC = () => {
     return (
         <AuthLayout
             heading="Register"
@@ -106,4 +106,4 @@ const RegisterForm: React.FC = () => {
     );
 };
 
-export default RegisterForm;
+export default Create;

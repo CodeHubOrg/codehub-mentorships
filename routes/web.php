@@ -1,22 +1,61 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Profiles\MenteeProfileController;
+use App\Http\Controllers\Profiles\MentorProfileController;
+use App\Http\Controllers\Profiles\ProfilesController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::name('auth.')
+    ->group(function () {
+        Route::get('/login', [LoginController::class, 'create'])
+            ->name('login.create')
+            ->middleware('guest');
+        Route::post('/login', [LoginController::class, 'store'])
+            ->name('login.store')
+            ->middleware('guest');
+        Route::post('/logout', [LoginController::class, 'destroy'])
+            ->name('login.destroy')
+            ->middleware('auth');
+        Route::get('/register', [RegisterController::class, 'create'])
+            ->name('register.create')
+            ->middleware('guest');
+        Route::post('/register', [RegisterController::class, 'store'])
+            ->name('register.store')
+            ->middleware('guest');
+    });
 
-// Auth
-Route::get('login')->name('login')->uses('Auth\LoginController@showLoginForm')->middleware('guest');
-Route::post('login')->name('login.attempt')->uses('Auth\LoginController@login')->middleware('guest');
-Route::post('logout')->name('logout')->uses('Auth\LoginController@logout');
+// Marketing page routes
+Route::view('/', 'marketing.home');
 
-Route::get('register')->name('register')->uses('Auth\RegisterController@showRegistrationForm')->middleware('guest');
+// User application routes
+Route::get('/dashboard', [DashboardController::class, 'show'])
+    ->middleware('auth')
+    ->name('dashboard.index');
 
-// Dashboard
-Route::get('/admin', [AdminDashboardController::class, 'index']);
+Route::name('profiles.')
+    ->prefix('profiles')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', [ProfilesController::class, 'index'])
+            ->name('index');
+        Route::get('/mentor/new', [MentorProfileController::class, 'create'])
+            ->name('mentor.create');
+        Route::post('/mentor/new', [MentorProfileController::class, 'store'])
+            ->name('mentor.store');
+        Route::get('/mentee/new', [MenteeProfileController::class, 'create'])
+            ->name('mentee.create');
+        Route::post('/mentee/new', [MenteeProfileController::class, 'store'])
+            ->name('mentee.store');
+    });
 
-// Member pages
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/mentor', 'MentorController@index')->name('mentor');
-Route::get('/mentee', 'MenteeController@index')->name('mentee');
+// Admin application routes
+Route::name('admin.')
+    ->prefix('admin')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', [AdminDashboardController::class, 'index'])
+            ->name('dashboard.index');
+    });

@@ -22,7 +22,7 @@ const validate = (values: LoginFormValues) => {
     return errors;
 };
 
-const LoginForm: React.FC = () => {
+const Create: React.FC = () => {
     return (
         <AuthLayout heading="Login" message="Log into your account">
             <Form<LoginFormValues>
@@ -90,4 +90,4 @@ const LoginForm: React.FC = () => {
     );
 };
 
-export default LoginForm;
+export default Create;

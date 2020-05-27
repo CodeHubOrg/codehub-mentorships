@@ -6,22 +6,15 @@ interface Props {
     heading?: string;
 }
 
-const linkStyles = {
-    textDecoration: "underline",
-    color: "#22c",
-    paddingLeft: "5px",
-    paddingRight: "5px",
-};
-
-const Home = ({ heading }: Props) => {
+const Index = ({ heading }: Props) => {
     return (
         <div>
             <FormLayout heading={heading} message="You are logged in.">
                 <>
                     <p>
                         If you would like to find a mentor, please fill out the
-                        <InertiaLink href="/mentee">
-                            <span style={linkStyles}>Mentee form</span>
+                        <InertiaLink href="/profiles/mentee/new" className="text-blue-500">
+                            Mentee form
                         </InertiaLink>
                         .
                     </p>
@@ -29,14 +22,14 @@ const Home = ({ heading }: Props) => {
                     <p>
                         If you would like to sign up as a mentor, please fill
                         out the
-                        <InertiaLink href="/mentor">
-                            <span style={linkStyles}>Mentor form</span>
+                        <InertiaLink href="/profiles/mentor/new" className="text-blue-500">
+                            Mentor form
                         </InertiaLink>
                         .
                     </p>
                     <p>&nbsp;</p>
-                    <InertiaLink href="/logout" method="post">
-                        <span style={linkStyles}>Log out</span>
+                    <InertiaLink href="/logout" method="post" className="text-blue-500">
+                        Log out
                     </InertiaLink>
                     <p>&nbsp;</p>
                 </>
@@ -45,4 +38,4 @@ const Home = ({ heading }: Props) => {
     );
 };
 
-export default Home;
+export default Index;

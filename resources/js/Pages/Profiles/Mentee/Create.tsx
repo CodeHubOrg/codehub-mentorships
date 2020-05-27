@@ -2,7 +2,7 @@ import React from "react";
 import MenteeForm from "@/Organisms/MenteeForm";
 import FormLayout from "@/Atoms/FormLayout";
 
-export default function Index() {
+export default function Create() {
     return (
         <div>
             <FormLayout
