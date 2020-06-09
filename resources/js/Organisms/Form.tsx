@@ -74,7 +74,7 @@ const Form = <IValues extends Record<string, any>>({
             setErrors(validate(values));
         }
     };
-
+    
     useEffect(() => {
         if (haveErrors(errors)) {
             setErrors(validate(values));
@@ -88,6 +88,21 @@ const Form = <IValues extends Record<string, any>>({
         };
     }, []);
 
+    if(action==="/profile") {
+        useEffect(() => {
+         // we will call API to get profileDetails values for user from database.
+         //temporarily i have hardcoded value fot testing purpose. 
+            let profileDetails = {
+                fullname: "ABC",
+                email: "test@example.com",
+                subtoteach:"React,larvel,Tailwind"
+            };
+            
+            setValues({ ...values,...profileDetails}); 
+        }, []);
+    }
+    
+
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
@@ -95,7 +110,7 @@ const Form = <IValues extends Record<string, any>>({
 
         const validated = validate(values);
         setErrors(validated);
-
+        console.log(values);
         if (!haveErrors(validated)) {
             setSending(true);
             await Inertia.post(action, values)
