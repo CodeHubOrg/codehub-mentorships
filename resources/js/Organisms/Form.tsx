@@ -6,7 +6,7 @@ interface IFormProps<IValues extends Record<string, any>> {
     action: string;
     initialValues: IValues;
     button: string;
-    validate: (values: IValues) => IErrors<IValues>;
+    validate?: (values: IValues) => IErrors<IValues>;
     /* A prop which allows content to be injected */
     render: (
         val: IValues,
@@ -29,7 +29,7 @@ export interface IFormState<IValues extends Record<string, any>> {
 }
 
 export type IErrors<IValues extends Record<string, any>> = {
-    [P in keyof IValues]?: string;
+    [P in keyof IValues]?: string
 };
 
 const Form = <IValues extends Record<string, any>>({
@@ -74,7 +74,7 @@ const Form = <IValues extends Record<string, any>>({
             setErrors(validate(values));
         }
     };
-    
+
     useEffect(() => {
         if (haveErrors(errors)) {
             setErrors(validate(values));
@@ -88,20 +88,19 @@ const Form = <IValues extends Record<string, any>>({
         };
     }, []);
 
-    if(action==="/profile") {
+    if (action === "/profile") {
         useEffect(() => {
-         // we will call API to get profileDetails values for user from database.
-         //temporarily i have hardcoded value fot testing purpose. 
+            // we will call API to get profileDetails values for user from database.
+            //temporarily i have hardcoded value fot testing purpose.
             let profileDetails = {
                 fullname: "ABC",
                 email: "test@example.com",
-                subtoteach:"React,larvel,Tailwind"
+                subtoteach: "React,larvel,Tailwind",
             };
-            
-            setValues({ ...values,...profileDetails}); 
+
+            setValues({ ...values, ...profileDetails });
         }, []);
     }
-    
 
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
