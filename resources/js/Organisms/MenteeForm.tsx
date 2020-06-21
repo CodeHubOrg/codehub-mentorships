@@ -5,8 +5,6 @@ import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
 type MenteeFormValues = {
-    fullname: string;
-    email: string;
     currentstatus: string;
     previousexp: string;
     interest: string;
@@ -20,13 +18,17 @@ type MenteeFormValues = {
 const validate = (values: MenteeFormValues) => {
     let errors: IErrors<MenteeFormValues> = {};
 
-    if (!values.fullname || values.fullname.trim().length === 0) {
-        errors.fullname = "Please enter your fullname";
-    }
+    // if (!values.fullname || values.fullname.trim().length === 0) {
+    //     errors.fullname = "Please enter your fullname";
+    // }
 
-    let validEmail = /^.+@.+\..+$/;
-    if (!validEmail.test(values.email)) {
-        errors.email = "Please enter valid email address";
+    // let validEmail = /^.+@.+\..+$/;
+    // if (!validEmail.test(values.email)) {
+    //     errors.email = "Please enter valid email address";
+    // }
+    if (!values.currentstatus || values.currentstatus.trim().length === 0) {
+        errors.currentstatus =
+            "Please give some information about your current situation.";
     }
 
     return errors;
@@ -35,10 +37,8 @@ const validate = (values: MenteeFormValues) => {
 const MenteeForm: React.FC = () => {
     return (
         <Form<MenteeFormValues>
-            action=""
+            action="/profiles/mentee/new"
             initialValues={{
-                fullname: "",
-                email: "",
                 currentstatus: "",
                 previousexp: "",
                 interest: "",
@@ -54,33 +54,15 @@ const MenteeForm: React.FC = () => {
                 <React.Fragment>
                     <FormTextInput
                         type="text"
-                        name="fullname"
-                        label="Full name"
-                        value={values.fullname}
-                        onChange={handleChange}
-                    />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors["fullname"]}
-                    </div>
-                    <FormTextInput
-                        type="email"
-                        name="email"
-                        label="Email address"
-                        value={values.email}
-                        onChange={handleChange}
-                    />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors["email"]}
-                    </div>
-                    <FormTextInput
-                        type="text"
                         name="currentstatus"
                         label="What is your current situation?"
                         value={values.currentstatus}
                         helpText="e.g. student, switching from another career, software dev who wants to learn web dev, etc."
                         onChange={handleChange}
                     />
-                    <div className="block text-sm font-medium text-red-500 pb-5" />
+                    <div className="block text-sm font-medium text-red-500 pb-5">
+                        {errors.currentstatus}
+                    </div>
                     <Textarea
                         name="previousexp"
                         label="How much experience have you got and with which technologies?"
@@ -113,12 +95,12 @@ const MenteeForm: React.FC = () => {
                             {
                                 label: "Yes",
                                 helptext: "Yes",
-                                value: "yes",
+                                value: "Yes",
                             },
                             {
                                 label: "No",
                                 helptext: "No",
-                                value: "no",
+                                value: "No",
                             },
                         ]}
                         helpText="e.g. starting out in the industry and not sure what best to learn"
