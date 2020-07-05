@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Profiles;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mentee;
 use App\Models\Mentor;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,8 +28,8 @@ class MentorProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {                
-        return Inertia::render('Profiles/Mentor/Create' );
+    {
+        return Inertia::render('Profiles/Mentor/Create');
     }
 
     /**
@@ -49,7 +48,6 @@ class MentorProfileController extends Controller
     public function store(Request $request)
     {
 
-       
         // Creating a new Mentor model with the data from the form.
         // Give this profile a 'Pending' status
 
@@ -57,13 +55,12 @@ class MentorProfileController extends Controller
             'mentorexp' => 'required',
             'skillsets' => '',
             'suitabletime' => '',
-            'extrainfo' => ''
+            'extrainfo' => '',
         ]));
 
         // temporary, turning array into string for now
- 
-        $interests = $request->interests ? implode($request->interests, ', ' ) : "";
-        
+
+        $interests = $request->interests ? implode($request->interests, ', ') : '';
 
         $m->status = 'Pending';
         // Associate this Mentor model with the authenticated User

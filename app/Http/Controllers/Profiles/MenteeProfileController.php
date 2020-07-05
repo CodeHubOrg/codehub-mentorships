@@ -32,13 +32,13 @@ class MenteeProfileController extends Controller
         return Inertia::render('Profiles/Mentee/Create');
     }
 
-
     // Currently the $request parameter of this method
     // is typehinted as a regular Illuminate\Http\Request
     // We should create a MenteeProfileRequest form request class
     // - https://laravel.com/docs/7.x/validation#form-request-validation
     // that will hold our validation logic so that by the time the
     // data reaches this point, we know that it is valid
+
     /**
      * Store a newly created resource in storage.
      *
@@ -77,7 +77,7 @@ class MenteeProfileController extends Controller
     {
         //dd($mentee);
 
-        // return Inertia::render('Profiles/Mentee/Show', ['mentee' => 
+        // return Inertia::render('Profiles/Mentee/Show', ['mentee' =>
         //         ['id' => $mentee->id,
         //           'currentstatus' => $mentee->currentstatus
 
