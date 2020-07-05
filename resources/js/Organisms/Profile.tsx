@@ -1,7 +1,8 @@
+// use this for registration
+
 import React from "react";
 import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
-
 
 type ProfilPageValues = {
     fullname: string;
@@ -15,7 +16,7 @@ type ProfilPageValues = {
 const validate = (values: ProfilPageValues) => {
     let errors: IErrors<ProfilPageValues> = {};
 
-   if (!values.fullname || values.fullname.trim().length === 0) {
+    if (!values.fullname || values.fullname.trim().length === 0) {
         errors.fullname = "Please enter your fullname";
     }
 
@@ -34,10 +35,10 @@ const Profile: React.FC = () => {
             initialValues={{
                 fullname: "",
                 email: "",
-                subtoteach:"",
-                subtolearn:"",
+                subtoteach: "",
+                subtolearn: "",
                 meetduration: "",
-                meetfrequency:""  
+                meetfrequency: "",
             }}
             validate={validate}
             button="Update"
@@ -102,4 +103,3 @@ const Profile: React.FC = () => {
 };
 
 export default Profile;
-

@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Profiles;
 
+use App\Http\Controllers\Controller;
+use App\Models\Mentee;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class ProfilesController
 {
     public function index()
     {
-        // We'll need to grab the mentor and mentee profiles (if they exist)
-        // for the currently authenticated user.  We'll then return these to the
-        // view.
+
+        $u = Auth::user();
+        $mentor = $u->mentor;
+        $mentee = $u->mentee;
 
         return Inertia::render('Profiles/Index', [
-            'mentor_profile' => null,
-            'mentee_profile' => null,
+            'mentor_profile' => $mentor,
+            'mentee_profile' => $mentee,
         ]);
     }
 }

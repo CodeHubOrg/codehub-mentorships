@@ -50,7 +50,7 @@ const MenteeForm: React.FC = () => {
             }}
             validate={validate}
             button="Submit"
-            render={(values, handleChange, errors) => (
+            render={(values, handleChange, errors, errorsBE) => (
                 <React.Fragment>
                     <FormTextInput
                         type="text"
@@ -60,9 +60,11 @@ const MenteeForm: React.FC = () => {
                         helpText="e.g. student, switching from another career, software dev who wants to learn web dev, etc."
                         onChange={handleChange}
                     />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors.currentstatus}
-                    </div>
+                    {(errors.currentstatus || errorsBE.currentstatus) && (
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {errors.currentstatus || errorsBE.currentstatus}
+                        </div>
+                    )}
                     <Textarea
                         name="previousexp"
                         label="How much experience have you got and with which technologies?"

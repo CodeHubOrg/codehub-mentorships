@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
 
 interface IFormProps<IValues extends Record<string, any>> {
     /* The http path that the form will be posted to */
@@ -14,6 +15,7 @@ interface IFormProps<IValues extends Record<string, any>> {
             e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
         ) => void,
         errors: IErrors<IValues>,
+        errorsBE: IErrors<IValues>,
     ) => React.ReactNode;
 }
 
@@ -23,6 +25,7 @@ export interface IFormState<IValues extends Record<string, any>> {
 
     /* The field validation error messages */
     errors: IErrors<IValues>;
+    errorsBE: IErrors<IValues>;
 
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
@@ -56,6 +59,8 @@ const Form = <IValues extends Record<string, any>>({
         return haveError;
     };
 
+    const { errors: errorsBE } = usePage();
+
     const updateState = (target: HTMLInputElement) => {
         const { name, value, type } = target;
         if (type === "checkbox") {
@@ -88,19 +93,19 @@ const Form = <IValues extends Record<string, any>>({
         };
     }, []);
 
-    if (action === "/profile") {
-        useEffect(() => {
-            // we will call API to get profileDetails values for user from database.
-            //temporarily i have hardcoded value fot testing purpose.
-            let profileDetails = {
-                fullname: "ABC",
-                email: "test@example.com",
-                subtoteach: "React,larvel,Tailwind",
-            };
+    // if (action === "/profile") {
+    //     useEffect(() => {
+    //         // we will call API to get profileDetails values for user from database.
+    //         //temporarily i have hardcoded value fot testing purpose.
+    //         let profileDetails = {
+    //             fullname: "ABC",
+    //             email: "test@example.com",
+    //             subtoteach: "React,larvel,Tailwind",
+    //         };
 
-            setValues({ ...values, ...profileDetails });
-        }, []);
-    }
+    //         setValues({ ...values, ...profileDetails });
+    //     }, []);
+    // }
 
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
@@ -135,6 +140,7 @@ const Form = <IValues extends Record<string, any>>({
                     values,
                     e => updateState(e.target as HTMLInputElement),
                     errors,
+                    errorsBE,
                 )}
 
                 <div className="form-group">
@@ -156,8 +162,7 @@ const Form = <IValues extends Record<string, any>>({
                 </div>
                 {submitSuccess && (
                     <div className="alert alert-info" role="alert">
-                        The form was successfully submitted (but in case of
-                        login form, you did not get logged in..)
+                        The form was successfully submitted.
                     </div>
                 )}
                 {submitSuccess === false && !haveErrors(errors) && (

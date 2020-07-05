@@ -41,11 +41,7 @@ Route::name('profiles.')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', [ProfilesController::class, 'index'])
-            ->name('index');
-        Route::get('/general/new', [GeneralProfileController::class, 'create'])
-            ->name('general.create');
-        Route::post('/general/new', [GeneralProfileController::class, 'store'])
-            ->name('general.store');
+            ->name('index');       
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
             ->name('mentor.create');
         Route::post('/mentor/new', [MentorProfileController::class, 'store'])
