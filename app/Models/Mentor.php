@@ -11,7 +11,7 @@ class Mentor extends Model
         'interests',
         'skillsets',
         'suitabletime',
-        'extrainfo'
+        'extrainfo',
     ];
 
     public function user()
