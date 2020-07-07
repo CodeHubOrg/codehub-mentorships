@@ -47,6 +47,16 @@ class MenteeProfileController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'currentstatus' => 'required',
+            'previousexp' => 'required',
+            'mentortype' => '',
+            'timeframe' => '',
+            'suitabletime' => '',
+            'extrainfo' => '',
+            'status' => '',
+        ]);
+
         // Creating a new Mentee model with the data from the form.
         // Give this profile a 'Pending' status
         $m = Mentee::create($request->validate([

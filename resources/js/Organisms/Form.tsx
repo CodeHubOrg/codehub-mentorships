@@ -93,19 +93,20 @@ const Form = <IValues extends Record<string, any>>({
         };
     }, []);
 
-    // if (action === "/profile") {
-    //     useEffect(() => {
-    //         // we will call API to get profileDetails values for user from database.
-    //         //temporarily i have hardcoded value fot testing purpose.
-    //         let profileDetails = {
-    //             fullname: "ABC",
-    //             email: "test@example.com",
-    //             subtoteach: "React,larvel,Tailwind",
-    //         };
+    // temporary
+    if (action === "/profile") {
+        useEffect(() => {
+            // we will call API to get profileDetails values for user from database.
+            //temporarily i have hardcoded value fot testing purpose.
+            let profileDetails = {
+                fullname: "ABC",
+                email: "test@example.com",
+                subtoteach: "React,larvel,Tailwind",
+            };
 
-    //         setValues({ ...values, ...profileDetails });
-    //     }, []);
-    // }
+            setValues({ ...values, ...profileDetails });
+        }, []);
+    }
 
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,

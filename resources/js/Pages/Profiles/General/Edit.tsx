@@ -7,7 +7,7 @@ export default function Create() {
         <div>
             <FormLayout
                 heading="Profile Form"
-                message="Please fill out the questionnaire below if you are interested in finding someone to mentor you"
+                message="Update your user profile"
             >
                 <Profile />
             </FormLayout>

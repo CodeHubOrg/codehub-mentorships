@@ -4,9 +4,9 @@ use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
-use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\ProfilesController;
 
 Route::name('auth.')
@@ -41,7 +41,10 @@ Route::name('profiles.')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', [ProfilesController::class, 'index'])
-            ->name('index');       
+            ->name('index'); 
+        // should we have the GeneralProfileController ?      
+        Route::get('/general/edit', [GeneralProfileController::class, 'edit'])
+            ->name('general.edit');
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
             ->name('mentor.create');
         Route::post('/mentor/new', [MentorProfileController::class, 'store'])

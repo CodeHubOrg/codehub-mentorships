@@ -16,12 +16,10 @@ class ProfilesController
     {
 
         $u = Auth::user();
-        $mentor = $u->mentor;
-        $mentee = $u->mentee;
 
         return Inertia::render('Profiles/Index', [
-            'mentor_profile' => $mentor,
-            'mentee_profile' => $mentee,
+            'mentor_profile' => $u->mentorProfile,
+            'mentee_profile' => $u->menteeProfile,
         ]);
     }
 }

@@ -1,5 +1,3 @@
-// use this for registration
-
 import React from "react";
 import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
