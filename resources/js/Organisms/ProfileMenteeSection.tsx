@@ -1,6 +1,19 @@
 import React from "react";
 import Card from "@/Molecules/Card";
-import { IProps } from "@/Pages/Profiles/Index";
+
+interface IProps {
+	heading: string;
+	mentee_profile?: {
+		id: number;
+		currentstatus: string;
+		previousexp: string;
+		mentortype?: string;
+		timeframe?: string;
+		suitabletime?: string;
+		extrainfo?: string;
+		status?: string;
+	};
+}
 
 const ProfileMenteeSection: React.FC<IProps> = ({
 	heading,

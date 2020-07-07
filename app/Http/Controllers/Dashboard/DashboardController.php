@@ -11,7 +11,11 @@ class DashboardController
     {
         $u = Auth::user();
 
+        // now I have moved the profiles in here, I am wondering if just passing the user would be enough
         return Inertia::render('Dashboard/Show', [
-            'user' => $u, ]);
+            'user' => $u,
+            'mentor_profile' => $u->mentorProfile,
+            'mentee_profile' => $u->menteeProfile,
+        ]);
     }
 }
