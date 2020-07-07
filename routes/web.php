@@ -7,7 +7,6 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
-use App\Http\Controllers\Profiles\ProfilesController;
 
 Route::name('auth.')
     ->group(function () {
@@ -40,7 +39,7 @@ Route::name('profiles.')
     ->prefix('profiles')
     ->middleware('auth')
     ->group(function () {
-        // should we have the GeneralProfileController ?      
+        // should we have the GeneralProfileController ?
         Route::get('/general/edit', [GeneralProfileController::class, 'edit'])
             ->name('general.edit');
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
