@@ -41,8 +41,8 @@ Route::name('profiles.')
     ->middleware('auth')
     ->group(function () {
         Route::get('/', [ProfilesController::class, 'index'])
-            ->name('index'); 
-        // should we have the GeneralProfileController ?      
+            ->name('index');
+        // should we have the GeneralProfileController ?
         Route::get('/general/edit', [GeneralProfileController::class, 'edit'])
             ->name('general.edit');
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
