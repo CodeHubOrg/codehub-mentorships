@@ -5,8 +5,6 @@ import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
 type MentorFormValues = {
-    email: string;
-    fullname: string;
     mentorexp: string;
     interests: string;
     skillsets: string;
@@ -16,14 +14,8 @@ type MentorFormValues = {
 
 const validate = (values: MentorFormValues) => {
     let errors: IErrors<MentorFormValues> = {};
-
-    if (!values.fullname || values.fullname.trim().length === 0) {
-        errors.fullname = "Please enter your fullname";
-    }
-
-    let validEmail = /^.+@.+\..+$/;
-    if (!validEmail.test(values.email)) {
-        errors.email = "Please enter valid email address";
+    if (!values.mentorexp) {
+        errors.mentorexp = "Please select a value.";
     }
 
     return errors;
@@ -34,8 +26,6 @@ const MentorForm: React.FC = () => {
         <Form<MentorFormValues>
             action=""
             initialValues={{
-                fullname: "",
-                email: "",
                 mentorexp: "",
                 interests: "",
                 skillsets: "",
@@ -44,28 +34,14 @@ const MentorForm: React.FC = () => {
             }}
             validate={validate}
             button="Submit"
-            render={(values, handleChange, errors) => (
+            render={(values, handleChange, errors, errorsFromBackend) => (
                 <React.Fragment>
-                    <FormTextInput
-                        type="text"
-                        name="fullname"
-                        label="Your Name/Slack handle"
-                        value={values.fullname}
-                        onChange={handleChange}
-                    />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors.fullname}
-                    </div>
-                    <FormTextInput
-                        type="email"
-                        name="email"
-                        label="Email address"
-                        value={values.email}
-                        onChange={handleChange}
-                    />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors.email}
-                    </div>
+                    {(errors.mentorexp || errorsFromBackend.mentorexp) && (
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {/*console.log("errors from backend", errorsFromBackend)*/}
+                            {errors.mentorexp || errorsFromBackend.mentorexp}
+                        </div>
+                    )}
                     <FormChoiceField
                         type="radio"
                         label="Have you mentored anyone before?"
@@ -74,17 +50,17 @@ const MentorForm: React.FC = () => {
                             {
                                 label: "Yes (with CodeHub)",
                                 helptext: "Yes",
-                                value: "yeswithcodehub",
+                                value: "Yes, with Codehub",
                             },
                             {
                                 label: "Yes (Elsewhere)",
                                 helptext: "Yes",
-                                value: "yes",
+                                value: "Yes",
                             },
                             {
                                 label: "No",
                                 helptext: "No",
-                                value: "no",
+                                value: "No",
                             },
                         ]}
                         onChange={handleChange}
@@ -99,17 +75,17 @@ const MentorForm: React.FC = () => {
                             {
                                 label: "Specific Programming Language",
                                 helptext: "Specific Programming Language",
-                                value: "programinglang",
+                                value: "Specific Programming Language",
                             },
                             {
                                 label: "Specific Framework/Library",
                                 helptext: "Specific Framework/Library",
-                                value: "framework",
+                                value: "Specific Framework/Library",
                             },
                             {
                                 label: "Industry/Career Advice",
                                 helptext: "Industry/Career Advice",
-                                value: "careeradvise",
+                                value: "Industry/Career Advice",
                             },
                         ]}
                         onChange={handleChange}

@@ -5,7 +5,7 @@ interface IProps {
     hasPadding?: Boolean;
 }
 
-const Card: React.FC<IProps> = ({ heading, hasPadding }) => {
+const Card: React.FC<IProps> = ({ heading, hasPadding, children}) => {
     return (
         <section>
             <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -21,14 +21,10 @@ const Card: React.FC<IProps> = ({ heading, hasPadding }) => {
                             <h3 className="text-lg leading-6 font-medium text-gray-900">
                                 {heading}
                             </h3>
-                        )}
-                        <dd className="text-sm leading-5 font-medium text-gray-500">
-                            A section
-                        </dd>
-                        <dt className="mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2">
-                            Section content
-                        </dt>
+                        )}                                           
                     </div>
+
+                    {children}
                 </div>
             </div>
         </section>

@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
 
 interface IFormProps<IValues extends Record<string, any>> {
     /* The http path that the form will be posted to */
     action: string;
     initialValues: IValues;
     button: string;
-    validate: (values: IValues) => IErrors<IValues>;
+    validate?: (values: IValues) => IErrors<IValues>;
     /* A prop which allows content to be injected */
     render: (
         val: IValues,
@@ -14,6 +15,7 @@ interface IFormProps<IValues extends Record<string, any>> {
             e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
         ) => void,
         errors: IErrors<IValues>,
+        errorsFromBackend: IErrors<IValues>,
     ) => React.ReactNode;
 }
 
@@ -23,13 +25,14 @@ export interface IFormState<IValues extends Record<string, any>> {
 
     /* The field validation error messages */
     errors: IErrors<IValues>;
+    errorsFromBackend: IErrors<IValues>;
 
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
 }
 
 export type IErrors<IValues extends Record<string, any>> = {
-    [P in keyof IValues]?: string;
+    [P in keyof IValues]?: string
 };
 
 const Form = <IValues extends Record<string, any>>({
@@ -55,6 +58,8 @@ const Form = <IValues extends Record<string, any>>({
         });
         return haveError;
     };
+
+    const { errors: errorsFromBackend } = usePage();
 
     const updateState = (target: HTMLInputElement) => {
         const { name, value, type } = target;
@@ -88,6 +93,21 @@ const Form = <IValues extends Record<string, any>>({
         };
     }, []);
 
+    // temporary
+    if (action === "/profile") {
+        useEffect(() => {
+            // we will call API to get profileDetails values for user from database.
+            //temporarily i have hardcoded value fot testing purpose.
+            let profileDetails = {
+                fullname: "ABC",
+                email: "test@example.com",
+                subtoteach: "React,larvel,Tailwind",
+            };
+
+            setValues({ ...values, ...profileDetails });
+        }, []);
+    }
+
     const handleSubmit = async (
         e: React.FormEvent<HTMLFormElement>,
     ): Promise<void> => {
@@ -95,7 +115,7 @@ const Form = <IValues extends Record<string, any>>({
 
         const validated = validate(values);
         setErrors(validated);
-
+        console.log(values);
         if (!haveErrors(validated)) {
             setSending(true);
             await Inertia.post(action, values)
@@ -121,6 +141,7 @@ const Form = <IValues extends Record<string, any>>({
                     values,
                     e => updateState(e.target as HTMLInputElement),
                     errors,
+                    errorsFromBackend,
                 )}
 
                 <div className="form-group">
@@ -142,8 +163,7 @@ const Form = <IValues extends Record<string, any>>({
                 </div>
                 {submitSuccess && (
                     <div className="alert alert-info" role="alert">
-                        The form was successfully submitted (but in case of
-                        login form, you did not get logged in..)
+                        The form was successfully submitted.
                     </div>
                 )}
                 {submitSuccess === false && !haveErrors(errors) && (
