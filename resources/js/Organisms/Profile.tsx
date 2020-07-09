@@ -2,7 +2,7 @@ import React from "react";
 import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 
-type ProfilPageValues = {
+type ProfilePageValues = {
     fullname: string;
     email: string;
     subtoteach: string;
@@ -11,8 +11,8 @@ type ProfilPageValues = {
     meetfrequency: string;
 };
 
-const validate = (values: ProfilPageValues) => {
-    let errors: IErrors<ProfilPageValues> = {};
+const validate = (values: ProfilePageValues) => {
+    let errors: IErrors<ProfilePageValues> = {};
 
     if (!values.fullname || values.fullname.trim().length === 0) {
         errors.fullname = "Please enter your fullname";
@@ -28,7 +28,7 @@ const validate = (values: ProfilPageValues) => {
 
 const Profile: React.FC = () => {
     return (
-        <Form<ProfilPageValues>
+        <Form<ProfilePageValues>
             action="/profile"
             initialValues={{
                 fullname: "",

@@ -3,7 +3,7 @@ import Card from "@/Molecules/Card";
 
 interface IProps {
 	heading: string;
-	mentor_profile?: {
+	mentorProfile?: {
 		id: number;
 		mentorexp: string;
 		interests?: string;
@@ -14,10 +14,7 @@ interface IProps {
 	};
 }
 
-const ProfileMentorSection: React.FC<IProps> = ({
-	heading,
-	mentor_profile,
-}) => {
+const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
 	const {
 		mentorexp,
 		interests,
@@ -25,7 +22,7 @@ const ProfileMentorSection: React.FC<IProps> = ({
 		suitabletime,
 		extrainfo,
 		status,
-	} = mentor_profile;
+	} = mentorProfile;
 
 	return (
 		<Card heading={heading}>

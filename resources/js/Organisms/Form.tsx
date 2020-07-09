@@ -15,7 +15,7 @@ interface IFormProps<IValues extends Record<string, any>> {
             e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
         ) => void,
         errors: IErrors<IValues>,
-        errorsBE: IErrors<IValues>,
+        errorsFromBackend: IErrors<IValues>,
     ) => React.ReactNode;
 }
 
@@ -25,7 +25,7 @@ export interface IFormState<IValues extends Record<string, any>> {
 
     /* The field validation error messages */
     errors: IErrors<IValues>;
-    errorsBE: IErrors<IValues>;
+    errorsFromBackend: IErrors<IValues>;
 
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
@@ -59,7 +59,7 @@ const Form = <IValues extends Record<string, any>>({
         return haveError;
     };
 
-    const { errors: errorsBE } = usePage();
+    const { errors: errorsFromBackend } = usePage();
 
     const updateState = (target: HTMLInputElement) => {
         const { name, value, type } = target;
@@ -141,7 +141,7 @@ const Form = <IValues extends Record<string, any>>({
                     values,
                     e => updateState(e.target as HTMLInputElement),
                     errors,
-                    errorsBE,
+                    errorsFromBackend,
                 )}
 
                 <div className="form-group">

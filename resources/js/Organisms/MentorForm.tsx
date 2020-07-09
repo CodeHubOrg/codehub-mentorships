@@ -5,8 +5,6 @@ import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
 type MentorFormValues = {
-    // email: string;
-    // fullname: string;
     mentorexp: string;
     interests: string;
     skillsets: string;
@@ -16,18 +14,6 @@ type MentorFormValues = {
 
 const validate = (values: MentorFormValues) => {
     let errors: IErrors<MentorFormValues> = {};
-
-    // if (!values.fullname || values.fullname.trim().length === 0) {
-    //     errors.fullname = "Please enter your fullname";
-    // }
-
-    // let validEmail = /^.+@.+\..+$/;
-    // if (!validEmail.test(values.email)) {
-    //     errors.email = "Please enter valid email address";
-    // }
-
-    // for testing error coming from the backend, temporarily
-    // change values.mentorexp to !values so frontend always passes
     if (!values.mentorexp) {
         errors.mentorexp = "Please select a value.";
     }
@@ -40,8 +26,6 @@ const MentorForm: React.FC = () => {
         <Form<MentorFormValues>
             action=""
             initialValues={{
-                // fullname: "",
-                // email: "",
                 mentorexp: "",
                 interests: "",
                 skillsets: "",
@@ -50,29 +34,12 @@ const MentorForm: React.FC = () => {
             }}
             validate={validate}
             button="Submit"
-            render={(values, handleChange, errors, errorsBE) => (
+            render={(values, handleChange, errors, errorsFromBackend) => (
                 <React.Fragment>
-                    {/*<FormTextInput
-                        type="text"
-                        name="fullname"
-                        label="Your Name/Slack handle"
-                        value={values.fullname}
-                        onChange={handleChange}
-                    />
-                    <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors.fullname}
-                    </div>
-                    <FormTextInput
-                        type="email"
-                        name="email"
-                        label="Email address"
-                        value={values.email}
-                        onChange={handleChange}
-                    />*/}
-                    {(errors.mentorexp || errorsBE.mentorexp) && (
+                    {(errors.mentorexp || errorsFromBackend.mentorexp) && (
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {/*console.log("errors from backend", errorsBE)*/}
-                            {errors.mentorexp || errorsBE.mentorexp}
+                            {/*console.log("errors from backend", errorsFromBackend)*/}
+                            {errors.mentorexp || errorsFromBackend.mentorexp}
                         </div>
                     )}
                     <FormChoiceField

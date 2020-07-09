@@ -6,7 +6,7 @@ import AuthLayout from "@/Atoms/AuthLayout";
 type RegisterFormValues = {
     email: string;
     password: string;
-    handle: string;
+    slackHandle: string;
     confirmpwd: string;
     fullname: string;
 };
@@ -44,7 +44,7 @@ const Create: React.FC = () => {
                 initialValues={{
                     fullname: "",
                     email: "",
-                    handle:"",
+                    slackHandle: "",
                     password: "",
                     confirmpwd: "",
                 }}
@@ -78,12 +78,11 @@ const Create: React.FC = () => {
                             type="text"
                             name="handle"
                             label="Slack handle"
-                            value={values.handle}
+                            value={values.slackHandle}
                             helpText=""
                             onChange={handleChange}
                         />
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                        </div>
+                        <div className="block text-sm font-medium text-red-500 pb-5" />
                         <FormTextInput
                             type="password"
                             name="password"

@@ -74,7 +74,7 @@ class MenteeProfileController extends Controller
         $m->user()->associate(Auth::user());
         $m->save();
 
-        return Redirect::route('profiles.index');
+        return Redirect::route('dashboard.index');
     }
 
     /**

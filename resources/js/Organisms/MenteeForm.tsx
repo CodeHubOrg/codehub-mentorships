@@ -17,15 +17,6 @@ type MenteeFormValues = {
 
 const validate = (values: MenteeFormValues) => {
     let errors: IErrors<MenteeFormValues> = {};
-
-    // if (!values.fullname || values.fullname.trim().length === 0) {
-    //     errors.fullname = "Please enter your fullname";
-    // }
-
-    // let validEmail = /^.+@.+\..+$/;
-    // if (!validEmail.test(values.email)) {
-    //     errors.email = "Please enter valid email address";
-    // }
     if (!values.currentstatus || values.currentstatus.trim().length === 0) {
         errors.currentstatus =
             "Please give some information about your current situation.";

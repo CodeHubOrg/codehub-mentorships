@@ -11,7 +11,7 @@ interface IProps {
         email: string;
         handle?: string;
     };
-    mentor_profile?: {
+    mentorProfile?: {
         id: number;
         mentorexp: string;
         interests?: string;
@@ -20,7 +20,7 @@ interface IProps {
         extrainfo?: string;
         status?: string;
     };
-    mentee_profile?: {
+    menteeProfile?: {
         id: number;
         currentstatus: string;
         previousexp: string;
@@ -32,7 +32,7 @@ interface IProps {
     };
 }
 
-const Show = ({ user, mentor_profile, mentee_profile }: IProps) => {
+const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
     return (
         <FormLayout heading="Profile Summary" message="">
             <InertiaLink
@@ -63,11 +63,11 @@ const Show = ({ user, mentor_profile, mentee_profile }: IProps) => {
                 <div className="flex flex-col lg:flex-row mb-12 lg:mb-24">
                     <div className="lg:w-1/2 w-full bg-gray-100">
                         <div className="rounded-md p-6 bg-gray shadow border">
-                            {mentee_profile ? (
+                            {menteeProfile ? (
                                 <div>
                                     <ProfileMenteeSection
                                         heading="Mentee profile"
-                                        mentee_profile={mentee_profile}
+                                        menteeProfile={menteeProfile}
                                     />
                                 </div>
                             ) : (
@@ -95,11 +95,11 @@ const Show = ({ user, mentor_profile, mentee_profile }: IProps) => {
                     </div>
                     <div className="lg:w-1/2 w-full lg:ml-4 lg:mt-0 ml-0 mt-12 bg-gray-100">
                         <div className="rounded-md p-6 bg-gray shadow border">
-                            {mentor_profile ? (
+                            {mentorProfile ? (
                                 <div>
                                     <ProfileMentorSection
                                         heading="Mentor profile"
-                                        mentor_profile={mentor_profile}
+                                        mentorProfile={mentorProfile}
                                     />
                                 </div>
                             ) : (

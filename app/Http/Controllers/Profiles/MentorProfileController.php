@@ -71,7 +71,7 @@ class MentorProfileController extends Controller
         // to alert them that a new registration has taken place.
 
         // Redirect the user to /profiles.
-        return Redirect::route('profiles.index');
+        return Redirect::route('dashboard.index');
     }
 
     /**
