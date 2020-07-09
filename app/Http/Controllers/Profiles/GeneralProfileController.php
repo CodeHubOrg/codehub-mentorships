@@ -7,9 +7,9 @@ use Inertia\Inertia;
 
 class GeneralProfileController
 {
-    // check whether to use this controller or different one 
-    // for updating the user profile; so far just showing 
-    // the form for updating 
+    // check whether to use this controller or different one
+    // for updating the user profile; so far just showing
+    // the form for updating
 
     public function edit()
     {
@@ -18,6 +18,5 @@ class GeneralProfileController
 
     public function store(Request $request)
     {
-
     }
 }
