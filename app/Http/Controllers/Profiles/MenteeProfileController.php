@@ -47,7 +47,7 @@ class MenteeProfileController extends Controller
      */
     public function store(Request $request)
     {
-  
+
         // Creating a new Mentee model with the data from the form.
         // Give this profile a 'Pending' status
         $m = MenteeProfile::create($request->validate([
@@ -61,7 +61,6 @@ class MenteeProfileController extends Controller
             'extra_info' => '',
             'status' => '',
         ]));
-
 
         // Associate this Mentee model with the authenticated User
         $m->user()->associate(Auth::user());
