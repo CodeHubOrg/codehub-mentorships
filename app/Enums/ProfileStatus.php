@@ -11,7 +11,7 @@ use BenSampo\Enum\Enum;
  */
 final class ProfileStatus extends Enum
 {
-    const Pending =   0;
-    const Confirmed =  1;
+    const Pending = 0;
+    const Confirmed = 1;
     const Disabled = 2;
 }

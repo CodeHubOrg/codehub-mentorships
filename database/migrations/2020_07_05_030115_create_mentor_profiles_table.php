@@ -1,9 +1,9 @@
 <?php
 
+use App\Enums\ProfileStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Enums\ProfileStatus;
 
 class CreateMentorProfilesTable extends Migration
 {
@@ -21,7 +21,7 @@ class CreateMentorProfilesTable extends Migration
             $table->text('skillset')->nullable();
             $table->text('suitable_time')->nullable();
             $table->text('extra_info')->nullable();
-             $table->tinyInteger('status')->unsigned()->default(ProfileStatus::Pending);
+            $table->tinyInteger('status')->unsigned()->default(ProfileStatus::Pending);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
