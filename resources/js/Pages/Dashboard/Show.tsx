@@ -13,22 +13,24 @@ interface IProps {
     };
     mentorProfile?: {
         id: number;
-        mentorexp: string;
+        mentoring_experience: string;
         interests?: string;
-        skillsets?: string;
-        suitabletime?: string;
-        extrainfo?: string;
-        status?: string;
+        skillset?: string;
+        suitable_time?: string;
+        extra_info?: string;
+        status?: number;
     };
     menteeProfile?: {
         id: number;
-        currentstatus: string;
-        previousexp: string;
-        mentortype?: string;
+        current_status: string;
+        previous_experience: string;
+        interests: string;
+        specific_interests: string;
+        mentoring_type?: string;
         timeframe?: string;
-        suitabletime?: string;
-        extrainfo?: string;
-        status?: string;
+        suitable_time?: string;
+        extra_info?: string;
+        status?: number;
     };
 }
 
@@ -126,22 +128,11 @@ const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
                     </div>
                 </div>
             </div>
+            <InertiaLink method="post" href="/logout" className="text-gray-900">
+                Log out
+            </InertiaLink>
         </FormLayout>
     );
 };
 
 export default Show;
-
-{
-    /*<div className="min-h-screen flex flex-col items-center justify-center">
-            <div className="max-w-md">
-                {user.name}
-                {user.name}
-                <p className="mb-8">This is the dashboard that an authenticated user will see upon login and successful registration.</p>
-                <p className="mb-8">Eventually this will show the user a short summary of their profiles (mentor/mentee) as well as summary details of the mentorships they are involved in.</p>
-                <p className="mb-8">For now you can use this link to view the users /profiles page:</p>
-
-                <p><InertiaLink href="/profiles" className="text-blue-500">Profiles</InertiaLink></p>
-            </div>
-    </div>*/
-}

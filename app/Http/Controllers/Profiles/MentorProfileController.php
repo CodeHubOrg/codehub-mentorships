@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Profiles;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mentor;
+use App\Models\MentorProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,18 +51,19 @@ class MentorProfileController extends Controller
         // Creating a new Mentor model with the data from the form.
         // Give this profile a 'Pending' status
 
-        $m = Mentor::create($request->validate([
-            'mentorexp' => 'required',
-            'skillsets' => '',
-            'suitabletime' => '',
-            'extrainfo' => '',
+        $m = MentorProfile::create($request->validate([
+            'mentoring_experience' => 'required',
+            'skillset' => '',
+            'suitable_time' => '',
+            'extra_info' => '',
         ]));
 
         // temporary, turning array into string for now
 
         $interests = $request->interests ? implode($request->interests, ', ') : '';
 
-        $m->status = 'Pending';
+        $m->interests = $interests;
+
         // Associate this Mentor model with the authenticated User
         $m->user()->associate(Auth::user());
         $m->save();

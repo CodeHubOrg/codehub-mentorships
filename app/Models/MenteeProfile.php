@@ -4,15 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mentee extends Model
+class MenteeProfile extends Model
 {
     protected $fillable = [
-        'currentstatus',
-        'previousexp',
-        'mentortype',
+        'current_status',
+        'previous_experience',
+        'interests',
+        'specific_interests',
+        'mentoring_type',
         'timeframe',
-        'suitabletime',
-        'extrainfo',
+        'suitable_time',
+        'extra_info',
         'status',
     ];
 

@@ -5,17 +5,17 @@ import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
 type MentorFormValues = {
-    mentorexp: string;
+    mentoring_experience: string;
     interests: string;
-    skillsets: string;
-    suitabletime: string;
-    extrainfo: string;
+    skillset: string;
+    suitable_time: string;
+    extra_info: string;
 };
 
 const validate = (values: MentorFormValues) => {
     let errors: IErrors<MentorFormValues> = {};
-    if (!values.mentorexp) {
-        errors.mentorexp = "Please select a value.";
+    if (!values.mentoring_experience) {
+        errors.mentoring_experience = "Please select a value.";
     }
 
     return errors;
@@ -26,26 +26,28 @@ const MentorForm: React.FC = () => {
         <Form<MentorFormValues>
             action=""
             initialValues={{
-                mentorexp: "",
+                mentoring_experience: "",
                 interests: "",
-                skillsets: "",
-                suitabletime: "",
-                extrainfo: "",
+                skillset: "",
+                suitable_time: "",
+                extra_info: "",
             }}
             validate={validate}
             button="Submit"
             render={(values, handleChange, errors, errorsFromBackend) => (
                 <React.Fragment>
-                    {(errors.mentorexp || errorsFromBackend.mentorexp) && (
+                    {(errors.mentoring_experience ||
+                        errorsFromBackend.mentoring_experience) && (
                         <div className="block text-sm font-medium text-red-500 pb-5">
                             {/*console.log("errors from backend", errorsFromBackend)*/}
-                            {errors.mentorexp || errorsFromBackend.mentorexp}
+                            {errors.mentoring_experience ||
+                                errorsFromBackend.mentoring_experience}
                         </div>
                     )}
                     <FormChoiceField
                         type="radio"
                         label="Have you mentored anyone before?"
-                        selected={values.mentorexp}
+                        selected={values.mentoring_experience}
                         choices={[
                             {
                                 label: "Yes (with CodeHub)",
@@ -64,7 +66,7 @@ const MentorForm: React.FC = () => {
                             },
                         ]}
                         onChange={handleChange}
-                        name="mentorexp"
+                        name="mentoring_experience"
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <FormChoiceField
@@ -93,26 +95,26 @@ const MentorForm: React.FC = () => {
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <Textarea
-                        name="skillsets"
+                        name="skillset"
                         label="Please list any languages, frameworks, etc. that you would be happy to cover"
-                        value={values.skillsets}
+                        value={values.skillset}
                         helpText="Please go into as much detail as you'd like"
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <FormTextInput
                         type="text"
-                        name="suitabletime"
+                        name="suitable_time"
                         label="Which timing is suitable for you?"
-                        value={values.suitabletime}
+                        value={values.suitable_time}
                         helpText=""
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <Textarea
-                        name="extrainfo"
+                        name="extra_info"
                         label="Anything else?"
-                        value={values.extrainfo}
+                        value={values.extra_info}
                         helpText=""
                         onChange={handleChange}
                     />

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Mentor extends Model
+class MentorProfile extends Model
 {
     protected $fillable = [
-        'mentorexp',
+        'mentoring_experience',
         'interests',
-        'skillsets',
-        'suitabletime',
-        'extrainfo',
+        'skillset',
+        'suitable_time',
+        'extra_info',
     ];
 
     public function user()
