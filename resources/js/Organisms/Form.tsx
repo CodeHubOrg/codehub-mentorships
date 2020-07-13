@@ -115,7 +115,6 @@ const Form = <IValues extends Record<string, any>>({
 
         const validated = validate(values);
         setErrors(validated);
-        console.log(values);
         if (!haveErrors(validated)) {
             setSending(true);
             await Inertia.post(action, values)

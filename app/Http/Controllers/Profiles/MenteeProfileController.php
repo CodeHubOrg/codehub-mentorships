@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Profiles;
 
 use App\Http\Controllers\Controller;
-use App\Models\Mentee;
+use App\Models\MenteeProfile;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,29 +47,21 @@ class MenteeProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'currentstatus' => 'required',
-            'previousexp' => 'required',
-            'mentortype' => '',
-            'timeframe' => '',
-            'suitabletime' => '',
-            'extrainfo' => '',
-            'status' => '',
-        ]);
 
         // Creating a new Mentee model with the data from the form.
         // Give this profile a 'Pending' status
-        $m = Mentee::create($request->validate([
-            'currentstatus' => 'required',
-            'previousexp' => 'required',
-            'mentortype' => '',
+        $m = MenteeProfile::create($request->validate([
+            'current_status' => 'required',
+            'previous_experience' => 'required',
+            'interests' => '',
+            'specific_interests' => '',
+            'mentoring_type' => '',
             'timeframe' => '',
-            'suitabletime' => '',
-            'extrainfo' => '',
+            'suitable_time' => '',
+            'extra_info' => '',
             'status' => '',
         ]));
 
-        $m->status = 'Pending';
         // Associate this Mentee model with the authenticated User
         $m->user()->associate(Auth::user());
         $m->save();
@@ -85,13 +77,7 @@ class MenteeProfileController extends Controller
      */
     public function show(Mentee $mentee)
     {
-        //dd($mentee);
-
-        // return Inertia::render('Profiles/Mentee/Show', ['mentee' =>
-        //         ['id' => $mentee->id,
-        //           'currentstatus' => $mentee->currentstatus
-
-        //         ]]);
+        //
     }
 
     /**

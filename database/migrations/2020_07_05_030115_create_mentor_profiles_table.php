@@ -1,10 +1,11 @@
 <?php
 
+use App\Enums\ProfileStatus;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMentorsTable extends Migration
+class CreateMentorProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +14,14 @@ class CreateMentorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('mentors', function (Blueprint $table) {
+        Schema::create('mentor_profiles', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('mentorexp');
+            $table->text('mentoring_experience');
             $table->text('interests')->nullable();
-            $table->text('skillsets')->nullable();
-            $table->text('suitabletime')->nullable();
-            $table->text('extrainfo')->nullable();
-            $table->char('status', 30)->default('Pending');
+            $table->text('skillset')->nullable();
+            $table->text('suitable_time')->nullable();
+            $table->text('extra_info')->nullable();
+            $table->tinyInteger('status')->unsigned()->default(ProfileStatus::Pending);
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

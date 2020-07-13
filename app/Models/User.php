@@ -38,11 +38,11 @@ class User extends Authenticatable
 
     public function menteeProfile()
     {
-        return $this->hasOne(Mentee::class);
+        return $this->hasOne(MenteeProfile::class);
     }
 
     public function mentorProfile()
     {
-        return $this->hasOne(Mentor::class);
+        return $this->hasOne(MentorProfile::class);
     }
 }

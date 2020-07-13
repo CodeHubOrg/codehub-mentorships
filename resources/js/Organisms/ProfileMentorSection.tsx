@@ -5,22 +5,22 @@ interface IProps {
 	heading: string;
 	mentorProfile?: {
 		id: number;
-		mentorexp: string;
+		mentoring_experience: string;
 		interests?: string;
-		skillsets?: string;
-		suitabletime?: string;
-		extrainfo?: string;
-		status?: string;
+		skillset?: string;
+		suitable_time?: string;
+		extra_info?: string;
+		status?: number;
 	};
 }
 
 const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
 	const {
-		mentorexp,
+		mentoring_experience,
 		interests,
-		skillsets,
-		suitabletime,
-		extrainfo,
+		skillset,
+		suitable_time,
+		extra_info,
 		status,
 	} = mentorProfile;
 
@@ -30,7 +30,7 @@ const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
 				<span className="mb-6 text-3x text-gray-800 font-semibold">
 					Mentoring experience:
 				</span>{" "}
-				{mentorexp}
+				{mentoring_experience}
 			</p>
 			{interests && (
 				<p>
@@ -40,31 +40,31 @@ const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
 					{interests}
 				</p>
 			)}
-			{skillsets && (
+			{skillset && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						Skill set:
 					</span>{" "}
-					{skillsets}
+					{skillset}
 				</p>
 			)}
-			{suitabletime && (
+			{suitable_time && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						Suitable Time:
 					</span>{" "}
-					{suitabletime}
+					{suitable_time}
 				</p>
 			)}
-			{extrainfo && (
+			{extra_info && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						Additional info:
 					</span>{" "}
-					{extrainfo}
+					{extra_info}
 				</p>
 			)}
-			{status === "Pending" && (
+			{status === 0 && (
 				<>
 					<p>&nbsp;</p>
 					<p>

@@ -5,24 +5,28 @@ interface IProps {
 	heading: string;
 	menteeProfile?: {
 		id: number;
-		currentstatus: string;
-		previousexp: string;
-		mentortype?: string;
+		current_status: string;
+		previous_experience: string;
+		interests: string;
+		specific_interests: string;
+		mentoring_type?: string;
 		timeframe?: string;
-		suitabletime?: string;
-		extrainfo?: string;
-		status?: string;
+		suitable_time?: string;
+		extra_info?: string;
+		status?: number;
 	};
 }
 
 const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
 	const {
-		currentstatus,
-		previousexp,
-		mentortype,
+		current_status,
+		previous_experience,
+		interests,
+		specific_interests,
+		mentoring_type,
 		timeframe,
-		suitabletime,
-		extrainfo,
+		suitable_time,
+		extra_info,
 		status,
 	} = menteeProfile;
 
@@ -32,20 +36,36 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
 				<span className="mb-6 text-3x text-gray-800 font-semibold">
 					Current status:
 				</span>{" "}
-				{currentstatus}
+				{current_status}
 			</p>
 			<p>
 				<span className="mb-6 text-3x text-gray-800 font-semibold">
 					Previous experience:
 				</span>{" "}
-				{previousexp}
+				{previous_experience}
 			</p>
-			{mentortype && (
+			{interests && (
+				<p>
+					<span className="mb-6 text-3x text-gray-800 font-semibold">
+						Interests:
+					</span>{" "}
+					{interests}
+				</p>
+			)}
+			{specific_interests && (
+				<p>
+					<span className="mb-6 text-3x text-gray-800 font-semibold">
+						Specific interests:
+					</span>{" "}
+					{specific_interests}
+				</p>
+			)}
+			{mentoring_type && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						After some more general mentoring:
 					</span>{" "}
-					{mentortype}
+					{mentoring_type}
 				</p>
 			)}
 			{timeframe && (
@@ -56,23 +76,23 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
 					{timeframe}
 				</p>
 			)}
-			{suitabletime && (
+			{suitable_time && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						Suitable time:
 					</span>{" "}
-					{suitabletime}
+					{suitable_time}
 				</p>
 			)}
-			{extrainfo && (
+			{extra_info && (
 				<p>
 					<span className="mb-6 text-3x text-gray-800 font-semibold">
 						Additional info:
 					</span>{" "}
-					{extrainfo}
+					{extra_info}
 				</p>
 			)}
-			{status === "Pending" && (
+			{status === 0 && (
 				<>
 					<p>&nbsp;</p>
 					<p>
