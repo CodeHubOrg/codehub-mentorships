@@ -16,7 +16,7 @@ Route::name('auth.')
         Route::post('/login', [LoginController::class, 'store'])
             ->name('login.store')
             ->middleware('guest');
-        Route::post('/logout', [LoginController::class, 'destroy'])
+        Route::delete('/logout', [LoginController::class, 'destroy'])
             ->name('login.destroy')
             ->middleware('auth');
         Route::get('/register', [RegisterController::class, 'create'])
