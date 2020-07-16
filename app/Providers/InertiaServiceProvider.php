@@ -37,9 +37,9 @@ class InertiaServiceProvider extends ServiceProvider
                 return [
                     'user' => UserPresenter::make(Auth::user())
                         ->preset('summary')
-                        ->get()
+                        ->get(),
                 ];
-            }
+            },
         ]);
     }
 }
