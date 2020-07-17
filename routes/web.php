@@ -43,8 +43,6 @@ Route::name('account.')
             ->name('edit');
     });
 
-
-
 Route::name('profiles.')
     ->prefix('profiles')
     ->middleware('auth')

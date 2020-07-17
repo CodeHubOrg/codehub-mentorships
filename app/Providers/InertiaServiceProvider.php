@@ -41,13 +41,13 @@ class InertiaServiceProvider extends ServiceProvider
                         ->get(),
                 ];
             },
-            'nav' => function() {
+            'nav' => function () {
                 return app(Navigation::class)
                     ->add('Home', route('dashboard.index'))
                     ->add('My Profiles', '#')
                     ->add('My Mentorships', '#')
                     ->tree();
-            }
+            },
         ]);
     }
 }
