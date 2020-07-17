@@ -1,3 +1,7 @@
+import { AppLayout } from '@/Layouts/AppLayout';
+import React from "react";
+import MentorForm from "@/Organisms/MentorForm";
+
 {
     /*import React from "react";
 import Heading from "@/Atoms/Heading";
@@ -31,10 +35,6 @@ export default function Index({ message, button }: Props) {
 */
 }
 
-import React from "react";
-import MentorForm from "@/Organisms/MentorForm";
-import FormLayout from "@/Atoms/FormLayout";
-
 // interface Props {
 //   message: React.ReactChildren;
 //   button: React.ReactChildren;
@@ -43,12 +43,11 @@ import FormLayout from "@/Atoms/FormLayout";
 export default function Index() {
     return (
         <div>
-            <FormLayout
+            <AppLayout
                 heading="Mentor Form"
-                message="Please fill out the questionnaire below if you are interested in finding someone to mentor you"
             >
                 <MentorForm />
-            </FormLayout>
+            </AppLayout>
         </div>
     );
 }

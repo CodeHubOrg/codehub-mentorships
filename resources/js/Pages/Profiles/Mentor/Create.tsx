@@ -1,16 +1,11 @@
 import React from "react";
 import MentorForm from "@/Organisms/MentorForm";
-import FormLayout from "@/Atoms/FormLayout";
+import { AppLayout } from '@/Layouts/AppLayout';
 
 export default function Create() {
     return (
-        <div>
-            <FormLayout
-                heading="Mentor Form"
-                message="Please fill out the questionnaire below if you are interested in finding someone to mentor"
-            >
-                <MentorForm />
-            </FormLayout>
-        </div>
+        <AppLayout heading="Mentor Form">
+            <MentorForm />
+        </AppLayout>
     );
 }
