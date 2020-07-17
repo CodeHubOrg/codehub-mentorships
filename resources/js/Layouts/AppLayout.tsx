@@ -1,7 +1,11 @@
 import React, { FC, useRef, useState } from 'react';
 import Transition from '@/Atoms/Transition';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import route from 'ziggy-js';
 import useOutsideClick from '@/Hooks/useOutsideClick';
+import { NavItem } from '@/Interfaces/NavItem';
+import { NavItemDesktop } from '@/Molecules/NavItemDesktop';
+import { NavItemMobile } from '@/Molecules/NavItemMobile';
 
 interface Props {
     children: React.ReactNode;
@@ -14,14 +18,14 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
 
-    const { auth } = usePage();
+    const { auth, nav } = usePage();
 
     useOutsideClick(profileMenu, () => {
         setProfileDropdownVisible(false);
     });
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-gray-50">
             <nav className="bg-white border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -33,18 +37,9 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                                      alt="Code Hub logo" />
                             </div>
                             <div className="hidden sm:-my-px sm:ml-12 sm:flex">
-                                <a href="#"
-                                   className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out">
-                                    Dashboard
-                                </a>
-                                <a href="#"
-                                   className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    My Mentorships
-                                </a>
-                                <a href="#"
-                                   className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                    Contact CodeHub
-                                </a>
+                                { nav.map((item: NavItem, index: number) => {
+                                    return <NavItemDesktop item={item} key={index} />
+                                })}
                             </div>
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -81,14 +76,14 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                                     <div ref={profileMenu} className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg">
                                         <div className="py-1 rounded-md bg-white shadow-xs">
                                             <InertiaLink
-                                                href="/profiles/general/edit"
+                                                href="#"
                                                 className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                                             >
-                                                Your Profile
+                                                My Account
                                             </InertiaLink>
                                             <InertiaLink
                                                 method="DELETE"
-                                                href="/logout"
+                                                href={route('auth.login.destroy')}
                                                 className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                                             >
                                                 Sign out
@@ -127,12 +122,9 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
 
                 <div className={mobileMenuVisible ? 'block sm:hidden' : 'hidden sm:hidden'}>
                     <div className="pt-2 pb-3">
-                        <a href="#"
-                           className="block pl-3 pr-4 py-2 border-l-4 border-indigo-500 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out">Dashboard</a>
-                        <a href="#"
-                           className="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Mentorships</a>
-                        <a href="#"
-                           className="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out">Contact CodeHub</a>
+                        { nav.map((item: NavItem, index: number) => {
+                            return <NavItemMobile item={item} key={index} />
+                        })}
                     </div>
                     <div className="pt-4 pb-3 border-t border-gray-200">
                         <div className="flex items-center px-4">
@@ -147,18 +139,25 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                             </div>
                         </div>
                         <div className="mt-3" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                            <a href="#"
-                               className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
-                               role="menuitem">Your Profile</a>
-                            <a href="#"
-                               className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
-                               role="menuitem">Sign out</a>
+                            <InertiaLink
+                                href="#"
+                                className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
+                            >
+                                My Account
+                            </InertiaLink>
+                            <InertiaLink
+                                method="DELETE"
+                                href={route('auth.login.destroy')}
+                                className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
+                            >
+                                Sign out
+                            </InertiaLink>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            <div className="py-10 bg-gray-50">
+            <div className="py-10">
                 <header>
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold leading-tight text-gray-900">
