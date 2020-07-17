@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
+use Spatie\Navigation\Navigation;
 
 class InertiaServiceProvider extends ServiceProvider
 {
@@ -39,6 +40,13 @@ class InertiaServiceProvider extends ServiceProvider
                         ->preset('summary')
                         ->get()
                 ];
+            },
+            'nav' => function() {
+                return app(Navigation::class)
+                    ->add('Home', route('dashboard.index'))
+                    ->add('My Profiles', '#')
+                    ->add('My Mentorships', '#')
+                    ->tree();
             }
         ]);
     }

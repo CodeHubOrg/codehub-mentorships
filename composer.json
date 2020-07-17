@@ -19,6 +19,7 @@
         "laravel/framework": "^7.18",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "spatie/laravel-navigation": "9999999-dev",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {

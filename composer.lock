@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "be98144490efeac5c0f2a280e94cbf3c",
+    "content-hash": "7bdc45435ff3d2fcb6a6d00aac8f48c3",
     "packages": [
         {
             "name": "additionapps/flexible-presenter",
@@ -2504,6 +2504,183 @@
                 "source": "https://github.com/ramsey/uuid"
             },
             "time": "2020-03-29T20:13:32+00:00"
+        },
+        {
+            "name": "spatie/laravel-navigation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-navigation.git",
+                "reference": "90dc440ecd3222955977ce9f722480bd4d530943"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-navigation/zipball/90dc440ecd3222955977ce9f722480bd4d530943",
+                "reference": "90dc440ecd3222955977ce9f722480bd4d530943",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4",
+                "spatie/url": "^1.3"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^9.0",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Navigation\\NavigationServiceProvider"
+                    ],
+                    "aliases": {
+                        "Navigation": "Spatie\\Navigation\\Facades\\Navigation"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Navigation\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Manage menus, breadcrumbs, and other navigational elements in Laravel apps",
+            "homepage": "https://github.com/spatie/laravel-navigation",
+            "keywords": [
+                "Laravel-Navigation",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-navigation/issues",
+                "source": "https://github.com/spatie/laravel-navigation/tree/master"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2020-07-06T15:50:20+00:00"
+        },
+        {
+            "name": "spatie/macroable",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/macroable.git",
+                "reference": "74b0d189ce75142f1706aad834d5a428dfc7c3c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/macroable/zipball/74b0d189ce75142f1706aad834d5a428dfc7c3c3",
+                "reference": "74b0d189ce75142f1706aad834d5a428dfc7c3c3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Macroable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A trait to dynamically add methods to a class",
+            "homepage": "https://github.com/spatie/macroable",
+            "keywords": [
+                "macroable",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/macroable/issues",
+                "source": "https://github.com/spatie/macroable/tree/master"
+            },
+            "time": "2017-09-18T09:51:20+00:00"
+        },
+        {
+            "name": "spatie/url",
+            "version": "1.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/url.git",
+                "reference": "1cfbd5736ca595e04c27f9f07ca51bbda28d754a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/url/zipball/1cfbd5736ca595e04c27f9f07ca51bbda28d754a",
+                "reference": "1cfbd5736ca595e04c27f9f07ca51bbda28d754a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2",
+                "psr/http-message": "^1.0",
+                "spatie/macroable": "^1.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Url\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian De Deyne",
+                    "email": "sebastian@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Parse, build and manipulate URL's",
+            "homepage": "https://github.com/spatie/url",
+            "keywords": [
+                "spatie",
+                "url"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/url/issues",
+                "source": "https://github.com/spatie/url/tree/1.3.2"
+            },
+            "time": "2020-02-23T13:13:32+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -6608,7 +6785,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "spatie/laravel-navigation": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
