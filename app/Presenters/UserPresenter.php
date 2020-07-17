@@ -18,7 +18,7 @@ class UserPresenter extends FlexiblePresenter
             'email' => $this->email,
             'avatar' => Gravatar::exists($this->email)
                 ? Gravatar::get($this->email)
-                : 'https://avatars.dicebear.com/api/bottts/'. Str::slug($this->first_name) .'.svg'
+                : 'https://avatars.dicebear.com/api/bottts/'.Str::slug($this->first_name).'.svg',
         ];
     }
 
@@ -26,6 +26,4 @@ class UserPresenter extends FlexiblePresenter
     {
         return $this->only('name', 'avatar', 'email');
     }
-
-
 }
