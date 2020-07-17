@@ -14,6 +14,5 @@ class AccountController
 
     public function update(Request $request)
     {
-
     }
 }
