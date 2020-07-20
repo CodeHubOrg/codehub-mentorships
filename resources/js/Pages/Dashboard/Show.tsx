@@ -7,7 +7,8 @@ import { AppLayout } from '@/Layouts/AppLayout';
 interface IProps {
     heading?: string;
     user: {
-        name: string;
+        first_name: string;
+        last_name: string;
         email: string;
         handle?: string;
     };
@@ -39,12 +40,11 @@ const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
 
     return (
         <AppLayout heading="Welcome to CodeHub Mentorships">
-
             <div className="flex flex-col">
                 <div className="mx-auto rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
                     <div className=" flex w-full md:w-1/3 justify-center mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Name: </p>
-                        <p className="flex w-1/2 justify-start">{user.name}</p>
+                        <p className="flex w-1/2 justify-start">{user.first_name}{" "}{user.last_name}</p>
                     </div>
                     <div className="flex w-full md:w-1/3 justify-center test-center w-1/2 mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Email:</p>

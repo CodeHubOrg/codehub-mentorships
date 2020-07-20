@@ -25,7 +25,7 @@ const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
 	} = mentorProfile;
 
 	return (
-		<Card heading={heading}>
+		<Card header={heading}>
 			<p>
 				<span className="mb-6 text-3x text-gray-800 font-semibold">
 					Mentoring experience:
