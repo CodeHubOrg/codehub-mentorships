@@ -3,7 +3,8 @@ import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
 
 type ProfilePageValues = {
-    fullname: string;
+    first_name: string;
+    last_name: string;
     email: string;
     subtoteach: string;
     subtolearn: string;
@@ -14,8 +15,12 @@ type ProfilePageValues = {
 const validate = (values: ProfilePageValues) => {
     let errors: IErrors<ProfilePageValues> = {};
 
-    if (!values.fullname || values.fullname.trim().length === 0) {
-        errors.fullname = "Please enter your fullname";
+    if (!values.first_name || values.first_name.trim().length === 0) {
+        errors.first_name = "Please enter your first name";
+    }
+
+    if (!values.last_name || values.last_name.trim().length === 0) {
+        errors.last_name = "Please enter your last name";
     }
 
     let validEmail = /^.+@.+\..+$/;
@@ -31,7 +36,8 @@ const Profile: React.FC = () => {
         <Form<ProfilePageValues>
             action="/profile"
             initialValues={{
-                fullname: "",
+                first_name: "",
+                last_name: "",
                 email: "",
                 subtoteach: "",
                 subtolearn: "",
@@ -44,13 +50,23 @@ const Profile: React.FC = () => {
                 <React.Fragment>
                     <FormTextInput
                         type="text"
-                        name="fullname"
-                        label="Full name"
-                        value={values.fullname}
+                        name="first_name"
+                        label="First name"
+                        value={values.first_name}
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5">
-                        {errors["fullname"]}
+                        {errors["first_name"]}
+                    </div>
+                    <FormTextInput
+                        type="text"
+                        name="last_name"
+                        label="Last name"
+                        value={values.last_name}
+                        onChange={handleChange}
+                    />
+                    <div className="block text-sm font-medium text-red-500 pb-5">
+                        {errors["last_name"]}
                     </div>
                     <FormTextInput
                         type="email"

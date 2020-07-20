@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -16,7 +17,7 @@ Route::name('auth.')
         Route::post('/login', [LoginController::class, 'store'])
             ->name('login.store')
             ->middleware('guest');
-        Route::post('/logout', [LoginController::class, 'destroy'])
+        Route::delete('/logout', [LoginController::class, 'destroy'])
             ->name('login.destroy')
             ->middleware('auth');
         Route::get('/register', [RegisterController::class, 'create'])
@@ -35,13 +36,19 @@ Route::get('/dashboard', [DashboardController::class, 'show'])
     ->middleware('auth')
     ->name('dashboard.index');
 
+Route::name('account.')
+    ->prefix('account')
+    ->group(function () {
+        Route::get('/', [AccountController::class, 'edit'])
+            ->name('edit');
+    });
+
 Route::name('profiles.')
     ->prefix('profiles')
     ->middleware('auth')
     ->group(function () {
         // should we have the GeneralProfileController ?
-        Route::get('/general/edit', [GeneralProfileController::class, 'edit'])
-            ->name('general.edit');
+
         Route::get('/mentor/new', [MentorProfileController::class, 'create'])
             ->name('mentor.create');
         Route::post('/mentor/new', [MentorProfileController::class, 'store'])

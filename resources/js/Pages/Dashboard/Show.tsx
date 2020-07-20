@@ -1,8 +1,8 @@
 import React from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
-import FormLayout from "@/Atoms/FormLayout";
 import ProfileMenteeSection from "@/Organisms/ProfileMenteeSection";
 import ProfileMentorSection from "@/Organisms/ProfileMentorSection";
+import { AppLayout } from '@/Layouts/AppLayout';
 
 interface IProps {
     heading?: string;
@@ -35,14 +35,10 @@ interface IProps {
 }
 
 const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
+
+
     return (
-        <FormLayout heading="Profile Summary" message="">
-            <InertiaLink
-                href="/profiles/general/edit"
-                className="text-gray-900 absolute top-6 right-10"
-            >
-                Update Account
-            </InertiaLink>
+        <AppLayout heading="Welcome to CodeHub Mentorships">
 
             <div className="flex flex-col">
                 <div className="mx-auto rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
@@ -128,10 +124,7 @@ const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
                     </div>
                 </div>
             </div>
-            <InertiaLink method="post" href="/logout" className="text-gray-900">
-                Log out
-            </InertiaLink>
-        </FormLayout>
+        </AppLayout>
     );
 };
 
