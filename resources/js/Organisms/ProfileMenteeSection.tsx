@@ -31,7 +31,7 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
 	} = menteeProfile;
 
 	return (
-		<Card heading={heading}>
+		<Card header={heading}>
 			<p>
 				<span className="mb-6 text-3x text-gray-800 font-semibold">
 					Current status:

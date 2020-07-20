@@ -60,7 +60,7 @@ class MentorProfileController extends Controller
 
         // temporary, turning array into string for now
 
-        $interests = $request->interests ? implode($request->interests, ', ') : '';
+        $interests = $request->interests ? implode(', ', $request->interests) : '';
 
         $m->interests = $interests;
 
