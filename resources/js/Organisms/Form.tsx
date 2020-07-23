@@ -22,11 +22,8 @@ interface IFormProps<IValues extends Record<string, any>> {
 export interface IFormState<IValues extends Record<string, any>> {
     /* The field values */
     values: IValues;
-
     /* The field validation error messages */
     errors: IErrors<IValues>;
-    errorsFromBackend: IErrors<IValues>;
-
     /* Whether the form has been successfully submitted */
     submitSuccess?: boolean;
 }
@@ -42,11 +39,13 @@ const Form = <IValues extends Record<string, any>>({
     render,
     validate,
 }: IFormProps<IValues>) => {
+    
+    const { errors: errorsFromBackend, old } = usePage();
     const _isMounted = useRef(true);
     //https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
     const [errors, setErrors] = useState<IErrors<IValues>>({});
     const [sending, setSending] = useState(false);
-    const [values, setValues] = useState<IValues>(initialValues);
+    const [values, setValues] = useState<IValues>(old ? old : initialValues);
     const [submitSuccess, setSuccess] = useState(undefined);
 
     const haveErrors = (errors: IErrors<IValues>) => {
@@ -59,7 +58,6 @@ const Form = <IValues extends Record<string, any>>({
         return haveError;
     };
 
-    const { errors: errorsFromBackend } = usePage();
 
     const updateState = (target: HTMLInputElement) => {
         const { name, value, type } = target;
@@ -122,7 +120,7 @@ const Form = <IValues extends Record<string, any>>({
                     if (_isMounted.current) {
                         setSending(false);
                         setSuccess(true);
-                        setValues(initialValues);
+                       // setValues(values);
                     }
                 })
                 .catch(err => console.log(err));
@@ -160,11 +158,11 @@ const Form = <IValues extends Record<string, any>>({
                         </button>
                     )}
                 </div>
-                {submitSuccess && (
+               {/* {submitSuccess && (
                     <div className="alert alert-info" role="alert">
                         The form was successfully submitted.
                     </div>
-                )}
+                )}*/}
                 {submitSuccess === false && !haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, an unexpected error has occurred
