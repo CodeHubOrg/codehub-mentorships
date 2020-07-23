@@ -4,18 +4,19 @@ import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
 
 type RegisterFormValues = {
+    first_name: string;
+    last_name: string;
     email: string;
     password: string;
-    slackHandle: string;
-    confirmpwd: string;
-    fullname: string;
+    slack_handle: string;
+    password_confirmation: string;
 };
 
 const validate = (values: RegisterFormValues) => {
     let errors: IErrors<RegisterFormValues> = {};
 
-    if (!values.fullname || values.fullname.trim().length === 0) {
-        errors.fullname = "Please enter your fullname";
+    if (!values.first_name || values.first_name.trim().length === 0) {
+        errors.first_name = "Please enter your first name";
     }
 
     let validEmail = /^.+@.+\..+$/;
@@ -26,8 +27,8 @@ const validate = (values: RegisterFormValues) => {
     if (values.password.trim().length < 8) {
         errors.password = "password length should be at least 8 characters.";
     }
-    if (values.password !== values.confirmpwd) {
-        errors.confirmpwd = "Passwords do not match.";
+    if (values.password !== values.password_confirmation) {
+        errors.password_confirmation = "Passwords do not match.";
     }
 
     return errors;
@@ -40,28 +41,41 @@ const Create: React.FC = () => {
             message="Please register to create a profile"
         >
             <Form<RegisterFormValues>
-                action=""
+                action="/register"
                 initialValues={{
-                    fullname: "",
+                    first_name: "",
+                    last_name: "",
                     email: "",
-                    slackHandle: "",
+                    slack_handle: "",
                     password: "",
-                    confirmpwd: "",
+                    password_confirmation: "",
                 }}
                 validate={validate}
                 button="Register"
-                render={(values, handleChange, errors) => (
+                render={(values, handleChange, errors, errorsFromBackend) => (
                     <React.Fragment>
                         <FormTextInput
                             type="text"
-                            name="fullname"
-                            label="Full Name"
-                            value={values.fullname}
+                            name="first_name"
+                            label="First Name"
+                            value={values.first_name}
+                            helpText=""
+                            onChange={handleChange}
+                        />
+                        
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {errors.first_name || errorsFromBackend.first_name}
+                        </div>
+                        <FormTextInput
+                            type="text"
+                            name="last_name"
+                            label="Last Name"
+                            value={values.last_name}
                             helpText=""
                             onChange={handleChange}
                         />
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.fullname}
+                            {errors.last_name || errorsFromBackend.last_name}
                         </div>
                         <FormTextInput
                             type="email"
@@ -72,13 +86,13 @@ const Create: React.FC = () => {
                             onChange={handleChange}
                         />
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.email}
+                            {errors.email || errorsFromBackend.email}
                         </div>
                         <FormTextInput
                             type="text"
-                            name="handle"
+                            name="slack_handle"
                             label="Slack handle"
-                            value={values.slackHandle}
+                            value={values.slack_handle}
                             helpText=""
                             onChange={handleChange}
                         />
@@ -93,19 +107,19 @@ const Create: React.FC = () => {
                         />
 
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.password}
+                            {errors.password || errorsFromBackend.password}
                         </div>
                         <FormTextInput
                             type="password"
-                            name="confirmpwd"
+                            name="password_confirmation"
                             label="Confirm Password"
-                            value={values.confirmpwd}
+                            value={values.password_confirmation}
                             helpText=""
                             onChange={handleChange}
                         />
 
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.confirmpwd}
+                            {errors.password_confirmation || errorsFromBackend.password_confirmation}
                         </div>
                     </React.Fragment>
                 )}
