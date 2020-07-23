@@ -30,7 +30,7 @@ const Create: React.FC = () => {
                 initialValues={{ email: "", password: "" }}
                 validate={validate}
                 button="Login"
-                render={(values, handleChange, errors) => (
+                render={(values, handleChange, errors, errorsFromBackend) => (
                     <React.Fragment>
                         <FormTextInput
                             type="email"
@@ -40,7 +40,7 @@ const Create: React.FC = () => {
                             onChange={handleChange}
                         />
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.email}
+                            {errors.email || errorsFromBackend.email}
                         </div>
                         <FormTextInput
                             type="password"
@@ -51,7 +51,7 @@ const Create: React.FC = () => {
                             onChange={handleChange}
                         />
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.password}
+                            {errors.password || errorsFromBackend.password}
                         </div>
                         <div className="mt-6 flex items-center justify-between">
                             {/*<div className="flex items-center">

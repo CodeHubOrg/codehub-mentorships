@@ -52,7 +52,7 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                                 </svg>
                             </button>
 
-                            <div className="ml-3 relative">
+                            { auth.user && (<div className="ml-3 relative">
                                 <div>
                                     <button
                                         onClick={() => setProfileDropdownVisible(! profileDropdownVisible)}
@@ -91,7 +91,7 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                                         </div>
                                     </div>
                                 </Transition>
-                            </div>
+                            </div>)}
                         </div>
                         <div className="-mr-2 flex items-center sm:hidden">
                             <button
@@ -126,7 +126,7 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                             return <NavItemMobile item={item} key={index} />
                         })}
                     </div>
-                    <div className="pt-4 pb-3 border-t border-gray-200">
+                    { auth.user && (<div className="pt-4 pb-3 border-t border-gray-200">
                         <div className="flex items-center px-4">
                             <div className="flex-shrink-0">
                                 <img className="h-10 w-10 rounded-full"
@@ -153,7 +153,7 @@ export const AppLayout: FC<Props>  = ({children, heading}) => {
                                 Sign out
                             </InertiaLink>
                         </div>
-                    </div>
+                    </div>)}
                 </div>
             </nav>
 

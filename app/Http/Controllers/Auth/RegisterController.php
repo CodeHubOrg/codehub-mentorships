@@ -3,10 +3,15 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -46,10 +51,16 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Register/Create');
     }
 
-    public function store()
+
+    public function store(Request $request)
     {
-        // This is where we will create the new User model and run any
-        // other code required after successful registration
+        // logic from register method of the RegistersUsers trait
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = User::create($request->all())));
+    
+        return Inertia::render('Auth/Verify/Index', ['user' => $user]);
+
     }
 
     /**
@@ -61,7 +72,9 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => '',
+            'slack_handle' => '',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
