@@ -65,7 +65,11 @@ const MenteeForm: React.FC = () => {
                         helpText=""
                         onChange={handleChange}
                     />
-                    <div className="block text-sm font-medium text-red-500 pb-5" />
+                    {(errorsFromBackend.previous_experience) && (
+                        <div className="block text-sm font-medium text-red-500 pb-5">
+                            {errorsFromBackend.previous_experience}
+                        </div>
+                    )}
                     <Textarea
                         name="interests"
                         label="What technologies are you interested in?"
