@@ -3,7 +3,6 @@
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Home\HomeController;
@@ -32,7 +31,6 @@ Route::name('auth.')
             ->middleware('guest');
     });
 
-
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
@@ -43,7 +41,7 @@ Route::get('/dashboard', [DashboardController::class, 'show'])
 
 // this is where the user is redirected to after email verification
 Route::get('/home', [HomeController::class, 'show'])
-    ->middleware(['auth','verified'])
+    ->middleware(['auth', 'verified'])
     ->name('home.index');
 
 Route::name('account.')
