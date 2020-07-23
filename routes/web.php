@@ -3,11 +3,15 @@
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\VerificationController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
+
+Auth::routes(['verify' => true]);
 
 Route::name('auth.')
     ->group(function () {
@@ -28,13 +32,19 @@ Route::name('auth.')
             ->middleware('guest');
     });
 
+
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
 // User application routes
 Route::get('/dashboard', [DashboardController::class, 'show'])
-    ->middleware('auth')
+    ->middleware(['auth'])
     ->name('dashboard.index');
+
+// this is where the user is redirected to after email verification
+Route::get('/home', [HomeController::class, 'show'])
+    ->middleware(['auth','verified'])
+    ->name('home.index');
 
 Route::name('account.')
     ->prefix('account')
