@@ -34,7 +34,7 @@ class InertiaServiceProvider extends ServiceProvider
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object) [];
             },
-            'old' => function() {
+            'old' => function () {
                 return Session::get('_old_input');
             },
             'auth' => function () {
