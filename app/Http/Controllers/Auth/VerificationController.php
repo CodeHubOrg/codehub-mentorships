@@ -3,18 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Foundation\Auth\VerifiesEmails;
-use Illuminate\Foundation\Auth\RedirectsUsers;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
-
 
 class VerificationController extends Controller
 {
@@ -30,7 +28,6 @@ class VerificationController extends Controller
     */
 
     use VerifiesEmails;
-   
 
     /**
      * Where to redirect users after verification.
@@ -50,25 +47,24 @@ class VerificationController extends Controller
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-
     public function show(Request $request)
     {
         $u = Auth::user();
-        if (is_object($u) && $u->hasVerifiedEmail()){
+        if (is_object($u) && $u->hasVerifiedEmail()) {
             // $u is logged in and verified user
             return Inertia::render('Home/Index', ['user' => $u]);
         } else {
-        // otherwise, $u is logged-in user 
-        // without verification, or null
-        return Inertia::render('Auth/Verify/Index', ['user' => $u]); 
-        }       
+            // otherwise, $u is logged-in user
+            // without verification, or null
+            return Inertia::render('Auth/Verify/Index', ['user' => $u]);
+        }
     }
 
     /**
      * Mark the authenticated user's email address as verified.
      *
-     * This is overwriting the method from VerifiesEmail trait of laravel/ui; user does not need to log in to verify email, will be logged in automaticallly 
-     * 
+     * This is overwriting the method from VerifiesEmail trait of laravel/ui; user does not need to log in to verify email, will be logged in automaticallly
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      *
@@ -76,7 +72,6 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
-
         $u = User::findOrFail($request->route('id'));
         Auth::login($u);
 
@@ -103,15 +98,14 @@ class VerificationController extends Controller
                     : redirect($this->redirectPath())->with('verified', true);
     }
 
-
     public function resend(Request $request)
     {
         $id = $request->get('userid');
         $u = User::findOrFail($id);
-        if (is_object($u)){
+        if (is_object($u)) {
             $u->sendEmailVerificationNotification();
+
             return Inertia::render('Auth/Verify/Index', ['user' => $u]);
         }
     }
-
 }

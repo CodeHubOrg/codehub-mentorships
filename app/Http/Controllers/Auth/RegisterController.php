@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -51,16 +48,14 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Register/Create');
     }
 
-
     public function store(Request $request)
     {
         // logic from register method of the RegistersUsers trait
         $this->validator($request->all())->validate();
 
         event(new Registered($user = User::create($request->all())));
-    
-        return Inertia::render('Auth/Verify/Index', ['user' => $user]);
 
+        return Inertia::render('Auth/Verify/Index', ['user' => $user]);
     }
 
     /**
