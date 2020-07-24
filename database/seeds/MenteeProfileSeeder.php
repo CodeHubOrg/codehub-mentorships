@@ -12,6 +12,6 @@ class MenteeProfileSeeder extends Seeder
      */
     public function run()
     {
-        factory(MenteeProfile::class, 15)->create();  
+        factory(MenteeProfile::class, 15)->create();
     }
 }

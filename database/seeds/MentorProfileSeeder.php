@@ -12,6 +12,6 @@ class MentorProfileSeeder extends Seeder
      */
     public function run()
     {
-        factory(MentorProfile::class, 10)->create();      	
+        factory(MentorProfile::class, 10)->create();
     }
 }
