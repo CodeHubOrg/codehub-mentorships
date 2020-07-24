@@ -1,53 +1,96 @@
-import { AppLayout } from '@/Layouts/AppLayout';
 import React from "react";
-import MentorForm from "@/Organisms/MentorForm";
-
-{
-    /*import React from "react";
-import Heading from "@/Atoms/Heading";
-import Button from "@/Atoms/Button";
+import { AppLayout } from '@/Layouts/AppLayout';
 import Card from "@/Molecules/Card";
-import SampleForm from "@/Organisms/SampleForm";
-import AuthLayout from "@/Atoms/AuthLayout";
-import { Textarea } from "@/Atoms/Textarea";
+import Heading from "@/Atoms/Heading";
 
-interface Props {
-  message: React.ReactChildren;
-  button: React.ReactChildren;
+type Mentor = {
+    first_name: string;
+    last_name?: string;
+    email: string;
+    slack_handle?: string;
+    mentoring_experience: string;
+    interests?: string;
+    skillset?: string;
+    suitable_time?: string;
+    extra_info?: string;
 }
 
-export default function Index({ message, button }: Props) {
-    return (
-        <div>
-            <AuthLayout heading="Auth Layout" message="">
-                <SampleForm />
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-
-                <Heading type="h3">{message}</Heading>
-                <Card heading="Card heading" hasPadding={true} />
-                <Button size="medium">{button}</Button>
-                <Textarea placeholder="text area" />
-            </AuthLayout>
-        </div>
-    );
-}
-*/
+type Mentee = {
+    first_name: string;
+    last_name?: string;
+    email: string;
+    slack_handle?: string;
+    current_status: string;
+    previous_experience: string;
+    interests: string;
+    specific_interests: string;
+    mentoring_type?: string;
+    timeframe?: string;
+    suitable_time?: string;
+    extra_info?: string;
 }
 
-// interface Props {
-//   message: React.ReactChildren;
-//   button: React.ReactChildren;
-// }
+interface IProps {
+    mentors: Mentor[];
+    mentees: Mentee[];
+}
 
-export default function Index() {
+// not using all the attributes currently
+const Index = ({mentors, mentees}: IProps) => {
     return (
         <div>
             <AppLayout
-                heading="Mentor Form"
+                heading="Mentor and Mentee Profiles"
             >
-                <MentorForm />
+                <Heading type="h2" content="Mentors" />
+                {mentors.map((mentor, i) => 
+                    (<div style={{marginBottom: "10px"}} key={i}>
+                        <Card  header={`${mentor.first_name} ${mentor.last_name}`}>
+                           <p>Mentored previously: {mentor.mentoring_experience}</p>
+                           {mentor.interests && (
+                           <p>Happy to cover: {mentor.interests}
+                          </p>
+                            )}
+                          {mentor.skillset && (
+                           <p>Skills: {mentor.skillset}
+                          </p>
+                            )}
+                          {mentor.extra_info && (
+                           <p>Extra info: {mentor.extra_info}
+                          </p>
+                            )}
+
+                        </Card>
+                    </div>)
+                    
+                )}
+
+                <Heading type="h2" content="Mentees" />
+                {mentees.map((mentee, i) => 
+                    (<div style={{marginBottom: "10px"}} key={i}>
+                        <Card  header={`${mentee.first_name} ${mentee.last_name}`}>
+                            <p>Current status: {mentee.current_status}</p>
+                          
+                          {mentee.interests && (
+                           <p>Interests: {mentee.interests}
+                          </p>
+                            )}
+                          {mentee.specific_interests && (
+                           <p>Specific thing to be mentored on: {mentee.specific_interests}
+                          </p>
+                            )}
+                          {mentee.timeframe && (
+                           <p>Weekly time investment: {mentee.timeframe}
+                          </p>
+                            )}
+                      
+                        </Card>
+                    </div>)
+                )}
+
             </AppLayout>
         </div>
     );
 }
+
+export default Index;
