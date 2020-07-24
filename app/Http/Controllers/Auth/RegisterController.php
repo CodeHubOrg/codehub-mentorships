@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Hash;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -52,8 +53,12 @@ class RegisterController extends Controller
     {
         // logic from register method of the RegistersUsers trait
         $this->validator($request->all())->validate();
+      
+        $user = User::make($request->all());
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
 
-        event(new Registered($user = User::create($request->all())));
+        event(new Registered($user));
 
         return Inertia::render('Auth/Verify/Index', ['user' => $user]);
     }
