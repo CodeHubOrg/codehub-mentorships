@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import { AppLayout } from '@/Layouts/AppLayout';
 import Table  from "@/Molecules/Table";
+import { Member } from '@/Interfaces/Member';
 
-type Mentor = {
-    first_name: string;
-    last_name?: string;
-    email: string;
-    slack_handle?: string;
-    mentoring_experience?: string;
-    interests?: string;
-    skillset?: string;
-    suitable_time?: string;
-    extra_info?: string;
-    count?:number;
-    current_status?: string;
-    previous_experience?: string;
-    specific_interests?: string;
-    mentoring_type?: string;
-    timeframe?: string;
-};
+type Summary = {
+    mentor:string;
+    mentor_slack_handle:string;
+    mentor_email:string;
+    mentee:string;
+    mentee_slack_handle:string;
+    mentee_email:string;
+}
 
 interface IProps {
-    mentors: Mentor[];
-    mentees: Mentor[];
+    mentors: Member[];
+    mentees: Member[];
 };
 
-const compare_qty = (a, b) => {
+const compare_qty = (a:Member, b:Member):number => {
     if(a.count < b.count){
             return 1;
     }else if(a.count > b.count){
@@ -36,11 +28,11 @@ const compare_qty = (a, b) => {
 };
 
 const Index = ({mentors,mentees}: IProps) => {
-    const [selectedmentee, setSelectedMentee] = useState({});
-    const [selectedmentor, setSelectedMentor] = useState({});
+    const [selectedmentee, setSelectedMentee] = useState<Member|null>(null);
+    const [selectedmentor, setSelectedMentor] = useState<Member|null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
    
-    const selectMentee = (member:Mentor) =>  {
+    const selectMentee = (member:Member) =>  {
         // sorting mentor list to match selected mentee skills
         let menteeSkills = member.interests.toUpperCase();
         let sortedMentors = [...mentors];
@@ -66,22 +58,25 @@ const Index = ({mentors,mentees}: IProps) => {
         
     }
 
-    const selectMentor = (member:Mentor) =>  {
+    const selectMentor = (member:Member) =>  {
         setSelectedMentor(member);
     }
 
     const addPair = () => {
-        const mentorShipData ={};
-        mentorShipData["mentor"] = `${selectedmentor["first_name"]} ${selectedmentor["last_name"]}`;
-        mentorShipData["mentor_Slack_handle"] = selectedmentor["Slack_handle"];
-        mentorShipData["mentor_email"] = selectedmentor["email"];
-        mentorShipData["mentee"] =  `${selectedmentee["first_name"]} ${selectedmentee["last_name"]}`;
-        mentorShipData["mentee_Slack_handle"] = selectedmentee["Slack_handle"];
-        mentorShipData["mentee_email"] = selectedmentee["email"];
-        console.log(mentorShipData);
+        const mentorShipSummary:Summary = 
+        {
+            mentor: `${selectedmentor.first_name} ${selectedmentor.last_name}`,
+            mentor_slack_handle: selectedmentor.slack_handle,
+            mentor_email: selectedmentor.email,
+            mentee: `${selectedmentee.first_name} ${selectedmentee.last_name}`,
+            mentee_slack_handle: selectedmentee.slack_handle,
+            mentee_email: selectedmentee.email
+        };
+    
+        console.log(mentorShipSummary);
         setSortedMentors(mentors);
-        setSelectedMentee("");
-        setSelectedMentor("");
+        setSelectedMentee(null);
+        setSelectedMentor(null);
 
     }
     
@@ -104,7 +99,7 @@ const Index = ({mentors,mentees}: IProps) => {
                         <Table members={selectedmentee?sortedMentors:mentors}  handleSelect={selectMentor} type={"mentor"}></Table>
                     </div>
                 </div>
-                {selectedmentee["first_name"] && selectedmentor["first_name"] && 
+                {selectedmentee && selectedmentor && 
                     <button
                         type="button"
                         className= "block mx-auto px-8 py-2 m-10 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"

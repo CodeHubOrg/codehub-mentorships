@@ -1,28 +1,11 @@
 import React from "react";
 import Tablerow  from "@/Molecules/Tablerow";
-
-type Members = {
-    first_name: string;
-    last_name?: string;
-    email: string;
-    slack_handle?: string;
-    mentoring_experience?: string;
-    interests?: string;
-    skillset?: string;
-    suitable_time?: string;
-    extra_info?: string;
-    count?:number;
-    current_status?: string;
-    previous_experience?: string;
-    specific_interests?: string;
-    mentoring_type?: string;
-    timeframe?: string;
-};
+import { Member } from '@/Interfaces/Member';
 
 interface IProps {
-    members: Members[];
-    handleSelect: (member:Members) => void;
-    type:string;
+    members: Member[];
+    handleSelect: (member:Member) => void;
+    type: string;
 };
 
 const Table = ({ members, handleSelect, type }: IProps) => {
@@ -46,9 +29,9 @@ const Table = ({ members, handleSelect, type }: IProps) => {
                 </tr>
             </thead>
             <tbody>
-                {members.map((member,i) => {return  <Tablerow member = {member} handleSelect = {handleSelect} type = {type} key = {i}/> }
-           
-                )}
+                { members.map((member:Member,i:number) => { 
+                    return <Tablerow member={member} handleSelect={handleSelect} type={type} key={i} /> 
+                }) }
             </tbody>
         </table>
         
