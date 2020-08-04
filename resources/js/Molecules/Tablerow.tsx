@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Member } from '@/Interfaces/Member';
+import { Member } from '@/Models/Member';
 
 interface Props {
     member: Member;
@@ -10,30 +10,31 @@ interface Props {
 const Tablerow = ({ member, handleSelect, type }: Props) => {
     const [fullProfileVisible, setFullProfileVisible] = useState(false);
 
-    const selectedMember = () =>  {
+    const selectMember = () =>  {
         handleSelect(member);
     }
-  
+     
+    const {slack_handle, first_name, last_name, email, mentoring_experience, current_status, interests, specific_interests, timeframe, skillset, suitable_time, previous_experience, mentoring_type, extra_info} = member;
     return (
         <>
-            <tr key={member.slack_handle}>
+            <tr key={slack_handle}>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex">
                         <div className="flex-shrink-0 w-10 h-10">
-                            <input type="radio" name={type} onChange={selectedMember}/>
+                            <input type="radio" name={type} onChange={selectMember}/>
                         </div>
                         <div className="ml-3">
                             <p className="text-gray-900 whitespace-no-wrap">
-                                {member.slack_handle} 
+                                {slack_handle} 
                             </p>
                         </div>
                     </div>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{`${member.first_name} ${member.last_name}`}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{`${first_name} ${last_name}`}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{member.email}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{email}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
@@ -45,29 +46,29 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
             </tr>
             {fullProfileVisible && <tr>
                 <td colSpan={4}>
-                    {member.mentoring_experience && (
-                        <p className="px-5 py-1 text-sm"><b>Mentored previously:</b> {member.mentoring_experience}</p>
+                    {mentoring_experience && (
+                        <p className="px-5 py-1 text-sm"><b>Mentored previously:</b> {mentoring_experience}</p>
                     )}
-                    {member.current_status && (
-                        <p className="px-5 py-1 text-sm"><b>Current status:</b> {member.current_status}</p>
+                    {current_status && (
+                        <p className="px-5 py-1 text-sm"><b>Current status:</b> {current_status}</p>
                     )}
-                    {member.interests && (
-                        <p className="px-5 py-1 text-sm"><b>Interests:</b> {member.interests || member.specific_interests}</p>
+                    {interests && (
+                        <p className="px-5 py-1 text-sm"><b>Interests:</b> {interests || specific_interests}</p>
                     )}
-                    {member.skillset && (
-                        <p className="px-5 py-1 text-sm"><b>Skills:</b> {member.skillset}</p>
+                    {skillset && (
+                        <p className="px-5 py-1 text-sm"><b>Skills:</b> {skillset}</p>
                     )}
-                    {member.suitable_time && (
-                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Suitable time:</b> {member.suitable_time || member.timeframe}</p>
+                    {suitable_time && (
+                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Suitable time:</b> {suitable_time || timeframe}</p>
                     )}
-                    {member.previous_experience && (
-                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Previous experience:</b> {member.previous_experience}</p>
+                    {previous_experience && (
+                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Previous experience:</b> {previous_experience}</p>
                     )}
-                    {member.mentoring_type && (
-                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Are you after general mentoring?:</b> {member.mentoring_type}</p>
+                    {mentoring_type && (
+                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Are you after general mentoring?:</b> {mentoring_type}</p>
                     )}
-                    {member.extra_info && (
-                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Extra info:</b> {member.extra_info}</p>
+                    {extra_info && (
+                        <p className="px-5 py-2 text-sm border-b border-gray-200"><b>Extra info:</b> {extra_info}</p>
                     )}
                 </td>     
             </tr>}

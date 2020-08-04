@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AppLayout } from '@/Layouts/AppLayout';
 import Table  from "@/Molecules/Table";
-import { Member } from '@/Interfaces/Member';
+import { Member } from '@/Models/Member';
 
 type Summary = {
     mentor:string;
@@ -17,7 +17,7 @@ interface IProps {
     mentees: Member[];
 };
 
-const compare_qty = (a:Member, b:Member):number => {
+const compareQuantity = (a:Member, b:Member):number => {
     if(a.count < b.count){
             return 1;
     }else if(a.count > b.count){
@@ -28,8 +28,8 @@ const compare_qty = (a:Member, b:Member):number => {
 };
 
 const Index = ({mentors,mentees}: IProps) => {
-    const [selectedmentee, setSelectedMentee] = useState<Member|null>(null);
-    const [selectedmentor, setSelectedMentor] = useState<Member|null>(null);
+    const [selectedMentee, setSelectedMentee] = useState<Member|null>(null);
+    const [selectedMentor, setSelectedMentor] = useState<Member|null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
    
     const selectMentee = (member:Member) =>  {
@@ -52,7 +52,7 @@ const Index = ({mentors,mentees}: IProps) => {
             }
         }
   
-        sortedMentors = sortedMentors.sort(compare_qty);
+        sortedMentors = sortedMentors.sort(compareQuantity);
         setSelectedMentee(member);
         setSortedMentors(sortedMentors);
         
@@ -65,12 +65,12 @@ const Index = ({mentors,mentees}: IProps) => {
     const addPair = () => {
         const mentorShipSummary:Summary = 
         {
-            mentor: `${selectedmentor.first_name} ${selectedmentor.last_name}`,
-            mentor_slack_handle: selectedmentor.slack_handle,
-            mentor_email: selectedmentor.email,
-            mentee: `${selectedmentee.first_name} ${selectedmentee.last_name}`,
-            mentee_slack_handle: selectedmentee.slack_handle,
-            mentee_email: selectedmentee.email
+            mentor: `${selectedMentor.first_name} ${selectedMentor.last_name}`,
+            mentor_slack_handle: selectedMentor.slack_handle,
+            mentor_email: selectedMentor.email,
+            mentee: `${selectedMentee.first_name} ${selectedMentee.last_name}`,
+            mentee_slack_handle: selectedMentee.slack_handle,
+            mentee_email: selectedMentee.email
         };
     
         console.log(mentorShipSummary);
@@ -90,16 +90,16 @@ const Index = ({mentors,mentees}: IProps) => {
                         <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
                             Mentee List
                         </h1>
-                        <Table members={mentees} handleSelect={selectMentee} type={"mentee"}></Table>
+                        <Table members={mentees} handleSelect={selectMentee} type="mentee"></Table>
                     </div>
                     <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow ml-2">
                         <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
                             Mentor List
                         </h1>
-                        <Table members={selectedmentee?sortedMentors:mentors}  handleSelect={selectMentor} type={"mentor"}></Table>
+                        <Table members={selectedMentee?sortedMentors:mentors}  handleSelect={selectMentor} type="mentor"></Table>
                     </div>
                 </div>
-                {selectedmentee && selectedmentor && 
+                {selectedMentee && selectedMentor && 
                     <button
                         type="button"
                         className= "block mx-auto px-8 py-2 m-10 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"

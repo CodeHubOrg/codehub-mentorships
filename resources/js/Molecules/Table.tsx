@@ -1,6 +1,6 @@
 import React from "react";
 import Tablerow  from "@/Molecules/Tablerow";
-import { Member } from '@/Interfaces/Member';
+import { Member } from '@/Models/Member';
 
 interface IProps {
     members: Member[];
