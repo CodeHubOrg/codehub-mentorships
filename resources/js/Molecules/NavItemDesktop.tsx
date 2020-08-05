@@ -1,5 +1,5 @@
 import React from "react";
-import { NavItem } from '@/Interfaces/NavItem';
+import { NavItem } from '@/Models/NavItem';
 
 interface Props {
     item: NavItem;

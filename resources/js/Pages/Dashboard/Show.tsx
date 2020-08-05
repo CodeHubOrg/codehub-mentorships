@@ -8,9 +8,9 @@ interface IProps {
     heading?: string;
     user: {
         first_name: string;
-        last_name: string;
+        last_name?: string;
         email: string;
-        handle?: string;
+        slack_handle?: string;
     };
     mentorProfile?: {
         id: number;
@@ -52,9 +52,9 @@ const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
                     </div>
                     <div className="flex w-full md:w-1/3 justify-center mx-auto mb-2 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">
-                            Slack Handle:{" "}
+                            Slack Handle:
                         </p>
-                        <p className="flex w-1/2 justify-start">Test</p>
+                        <p className="flex w-1/2 justify-start">{user.slack_handle}</p>
                     </div>
                 </div>
 

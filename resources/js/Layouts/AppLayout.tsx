@@ -3,7 +3,7 @@ import Transition from '@/Atoms/Transition';
 import { InertiaLink, usePage } from '@inertiajs/inertia-react';
 import route from 'ziggy-js';
 import useOutsideClick from '@/Hooks/useOutsideClick';
-import { NavItem } from '@/Interfaces/NavItem';
+import { NavItem } from '@/Models/NavItem';
 import { NavItemDesktop } from '@/Molecules/NavItemDesktop';
 import { NavItemMobile } from '@/Molecules/NavItemMobile';
 
