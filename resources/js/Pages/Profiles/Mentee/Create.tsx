@@ -1,7 +1,7 @@
 import React from "react";
 import MenteeForm from "@/Organisms/MenteeForm";
-import { AppLayout } from '@/Layouts/AppLayout';
-import Card from '@/Molecules/Card';
+import { AppLayout } from "@/Layouts/AppLayout";
+import Card from "@/Molecules/Card";
 
 export default function Create() {
     return (

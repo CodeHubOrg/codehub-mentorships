@@ -2,7 +2,7 @@ import React from "react";
 import { InertiaLink } from "@inertiajs/inertia-react";
 import ProfileMenteeSection from "@/Organisms/ProfileMenteeSection";
 import ProfileMentorSection from "@/Organisms/ProfileMentorSection";
-import { AppLayout } from '@/Layouts/AppLayout';
+import { AppLayout } from "@/Layouts/AppLayout";
 
 interface IProps {
     heading?: string;
@@ -36,15 +36,15 @@ interface IProps {
 }
 
 const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
-
-
     return (
         <AppLayout heading="Welcome to CodeHub Mentorships">
             <div className="flex flex-col">
                 <div className="mx-auto rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
                     <div className=" flex w-full md:w-1/3 justify-center mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Name: </p>
-                        <p className="flex w-1/2 justify-start">{user.first_name}{" "}{user.last_name}</p>
+                        <p className="flex w-1/2 justify-start">
+                            {user.first_name} {user.last_name}
+                        </p>
                     </div>
                     <div className="flex w-full md:w-1/3 justify-center test-center w-1/2 mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Email:</p>
@@ -54,7 +54,9 @@ const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
                         <p className="flex w-1/2 justify-start">
                             Slack Handle:
                         </p>
-                        <p className="flex w-1/2 justify-start">{user.slack_handle}</p>
+                        <p className="flex w-1/2 justify-start">
+                            {user.slack_handle}
+                        </p>
                     </div>
                 </div>
 
