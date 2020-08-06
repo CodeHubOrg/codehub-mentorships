@@ -1,7 +1,7 @@
 // Based on https://gist.github.com/adamwathan/3b9f3ad1a285a2d1b482769aeb862467
 
-import { CSSTransition as ReactCSSTransition } from 'react-transition-group';
-import React, { useContext, useEffect, useRef } from 'react';
+import { CSSTransition as ReactCSSTransition } from "react-transition-group";
+import React, { useContext, useEffect, useRef } from "react";
 
 type TransitionContextProps = {
     parent: {
@@ -40,21 +40,21 @@ interface TransitionProps {
 
 function CSSTransition({
     show,
-    enter = '',
-    enterFrom = '',
-    enterTo = '',
-    leave = '',
-    leaveFrom = '',
-    leaveTo = '',
+    enter = "",
+    enterFrom = "",
+    enterTo = "",
+    leave = "",
+    leaveFrom = "",
+    leaveTo = "",
     appear,
     children,
 }: TransitionProps) {
-    const enterClasses = enter.split(' ').filter((s) => s.length);
-    const enterFromClasses = enterFrom.split(' ').filter((s) => s.length);
-    const enterToClasses = enterTo.split(' ').filter((s) => s.length);
-    const leaveClasses = leave.split(' ').filter((s) => s.length);
-    const leaveFromClasses = leaveFrom.split(' ').filter((s) => s.length);
-    const leaveToClasses = leaveTo.split(' ').filter((s) => s.length);
+    const enterClasses = enter.split(" ").filter(s => s.length);
+    const enterFromClasses = enterFrom.split(" ").filter(s => s.length);
+    const enterToClasses = enterTo.split(" ").filter(s => s.length);
+    const leaveClasses = leave.split(" ").filter(s => s.length);
+    const leaveFromClasses = leaveFrom.split(" ").filter(s => s.length);
+    const leaveToClasses = leaveTo.split(" ").filter(s => s.length);
 
     function addClasses(node: HTMLElement, classes: string[]): void {
         if (classes.length) {
@@ -75,26 +75,26 @@ function CSSTransition({
             in={show}
             timeout={(undefined as unknown) as any}
             addEndListener={(node, done) => {
-                node.addEventListener('transitionend', done, false);
+                node.addEventListener("transitionend", done, false);
             }}
-            onEnter={(node) => {
+            onEnter={node => {
                 addClasses(node, [...enterClasses, ...enterFromClasses]);
             }}
-            onEntering={(node) => {
+            onEntering={node => {
                 removeClasses(node, enterFromClasses);
                 addClasses(node, enterToClasses);
             }}
-            onEntered={(node) => {
+            onEntered={node => {
                 removeClasses(node, [...enterToClasses, ...enterClasses]);
             }}
-            onExit={(node) => {
+            onExit={node => {
                 addClasses(node, [...leaveClasses, ...leaveFromClasses]);
             }}
-            onExiting={(node) => {
+            onExiting={node => {
                 removeClasses(node, leaveFromClasses);
                 addClasses(node, leaveToClasses);
             }}
-            onExited={(node) => {
+            onExited={node => {
                 removeClasses(node, [...leaveToClasses, ...leaveClasses]);
             }}
         >
@@ -111,7 +111,9 @@ function Transition({ show, appear, ...rest }: TransitionProps) {
     if (isChild) {
         return (
             <CSSTransition
-                appear={parent ? parent.appear || !parent.isInitialRender : false}
+                appear={
+                    parent ? parent.appear || !parent.isInitialRender : false
+                }
                 show={parent?.show ? parent.show : false}
                 {...rest}
             />

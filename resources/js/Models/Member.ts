@@ -8,7 +8,7 @@ export type Member = {
     skillset?: string;
     suitable_time?: string;
     extra_info?: string;
-    count?:number;
+    count?: number;
     current_status?: string;
     previous_experience?: string;
     specific_interests?: string;
