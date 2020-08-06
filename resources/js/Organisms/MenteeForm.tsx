@@ -65,7 +65,7 @@ const MenteeForm: React.FC = () => {
                         helpText=""
                         onChange={handleChange}
                     />
-                    {(errorsFromBackend.previous_experience) && (
+                    {errorsFromBackend.previous_experience && (
                         <div className="block text-sm font-medium text-red-500 pb-5">
                             {errorsFromBackend.previous_experience}
                         </div>

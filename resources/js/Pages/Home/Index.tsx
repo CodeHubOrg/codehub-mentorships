@@ -1,5 +1,5 @@
 import React from "react";
-import { AppLayout } from '@/Layouts/AppLayout';
+import { AppLayout } from "@/Layouts/AppLayout";
 
 interface IProps {
     heading?: string;
@@ -15,7 +15,9 @@ const Show = ({ user }: IProps) => {
     return (
         <AppLayout heading="Email verification successful">
             <div className="flex flex-col">
-                <p>Thank you {user.first_name}, your account has been verified.</p>
+                <p>
+                    Thank you {user.first_name}, your account has been verified.
+                </p>
             </div>
         </AppLayout>
     );
