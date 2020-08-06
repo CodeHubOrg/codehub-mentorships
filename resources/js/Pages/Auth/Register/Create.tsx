@@ -62,7 +62,7 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        
+
                         <div className="block text-sm font-medium text-red-500 pb-5">
                             {errors.first_name || errorsFromBackend.first_name}
                         </div>
@@ -119,7 +119,8 @@ const Create: React.FC = () => {
                         />
 
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.password_confirmation || errorsFromBackend.password_confirmation}
+                            {errors.password_confirmation ||
+                                errorsFromBackend.password_confirmation}
                         </div>
                     </React.Fragment>
                 )}

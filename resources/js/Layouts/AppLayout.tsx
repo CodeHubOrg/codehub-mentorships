@@ -83,60 +83,62 @@ export const AppLayout: FC<Props> = ({
                                 </svg>
                             </button>
 
-                            { auth.user && (<div className="ml-3 relative">
-                                <div>
-                                    <button
-                                        onClick={() =>
-                                            setProfileDropdownVisible(
-                                                !profileDropdownVisible,
-                                            )
-                                        }
-                                        className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
-                                        id="user-menu"
-                                        aria-label="User menu"
-                                        aria-haspopup="true"
-                                    >
-                                        <img
-                                            className="h-8 w-8 rounded-full"
-                                            src={auth.user.avatar}
-                                            alt=""
-                                        />
-                                    </button>
-                                </div>
-
-                                <Transition
-                                    show={profileDropdownVisible}
-                                    enter="transition ease-out duration-200"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
-                                >
-                                    <div
-                                        ref={profileMenu}
-                                        className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
-                                    >
-                                        <div className="py-1 rounded-md bg-white shadow-xs">
-                                            <InertiaLink
-                                                href={route("account.edit")}
-                                                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                                            >
-                                                My Account
-                                            </InertiaLink>
-                                            <InertiaLink
-                                                method="DELETE"
-                                                href={route(
-                                                    "auth.login.destroy",
-                                                )}
-                                                className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
-                                            >
-                                                Sign out
-                                            </InertiaLink>
-                                        </div>
+                            {auth.user && (
+                                <div className="ml-3 relative">
+                                    <div>
+                                        <button
+                                            onClick={() =>
+                                                setProfileDropdownVisible(
+                                                    !profileDropdownVisible,
+                                                )
+                                            }
+                                            className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
+                                            id="user-menu"
+                                            aria-label="User menu"
+                                            aria-haspopup="true"
+                                        >
+                                            <img
+                                                className="h-8 w-8 rounded-full"
+                                                src={auth.user.avatar}
+                                                alt=""
+                                            />
+                                        </button>
                                     </div>
-                                </Transition>
-                            </div>)}
+
+                                    <Transition
+                                        show={profileDropdownVisible}
+                                        enter="transition ease-out duration-200"
+                                        enterFrom="transform opacity-0 scale-95"
+                                        enterTo="transform opacity-100 scale-100"
+                                        leave="transition ease-in duration-75"
+                                        leaveFrom="transform opacity-100 scale-100"
+                                        leaveTo="transform opacity-0 scale-95"
+                                    >
+                                        <div
+                                            ref={profileMenu}
+                                            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg"
+                                        >
+                                            <div className="py-1 rounded-md bg-white shadow-xs">
+                                                <InertiaLink
+                                                    href={route("account.edit")}
+                                                    className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                                                >
+                                                    My Account
+                                                </InertiaLink>
+                                                <InertiaLink
+                                                    method="DELETE"
+                                                    href={route(
+                                                        "auth.login.destroy",
+                                                    )}
+                                                    className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+                                                >
+                                                    Sign out
+                                                </InertiaLink>
+                                            </div>
+                                        </div>
+                                    </Transition>
+                                </div>
+                            )}
                         </div>
                         <div className="-mr-2 flex items-center sm:hidden">
                             <button
@@ -196,45 +198,47 @@ export const AppLayout: FC<Props> = ({
                             return <NavItemMobile item={item} key={index} />;
                         })}
                     </div>
-                    { auth.user && (<div className="pt-4 pb-3 border-t border-gray-200">
-                        <div className="flex items-center px-4">
-                            <div className="flex-shrink-0">
-                                <img
-                                    className="h-10 w-10 rounded-full"
-                                    src={auth.user.avatar}
-                                    alt=""
-                                />
+                    {auth.user && (
+                        <div className="pt-4 pb-3 border-t border-gray-200">
+                            <div className="flex items-center px-4">
+                                <div className="flex-shrink-0">
+                                    <img
+                                        className="h-10 w-10 rounded-full"
+                                        src={auth.user.avatar}
+                                        alt=""
+                                    />
+                                </div>
+                                <div className="ml-3">
+                                    <div className="text-base font-medium leading-6 text-gray-800">
+                                        {auth.user.name}
+                                    </div>
+                                    <div className="text-sm font-medium leading-5 text-gray-500">
+                                        {auth.user.email}
+                                    </div>
+                                </div>
                             </div>
-                            <div className="ml-3">
-                                <div className="text-base font-medium leading-6 text-gray-800">
-                                    {auth.user.name}
-                                </div>
-                                <div className="text-sm font-medium leading-5 text-gray-500">
-                                    {auth.user.email}
-                                </div>
+                            <div
+                                className="mt-3"
+                                role="menu"
+                                aria-orientation="vertical"
+                                aria-labelledby="user-menu"
+                            >
+                                <InertiaLink
+                                    href={route("account.edit")}
+                                    className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
+                                >
+                                    My Account
+                                </InertiaLink>
+                                <InertiaLink
+                                    method="DELETE"
+                                    href={route("auth.login.destroy")}
+                                    className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
+                                >
+                                    Sign out
+                                </InertiaLink>
                             </div>
                         </div>
-                        <div
-                            className="mt-3"
-                            role="menu"
-                            aria-orientation="vertical"
-                            aria-labelledby="user-menu"
-                        >
-                            <InertiaLink
-                                href={route("account.edit")}
-                                className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
-                            >
-                                My Account
-                            </InertiaLink>
-                            <InertiaLink
-                                method="DELETE"
-                                href={route("auth.login.destroy")}
-                                className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out"
-                            >
-                                Sign out
-                            </InertiaLink>
-                        </div>
-                    </div>)}
+                    )}
                 </div>
             </nav>
 

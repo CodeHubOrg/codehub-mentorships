@@ -39,7 +39,6 @@ const Form = <IValues extends Record<string, any>>({
     render,
     validate,
 }: IFormProps<IValues>) => {
-    
     const { errors: errorsFromBackend, old } = usePage();
     const _isMounted = useRef(true);
     //https://stackoverflow.com/questions/59780268/cleanup-memory-leaks-on-an-unmounted-component-in-react-hooks
@@ -57,7 +56,6 @@ const Form = <IValues extends Record<string, any>>({
         });
         return haveError;
     };
-
 
     const updateState = (target: HTMLInputElement) => {
         const { name, value, type } = target;
@@ -120,7 +118,7 @@ const Form = <IValues extends Record<string, any>>({
                     if (_isMounted.current) {
                         setSending(false);
                         setSuccess(true);
-                       // setValues(values);
+                        // setValues(values);
                     }
                 })
                 .catch(err => console.log(err));
@@ -158,7 +156,7 @@ const Form = <IValues extends Record<string, any>>({
                         </button>
                     )}
                 </div>
-               {/* {submitSuccess && (
+                {/* {submitSuccess && (
                     <div className="alert alert-info" role="alert">
                         The form was successfully submitted.
                     </div>
