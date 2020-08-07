@@ -98,6 +98,17 @@ class VerificationController extends Controller
                     : redirect($this->redirectPath())->with('verified', true);
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => '',
+            'slack_handle' => '',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
     public function resend(Request $request)
     {
         $id = $request->get('userid');
