@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class MenteeProfileController extends Controller
@@ -48,17 +49,23 @@ class MenteeProfileController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request->all());
+        // 
+        $this->validator($request->all())->validate();
+
+        // dd($r->errors());
+
         // Creating a new Mentee model with the data from the form.
         // Give this profile a 'Pending' status
         $m = MenteeProfile::create($request->validate([
-            'current_status' => 'required',
-            'previous_experience' => 'required',
+            'currentStatus' => 'required',
+            'previousExperience' => 'required',
             'interests' => '',
-            'specific_interests' => '',
-            'mentoring_type' => '',
+            'specificInterests' => '',
+            'mentoringType' => '',
             'timeframe' => '',
-            'suitable_time' => '',
-            'extra_info' => '',
+            'suitableTime' => '',
+            'extraInfo' => '',
             'status' => '',
         ]));
 
@@ -68,6 +75,7 @@ class MenteeProfileController extends Controller
 
         return Redirect::route('dashboard.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -112,5 +120,20 @@ class MenteeProfileController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'currentStatus' => ['required'],
+            'previousExperience' => ['required'],
+            'interests' => '',
+            'specificInterests' => '',
+            'mentoringType' => '',
+            'timeframe' => '',
+            'suitableTime' => '',
+            'extraInfo' => '',
+            'status' => '',
+        ]);
     }
 }
