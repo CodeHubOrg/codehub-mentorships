@@ -17,7 +17,7 @@ class AdminDashboardController
 
         foreach ($mentorProfiles as $m) {
             $attr = $h->addCamelsToModel($m)->getAttributes();
-            $u = $m->user;          
+            $u = $m->user;
             $attr['name'] = $u->Name;
             $attr['email'] = $u->email;
             $attr['slackHandle'] = $u->slack_handle;

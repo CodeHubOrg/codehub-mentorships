@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Profiles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MenteeProfileRequest;
 use App\Models\MenteeProfile;
 use App\Models\User;
-use App\Http\Requests\MenteeProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -13,7 +13,6 @@ use Inertia\Inertia;
 
 class MenteeProfileController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +41,7 @@ class MenteeProfileController extends Controller
      */
     public function store(MenteeProfileRequest $request)
     {
-        $validated = $request->validated();        
+        $validated = $request->validated();
 
         $h = resolve('\App\Helpers\GeneralHelper');
         $valsDB = $h->snakeArrayKeys($validated);
@@ -54,7 +53,6 @@ class MenteeProfileController extends Controller
 
         return Redirect::route('dashboard.index');
     }
-
 
     /**
      * Display the specified resource.
