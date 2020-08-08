@@ -5,17 +5,17 @@ import FormChoiceField from "@/Molecules/FormChoiceField";
 import { Textarea } from "@/Atoms/Textarea";
 
 type MentorFormValues = {
-    mentoring_experience: string;
+    mentoringExperience: string;
     interests: string;
     skillset: string;
-    suitable_time: string;
-    extra_info: string;
+    suitableTime: string;
+    extraInfo: string;
 };
 
 const validate = (values: MentorFormValues) => {
     let errors: IErrors<MentorFormValues> = {};
-    if (!values.mentoring_experience) {
-        errors.mentoring_experience = "Please select a value.";
+    if (!values.mentoringExperience) {
+        errors.mentoringExperience = "Please select a value.";
     }
 
     return errors;
@@ -26,28 +26,28 @@ const MentorForm: React.FC = () => {
         <Form<MentorFormValues>
             action=""
             initialValues={{
-                mentoring_experience: "",
+                mentoringExperience: "",
                 interests: "",
                 skillset: "",
-                suitable_time: "",
-                extra_info: "",
+                suitableTime: "",
+                extraInfo: "",
             }}
             validate={validate}
             button="Submit"
             render={(values, handleChange, errors, errorsFromBackend) => (
                 <React.Fragment>
-                    {(errors.mentoring_experience ||
-                        errorsFromBackend.mentoring_experience) && (
+                    {(errors.mentoringExperience ||
+                        errorsFromBackend.mentoringExperience) && (
                         <div className="block text-sm font-medium text-red-500 pb-5">
                             {/*console.log("errors from backend", errorsFromBackend)*/}
-                            {errors.mentoring_experience ||
-                                errorsFromBackend.mentoring_experience}
+                            {errors.mentoringExperience ||
+                                errorsFromBackend.mentoringExperience}
                         </div>
                     )}
                     <FormChoiceField
                         type="radio"
                         label="Have you mentored anyone before?"
-                        selected={values.mentoring_experience}
+                        selected={values.mentoringExperience}
                         choices={[
                             {
                                 label: "Yes (with CodeHub)",
@@ -66,7 +66,7 @@ const MentorForm: React.FC = () => {
                             },
                         ]}
                         onChange={handleChange}
-                        name="mentoring_experience"
+                        name="mentoringExperience"
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <FormChoiceField
@@ -104,17 +104,17 @@ const MentorForm: React.FC = () => {
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <FormTextInput
                         type="text"
-                        name="suitable_time"
+                        name="suitableTime"
                         label="Which timing is suitable for you?"
-                        value={values.suitable_time}
+                        value={values.suitableTime}
                         helpText=""
                         onChange={handleChange}
                     />
                     <div className="block text-sm font-medium text-red-500 pb-5" />
                     <Textarea
-                        name="extra_info"
+                        name="extraInfo"
                         label="Anything else?"
-                        value={values.extra_info}
+                        value={values.extraInfo}
                         helpText=""
                         onChange={handleChange}
                     />

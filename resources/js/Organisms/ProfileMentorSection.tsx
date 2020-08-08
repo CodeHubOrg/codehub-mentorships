@@ -5,22 +5,22 @@ interface IProps {
     heading: string;
     mentorProfile?: {
         id: number;
-        mentoring_experience: string;
+        mentoringExperience: string;
         interests?: string;
         skillset?: string;
-        suitable_time?: string;
-        extra_info?: string;
+        suitableTime?: string;
+        extraInfo?: string;
         status?: number;
     };
 }
 
 const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
     const {
-        mentoring_experience,
+        mentoringExperience,
         interests,
         skillset,
-        suitable_time,
-        extra_info,
+        suitableTime,
+        extraInfo,
         status,
     } = mentorProfile;
 
@@ -30,7 +30,7 @@ const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
                 <span className="mb-6 text-3x text-gray-800 font-semibold">
                     Mentoring experience:
                 </span>{" "}
-                {mentoring_experience}
+                {mentoringExperience}
             </p>
             {interests && (
                 <p>
@@ -48,20 +48,20 @@ const ProfileMentorSection: React.FC<IProps> = ({ heading, mentorProfile }) => {
                     {skillset}
                 </p>
             )}
-            {suitable_time && (
+            {suitableTime && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         Suitable Time:
                     </span>{" "}
-                    {suitable_time}
+                    {suitableTime}
                 </p>
             )}
-            {extra_info && (
+            {extraInfo && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         Additional info:
                     </span>{" "}
-                    {extra_info}
+                    {extraInfo}
                 </p>
             )}
             {status === 0 && (

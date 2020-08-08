@@ -4,19 +4,19 @@ import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Atoms/AuthLayout";
 
 type RegisterFormValues = {
-    first_name: string;
-    last_name: string;
+    firstName: string;
+    lastName: string;
     email: string;
     password: string;
-    slack_handle: string;
+    slackHandle: string;
     password_confirmation: string;
 };
 
 const validate = (values: RegisterFormValues) => {
     let errors: IErrors<RegisterFormValues> = {};
 
-    if (!values.first_name || values.first_name.trim().length === 0) {
-        errors.first_name = "Please enter your first name";
+    if (!values.firstName || values.firstName.trim().length === 0) {
+        errors.firstName = "Please enter your first name";
     }
 
     let validEmail = /^.+@.+\..+$/;
@@ -43,10 +43,10 @@ const Create: React.FC = () => {
             <Form<RegisterFormValues>
                 action="/register"
                 initialValues={{
-                    first_name: "",
-                    last_name: "",
+                    firstName: "",
+                    lastName: "",
                     email: "",
-                    slack_handle: "",
+                    slackHandle: "",
                     password: "",
                     password_confirmation: "",
                 }}
@@ -56,26 +56,26 @@ const Create: React.FC = () => {
                     <React.Fragment>
                         <FormTextInput
                             type="text"
-                            name="first_name"
+                            name="firstName"
                             label="First Name"
-                            value={values.first_name}
+                            value={values.firstName}
                             helpText=""
                             onChange={handleChange}
                         />
 
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.first_name || errorsFromBackend.first_name}
+                            {errors.firstName || errorsFromBackend.firstName}
                         </div>
                         <FormTextInput
                             type="text"
-                            name="last_name"
+                            name="lastName"
                             label="Last Name"
-                            value={values.last_name}
+                            value={values.lastName}
                             helpText=""
                             onChange={handleChange}
                         />
                         <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.last_name || errorsFromBackend.last_name}
+                            {errors.lastName || errorsFromBackend.lastName}
                         </div>
                         <FormTextInput
                             type="email"
@@ -90,9 +90,9 @@ const Create: React.FC = () => {
                         </div>
                         <FormTextInput
                             type="text"
-                            name="slack_handle"
+                            name="slackHandle"
                             label="Slack handle"
-                            value={values.slack_handle}
+                            value={values.slackHandle}
                             helpText=""
                             onChange={handleChange}
                         />

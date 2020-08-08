@@ -7,55 +7,54 @@ import { AppLayout } from "@/Layouts/AppLayout";
 interface IProps {
     heading?: string;
     user: {
-        first_name: string;
-        last_name?: string;
+        name: string;
         email: string;
-        slack_handle?: string;
+        slackHandle?: string;
     };
     mentorProfile?: {
         id: number;
-        mentoring_experience: string;
+        mentoringExperience: string;
         interests?: string;
         skillset?: string;
-        suitable_time?: string;
-        extra_info?: string;
+        suitableTime?: string;
+        extraInfo?: string;
         status?: number;
     };
     menteeProfile?: {
         id: number;
-        current_status: string;
-        previous_experience: string;
+        currentStatus: string;
+        previousExperience: string;
         interests: string;
-        specific_interests: string;
-        mentoring_type?: string;
+        specificInterests: string;
+        mentoringType?: string;
         timeframe?: string;
-        suitable_time?: string;
-        extra_info?: string;
+        suitableTime?: string;
+        extraInfo?: string;
         status?: number;
     };
 }
 
 const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
+    const { name, email, slackHandle } = user;
+
     return (
         <AppLayout heading="Welcome to CodeHub Mentorships">
             <div className="flex flex-col">
                 <div className="mx-auto rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
                     <div className=" flex w-full md:w-1/3 justify-center mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Name: </p>
-                        <p className="flex w-1/2 justify-start">
-                            {user.first_name} {user.last_name}
-                        </p>
+                        <p className="flex w-1/2 justify-start">{name}</p>
                     </div>
                     <div className="flex w-full md:w-1/3 justify-center test-center w-1/2 mx-auto mb-6 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">Email:</p>
-                        <p className="flex w-1/2 justify-start">{user.email}</p>
+                        <p className="flex w-1/2 justify-start">{email}</p>
                     </div>
                     <div className="flex w-full md:w-1/3 justify-center mx-auto mb-2 text-sm text-gray-900">
                         <p className="flex w-1/2 justify-start">
                             Slack Handle:
                         </p>
                         <p className="flex w-1/2 justify-start">
-                            {user.slack_handle}
+                            {slackHandle}
                         </p>
                     </div>
                 </div>
