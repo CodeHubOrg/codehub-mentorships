@@ -65,7 +65,7 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         $formvals = $request->all();
-        
+
         $h = resolve('\App\Helpers\GeneralHelper');
         $valsDB = $h->snakeArrayKeys($formvals);
 

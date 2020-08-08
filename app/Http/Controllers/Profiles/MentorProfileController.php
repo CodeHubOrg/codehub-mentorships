@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Profiles;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MentorProfileRequest;
 use App\Models\MentorProfile;
 use App\Models\User;
-use App\Http\Requests\MentorProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -38,13 +38,12 @@ class MentorProfileController extends Controller
      * @param  \App\Http\Requests\MentorProfileRequest $request
      * @return \Illuminate\Http\Response
      */
-
     public function store(MentorProfileRequest $request)
     {
 
         // Creating a new Mentor model with the data from the form - turning camel case from frontend into snake case first.
         // Give this profile a 'Pending' status
-        $validated = $request->validated(); 
+        $validated = $request->validated();
 
         $h = resolve('\App\Helpers\GeneralHelper');
         $valsDB = $h->snakeArrayKeys($validated);
