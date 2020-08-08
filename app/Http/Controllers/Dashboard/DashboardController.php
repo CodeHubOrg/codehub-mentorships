@@ -9,13 +9,16 @@ class DashboardController
 {
     public function show()
     {
-        $u = Auth::user();
+        $h = resolve('\App\Helpers\GeneralHelper');
 
-        // now I have moved the profiles in here, I am wondering if just passing the user would be enough
+        $u = (Auth::user());
+        $u->name = $u->Name;
+        $u = $h->addCamelsToModel($u);
+
         return Inertia::render('Dashboard/Show', [
             'user' => $u,
-            'mentorProfile' => $u->mentorProfile,
-            'menteeProfile' => $u->menteeProfile,
+            'mentorProfile' => $h->addCamelsToModel($u->mentorProfile),
+            'menteeProfile' => $h->addCamelsToModel($u->menteeProfile),
         ]);
     }
 }

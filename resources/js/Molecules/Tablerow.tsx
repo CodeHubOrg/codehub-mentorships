@@ -15,24 +15,23 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
     };
 
     const {
-        slack_handle,
-        first_name,
-        last_name,
+        slackHandle,
+        name,
         email,
-        mentoring_experience,
-        current_status,
+        mentoringExperience,
+        currentStatus,
         interests,
-        specific_interests,
+        specificInterests,
         timeframe,
         skillset,
-        suitable_time,
-        previous_experience,
-        mentoring_type,
-        extra_info,
+        suitableTime,
+        previousExperience,
+        mentoringType,
+        extraInfo,
     } = member;
     return (
         <>
-            <tr key={slack_handle}>
+            <tr key={slackHandle}>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <div className="flex">
                         <div className="flex-shrink-0 w-10 h-10">
@@ -44,13 +43,13 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
                         </div>
                         <div className="ml-3">
                             <p className="text-gray-900 whitespace-no-wrap">
-                                {slack_handle}
+                                {slackHandle}
                             </p>
                         </div>
                     </div>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{`${first_name} ${last_name}`}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{name}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">{email}</p>
@@ -70,21 +69,21 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
             {fullProfileVisible && (
                 <tr>
                     <td colSpan={4}>
-                        {mentoring_experience && (
+                        {mentoringExperience && (
                             <p className="px-5 py-1 text-sm">
                                 <b>Mentored previously:</b>{" "}
-                                {mentoring_experience}
+                                {mentoringExperience}
                             </p>
                         )}
-                        {current_status && (
+                        {currentStatus && (
                             <p className="px-5 py-1 text-sm">
-                                <b>Current status:</b> {current_status}
+                                <b>Current status:</b> {currentStatus}
                             </p>
                         )}
                         {interests && (
                             <p className="px-5 py-1 text-sm">
                                 <b>Interests:</b>{" "}
-                                {interests || specific_interests}
+                                {interests || specificInterests}
                             </p>
                         )}
                         {skillset && (
@@ -92,27 +91,26 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
                                 <b>Skills:</b> {skillset}
                             </p>
                         )}
-                        {suitable_time && (
+                        {suitableTime && (
                             <p className="px-5 py-2 text-sm border-b border-gray-200">
                                 <b>Suitable time:</b>{" "}
-                                {suitable_time || timeframe}
+                                {suitableTime || timeframe}
                             </p>
                         )}
-                        {previous_experience && (
+                        {previousExperience && (
                             <p className="px-5 py-2 text-sm border-b border-gray-200">
-                                <b>Previous experience:</b>{" "}
-                                {previous_experience}
+                                <b>Previous experience:</b> {previousExperience}
                             </p>
                         )}
-                        {mentoring_type && (
+                        {mentoringType && (
                             <p className="px-5 py-2 text-sm border-b border-gray-200">
                                 <b>Are you after general mentoring?:</b>{" "}
-                                {mentoring_type}
+                                {mentoringType}
                             </p>
                         )}
-                        {extra_info && (
+                        {extraInfo && (
                             <p className="px-5 py-2 text-sm border-b border-gray-200">
-                                <b>Extra info:</b> {extra_info}
+                                <b>Extra info:</b> {extraInfo}
                             </p>
                         )}
                     </td>

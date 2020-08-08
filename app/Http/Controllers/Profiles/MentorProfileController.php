@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Profiles;
 use App\Http\Controllers\Controller;
 use App\Models\MentorProfile;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\MentorProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -35,33 +35,23 @@ class MentorProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MentorProfileRequest $request
      * @return \Illuminate\Http\Response
      */
 
-    // Currently the $request parameter of this method
-    // is typehinted as a regular Illuminate\Http\Request
-    // We should create a MentorProfileRequest form request class
-    // - https://laravel.com/docs/7.x/validation#form-request-validation
-    // that will hold our validation logic so that by the time the
-    // data reaches this point, we know that it is valid
-    public function store(Request $request)
+    public function store(MentorProfileRequest $request)
     {
 
-        // Creating a new Mentor model with the data from the form.
+        // Creating a new Mentor model with the data from the form - turning camel case from frontend into snake case first.
         // Give this profile a 'Pending' status
+        $validated = $request->validated(); 
 
-        $m = MentorProfile::create($request->validate([
-            'mentoring_experience' => 'required',
-            'skillset' => '',
-            'suitable_time' => '',
-            'extra_info' => '',
-        ]));
+        $h = resolve('\App\Helpers\GeneralHelper');
+        $valsDB = $h->snakeArrayKeys($validated);
 
-        // temporary, turning array into string for now
-
+        $m = MentorProfile::make($valsDB);
+        // temporary solution, turning array into string for now
         $interests = $request->interests ? implode(', ', $request->interests) : '';
-
         $m->interests = $interests;
 
         // Associate this Mentor model with the authenticated User

@@ -34,6 +34,8 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    public $fields;
+
     /**
      * Create a new controller instance.
      *
@@ -42,6 +44,14 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+
+        $this->fields = [
+            'firstName' => ['required', 'string', 'max:255'],
+            'lastName' => '',
+            'slackHandle' => '',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ];
     }
 
     public function create()
@@ -54,7 +64,12 @@ class RegisterController extends Controller
         // logic from register method of the RegistersUsers trait
         $this->validator($request->all())->validate();
 
-        $user = User::make($request->all());
+        $formvals = $request->all();
+        
+        $h = resolve('\App\Helpers\GeneralHelper');
+        $valsDB = $h->snakeArrayKeys($formvals);
+
+        $user = User::make($valsDB);
         $user->password = Hash::make($request->get('password'));
         $user->save();
 
@@ -71,12 +86,6 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => '',
-            'slack_handle' => '',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, $this->fields);
     }
 }

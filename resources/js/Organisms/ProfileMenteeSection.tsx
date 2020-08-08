@@ -5,28 +5,28 @@ interface IProps {
     heading: string;
     menteeProfile?: {
         id: number;
-        current_status: string;
-        previous_experience: string;
+        currentStatus: string;
+        previousExperience: string;
         interests: string;
-        specific_interests: string;
-        mentoring_type?: string;
+        specificInterests: string;
+        mentoringType?: string;
         timeframe?: string;
-        suitable_time?: string;
-        extra_info?: string;
+        suitableTime?: string;
+        extraInfo?: string;
         status?: number;
     };
 }
 
 const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
     const {
-        current_status,
-        previous_experience,
+        currentStatus,
+        previousExperience,
         interests,
-        specific_interests,
-        mentoring_type,
+        specificInterests,
+        mentoringType,
         timeframe,
-        suitable_time,
-        extra_info,
+        suitableTime,
+        extraInfo,
         status,
     } = menteeProfile;
 
@@ -36,13 +36,13 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
                 <span className="mb-6 text-3x text-gray-800 font-semibold">
                     Current status:
                 </span>{" "}
-                {current_status}
+                {currentStatus}
             </p>
             <p>
                 <span className="mb-6 text-3x text-gray-800 font-semibold">
                     Previous experience:
                 </span>{" "}
-                {previous_experience}
+                {previousExperience}
             </p>
             {interests && (
                 <p>
@@ -52,20 +52,20 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
                     {interests}
                 </p>
             )}
-            {specific_interests && (
+            {specificInterests && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         Specific interests:
                     </span>{" "}
-                    {specific_interests}
+                    {specificInterests}
                 </p>
             )}
-            {mentoring_type && (
+            {mentoringType && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         After some more general mentoring:
                     </span>{" "}
-                    {mentoring_type}
+                    {mentoringType}
                 </p>
             )}
             {timeframe && (
@@ -76,20 +76,20 @@ const ProfileMenteeSection: React.FC<IProps> = ({ heading, menteeProfile }) => {
                     {timeframe}
                 </p>
             )}
-            {suitable_time && (
+            {suitableTime && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         Suitable time:
                     </span>{" "}
-                    {suitable_time}
+                    {suitableTime}
                 </p>
             )}
-            {extra_info && (
+            {extraInfo && (
                 <p>
                     <span className="mb-6 text-3x text-gray-800 font-semibold">
                         Additional info:
                     </span>{" "}
-                    {extra_info}
+                    {extraInfo}
                 </p>
             )}
             {status === 0 && (

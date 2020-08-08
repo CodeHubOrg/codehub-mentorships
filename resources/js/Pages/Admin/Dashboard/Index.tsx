@@ -6,6 +6,15 @@ import MentorshipSummaryTable from "@/Molecules/MentorshipSummaryTable";
 import { Summary } from "@/Models/Summary";
 import { Inertia } from "@inertiajs/inertia";
 
+// type Summary = {
+//     mentor: string;
+//     mentorSlackHandle: string;
+//     mentorEmail: string;
+//     mentee: string;
+//     menteeSlackHandle: string;
+//     menteeEmail: string;
+// };
+
 interface IProps {
     mentors: Member[];
     mentees: Member[];
@@ -60,11 +69,19 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
     };
 
     const addPair = () => {
-        console.log(selectedMentor);
         Inertia.post("/admin/", {
             mentorId: selectedMentor.id,
             menteeId: selectedMentee.id,
         });
+
+        // const mentorShipSummary: Summary = {
+        //     mentor: selectedMentor.name,
+        //     mentorSlackHandle: selectedMentor.slackHandle,
+        //     mentorEmail: selectedMentor.email,
+        //     mentee: selectedMentee.name,
+        //     menteeSlackHandle: selectedMentee.slackHandle,
+        //     menteeEmail: selectedMentee.email,
+        // };
 
         setSortedMentors(mentors);
         setSelectedMentee(null);

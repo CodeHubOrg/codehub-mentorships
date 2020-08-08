@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Profiles;
 use App\Http\Controllers\Controller;
 use App\Models\MenteeProfile;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Http\Requests\MenteeProfileRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -13,6 +13,7 @@ use Inertia\Inertia;
 
 class MenteeProfileController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -33,42 +34,20 @@ class MenteeProfileController extends Controller
         return Inertia::render('Profiles/Mentee/Create');
     }
 
-    // Currently the $request parameter of this method
-    // is typehinted as a regular Illuminate\Http\Request
-    // We should create a MenteeProfileRequest form request class
-    // - https://laravel.com/docs/7.x/validation#form-request-validation
-    // that will hold our validation logic so that by the time the
-    // data reaches this point, we know that it is valid
-
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MenteeProfileRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenteeProfileRequest $request)
     {
+        $validated = $request->validated();        
 
-        //dd($request->all());
-        // 
-        $this->validator($request->all())->validate();
+        $h = resolve('\App\Helpers\GeneralHelper');
+        $valsDB = $h->snakeArrayKeys($validated);
 
-        // dd($r->errors());
-
-        // Creating a new Mentee model with the data from the form.
-        // Give this profile a 'Pending' status
-        $m = MenteeProfile::create($request->validate([
-            'currentStatus' => 'required',
-            'previousExperience' => 'required',
-            'interests' => '',
-            'specificInterests' => '',
-            'mentoringType' => '',
-            'timeframe' => '',
-            'suitableTime' => '',
-            'extraInfo' => '',
-            'status' => '',
-        ]));
-
+        $m = MenteeProfile::create($valsDB);
         // Associate this Mentee model with the authenticated User
         $m->user()->associate(Auth::user());
         $m->save();
@@ -124,16 +103,6 @@ class MenteeProfileController extends Controller
 
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'currentStatus' => ['required'],
-            'previousExperience' => ['required'],
-            'interests' => '',
-            'specificInterests' => '',
-            'mentoringType' => '',
-            'timeframe' => '',
-            'suitableTime' => '',
-            'extraInfo' => '',
-            'status' => '',
-        ]);
+        return Validator::make($data, $this->formfields);
     }
 }
