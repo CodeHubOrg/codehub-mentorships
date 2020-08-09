@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Dashboard;
 
+use App\Http\Requests\MentorMenteeRequest;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
-use App\Http\Requests\MentorMenteeRequest;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -52,6 +52,5 @@ class AdminDashboardController
         $mentee->mentorProfiles()->attach($mentor);
 
         return Redirect::route('admin.dashboard.index');
-
     }
 }

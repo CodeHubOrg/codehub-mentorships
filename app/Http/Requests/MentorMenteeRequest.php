@@ -26,7 +26,7 @@ class MentorMenteeRequest extends FormRequest
     {
         return [
             'mentorId' => ['required'],
-            'menteeId' => ['required']
+            'menteeId' => ['required'],
         ];
     }
 }
