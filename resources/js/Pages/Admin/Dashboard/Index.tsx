@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { AppLayout } from "@/Layouts/AppLayout";
 import Table from "@/Molecules/Table";
 import { Member } from "@/Models/Member";
-
-type Summary = {
-    mentor: string;
-    mentor_slack_handle: string;
-    mentor_email: string;
-    mentee: string;
-    mentee_slack_handle: string;
-    mentee_email: string;
-};
+import { Inertia } from "@inertiajs/inertia";
 
 interface IProps {
     mentors: Member[];
@@ -62,16 +54,11 @@ const Index = ({ mentors, mentees }: IProps) => {
     };
 
     const addPair = () => {
-        const mentorShipSummary: Summary = {
-            mentor: `${selectedMentor.first_name} ${selectedMentor.last_name}`,
-            mentor_slack_handle: selectedMentor.slack_handle,
-            mentor_email: selectedMentor.email,
-            mentee: `${selectedMentee.first_name} ${selectedMentee.last_name}`,
-            mentee_slack_handle: selectedMentee.slack_handle,
-            mentee_email: selectedMentee.email,
-        };
+        Inertia.post("/admin/", {
+            mentorId: selectedMentor.id,
+            menteeId: selectedMentee.id,
+        });
 
-        console.log(mentorShipSummary);
         setSortedMentors(mentors);
         setSelectedMentee(null);
         setSelectedMentor(null);
@@ -89,7 +76,7 @@ const Index = ({ mentors, mentees }: IProps) => {
                             members={mentees}
                             handleSelect={selectMentee}
                             type="mentee"
-                        ></Table>
+                        />
                     </div>
                     <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow ml-2">
                         <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
@@ -99,7 +86,7 @@ const Index = ({ mentors, mentees }: IProps) => {
                             members={selectedMentee ? sortedMentors : mentors}
                             handleSelect={selectMentor}
                             type="mentor"
-                        ></Table>
+                        />
                     </div>
                 </div>
                 {selectedMentee && selectedMentor && (

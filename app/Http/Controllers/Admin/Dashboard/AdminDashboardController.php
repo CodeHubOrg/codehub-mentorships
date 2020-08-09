@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Dashboard;
 
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
+use App\Http\Requests\MentorMenteeRequest;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class AdminDashboardController
@@ -38,5 +40,18 @@ class AdminDashboardController
             'mentors' => $mentors,
             'mentees' => $mentees,
         ]);
+    }
+
+    public function store(MentorMenteeRequest $request)
+    {
+        $validated = $request->validated();
+
+        $mentor = MentorProfile::findOrFail($validated['mentorId']);
+        $mentee = MenteeProfile::findOrFail($validated['menteeId']);
+
+        $mentee->mentorProfiles()->attach($mentor);
+
+        return Redirect::route('admin.dashboard.index');
+
     }
 }

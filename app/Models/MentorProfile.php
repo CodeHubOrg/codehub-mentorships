@@ -18,4 +18,9 @@ class MentorProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function menteeProfiles()
+    {
+        return $this->belongsToMany(MenteeProfile::class);
+    }
 }
