@@ -3,10 +3,21 @@ import { AppLayout } from "@/Layouts/AppLayout";
 import Table from "@/Molecules/Table";
 import { Member } from "@/Models/Member";
 import { Inertia } from "@inertiajs/inertia";
+type Summary = {
+    mentee_first_name: string;
+    mentee_last_name: string;
+    mentee_email: string;
+    mentee_slack_handle: string;
+    mentor_first_name: string;
+    mentor_last_name: string;
+    mentor_email: string;
+    mentor_slack_handle: string;
+};
 
 interface IProps {
     mentors: Member[];
     mentees: Member[];
+    summary:Summary[];
 }
 
 const compareQuantity = (a: Member, b: Member): number => {
@@ -19,7 +30,7 @@ const compareQuantity = (a: Member, b: Member): number => {
     }
 };
 
-const Index = ({ mentors, mentees }: IProps) => {
+const Index = ({ mentors, mentees, summary }: IProps) => {
     const [selectedMentee, setSelectedMentee] = useState<Member | null>(null);
     const [selectedMentor, setSelectedMentor] = useState<Member | null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
@@ -54,6 +65,7 @@ const Index = ({ mentors, mentees }: IProps) => {
     };
 
     const addPair = () => {
+        console.log(selectedMentor);
         Inertia.post("/admin/", {
             mentorId: selectedMentor.id,
             menteeId: selectedMentee.id,
@@ -63,7 +75,7 @@ const Index = ({ mentors, mentees }: IProps) => {
         setSelectedMentee(null);
         setSelectedMentor(null);
     };
-
+console.log(summary)
     return (
         <div>
             <AppLayout heading="Mentor and Mentee Profiles">
