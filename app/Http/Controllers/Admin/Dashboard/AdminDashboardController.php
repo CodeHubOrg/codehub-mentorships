@@ -39,24 +39,24 @@ class AdminDashboardController
             $mentees[] = $attr;
         }
 
-        $mentoringSummary = [];
+        $mentorshipSummary = [];
         $menteeMentorProfiles = MentorProfileMenteeProfile::all();
         foreach ($menteeMentorProfiles as $m) {
             $summary;
-            $activeMentee = $m['mentee_profile_id'];
-            $activeMenteeId = MenteeProfile::find($activeMentee)->user_id;
-            $mentee = User::find($activeMenteeId); 
+            $activeMenteeId = $m['mentee_profile_id'];
+            $activeMenteeUserId = MenteeProfile::find($activeMenteeId)->user_id;
+            $mentee = User::find($activeMenteeUserId); 
             $summary['mentee_first_name'] = $mentee->first_name;
             $summary['mentee_last_name'] = $mentee->last_name;
             $summary['mentee_email'] = $mentee->email;
             
-            $activeMentor = $m['mentor_profile_id'];
-            $activeMentorId = MenteeProfile::find($activeMentor)->user_id;
-            $mentor = User::find($activeMentorId);
+            $activeMentorId = $m['mentor_profile_id'];
+            $activeMentorUserId = MenteeProfile::find($activeMentorId)->user_id;
+            $mentor = User::find($activeMentorUserId);
             $summary['mentor_first_name'] = $mentor->first_name;
             $summary['mentor_last_name'] = $mentor->last_name;
             $summary['mentor_email'] = $mentor->email;
-            $mentoringSummary[] = $summary;
+            $mentorshipSummary[] = $summary;
          }
 
 
