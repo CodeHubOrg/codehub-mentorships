@@ -14,7 +14,12 @@ interface Props {
     handleDisplay?: (value: string) => void;
 }
 
-export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }) => {
+export const AppLayout: FC<Props> = ({
+    children,
+    heading,
+    admin,
+    handleDisplay,
+}) => {
     const profileMenu = useRef();
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -25,7 +30,7 @@ export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }
         setProfileDropdownVisible(false);
     });
 
-    const handleClick = ( e ) => {
+    const handleClick = e => {
         handleDisplay(e.target.value);
     };
 
@@ -240,7 +245,7 @@ export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }
                             {heading}
                         </h1>
                     </div>
-                    { admin && 
+                    {admin && (
                         <div className="px-4 sm:px-6 lg:px-8">
                             <input 
                                 className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white" 
@@ -255,7 +260,7 @@ export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }
                                 onClick={handleClick} 
                             />
                         </div>
-                    }
+                    )}
                 </header>
                 <main>
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
