@@ -247,17 +247,17 @@ export const AppLayout: FC<Props> = ({
                     </div>
                     {admin && (
                         <div className="px-4 sm:px-6 lg:px-8">
-                            <input 
-                                className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white" 
-                                type="button" 
-                                value="Summary" 
-                                onClick={handleClick} 
+                            <input
+                                className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                type="button"
+                                value="Summary"
+                                onClick={handleClick}
                             />
-                            <input 
-                                className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white" 
-                                type="button" 
-                                value="Paring" 
-                                onClick={handleClick} 
+                            <input
+                                className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                type="button"
+                                value="Paring"
+                                onClick={handleClick}
                             />
                         </div>
                     )}
