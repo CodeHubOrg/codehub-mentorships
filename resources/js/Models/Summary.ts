@@ -1,4 +1,4 @@
-type Summary = {
+export type Summary = {
     mentee_first_name: string;
     mentee_last_name: string;
     mentee_email: string;
@@ -9,4 +9,3 @@ type Summary = {
     mentor_slack_handle: string;
 };
 
-export default Summary;

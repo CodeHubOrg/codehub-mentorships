@@ -51,7 +51,7 @@ class AdminDashboardController
             $summary['mentee_email'] = $mentee->email;
             
             $activeMentorId = $m['mentor_profile_id'];
-            $activeMentorUserId = MenteeProfile::find($activeMentorId)->user_id;
+            $activeMentorUserId = MentorProfile::find($activeMentorId)->user_id;
             $mentor = User::find($activeMentorUserId);
             $summary['mentor_first_name'] = $mentor->first_name;
             $summary['mentor_last_name'] = $mentor->last_name;
@@ -64,7 +64,7 @@ class AdminDashboardController
         return Inertia::render('Admin/Dashboard/Index', [
             'mentors' => $mentors,
             'mentees' => $mentees,
-            'summary' => $mentoringSummary,
+            'summary' => $mentorshipSummary,
         ]);
     }
 
