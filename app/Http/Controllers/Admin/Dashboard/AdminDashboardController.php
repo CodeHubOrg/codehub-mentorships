@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use App\Http\Requests\MentorMenteeRequest;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
-use App\Models\User;
 use App\Models\MentorProfileMenteeProfile;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -45,11 +45,11 @@ class AdminDashboardController
             $summary;
             $activeMenteeId = $m['mentee_profile_id'];
             $activeMenteeUserId = MenteeProfile::find($activeMenteeId)->user_id;
-            $mentee = User::find($activeMenteeUserId); 
+            $mentee = User::find($activeMenteeUserId);
             $summary['mentee_first_name'] = $mentee->first_name;
             $summary['mentee_last_name'] = $mentee->last_name;
             $summary['mentee_email'] = $mentee->email;
-            
+
             $activeMentorId = $m['mentor_profile_id'];
             $activeMentorUserId = MentorProfile::find($activeMentorId)->user_id;
             $mentor = User::find($activeMentorUserId);
@@ -57,9 +57,7 @@ class AdminDashboardController
             $summary['mentor_last_name'] = $mentor->last_name;
             $summary['mentor_email'] = $mentor->email;
             $mentorshipSummary[] = $summary;
-         }
-
-
+        }
 
         return Inertia::render('Admin/Dashboard/Index', [
             'mentors' => $mentors,
