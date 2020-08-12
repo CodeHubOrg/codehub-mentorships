@@ -10,8 +10,8 @@ import { NavItemMobile } from "@/Molecules/NavItemMobile";
 interface Props {
     children: React.ReactNode;
     heading?: string;
-    admin?:string;
-    handleDisplay?:(value:string) => void;
+    admin?: string;
+    handleDisplay?: (value: string) => void;
 }
 
 export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }) => {
@@ -25,7 +25,7 @@ export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }
         setProfileDropdownVisible(false);
     });
 
-    const handleClick = (e) => {
+    const handleClick = ( e ) => {
         handleDisplay(e.target.value);
     };
 
@@ -240,10 +240,22 @@ export const AppLayout: FC<Props> = ({ children, heading, admin, handleDisplay }
                             {heading}
                         </h1>
                     </div>
-                    {admin && <div className="px-4 sm:px-6 lg:px-8">
-                        <input className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white" type="button" value="Summary" onClick={handleClick} />
-                        <input className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white" type="button" value="Paring" onClick={handleClick} />
-                    </div>}
+                    { admin && 
+                        <div className="px-4 sm:px-6 lg:px-8">
+                            <input 
+                                className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white" 
+                                type="button" 
+                                value="Summary" 
+                                onClick={handleClick} 
+                            />
+                            <input 
+                                className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white" 
+                                type="button" 
+                                value="Paring" 
+                                onClick={handleClick} 
+                            />
+                        </div>
+                    }
                 </header>
                 <main>
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

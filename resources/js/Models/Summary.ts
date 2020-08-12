@@ -8,4 +8,3 @@ export type Summary = {
     mentor_email: string;
     mentor_slack_handle: string;
 };
-

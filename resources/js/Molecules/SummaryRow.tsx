@@ -1,15 +1,14 @@
-import React  from "react";
+import React from "react";
 import { Summary } from "@/Models/Summary";
 
 interface Props {
     summary: Summary;
     handleSelect: (summary: Summary) => void;
-    key:number;
+    key: number;
 }
 
 const SummaryRow = ({ summary, handleSelect, key }: Props) => {
-
-    const handleClick = () => {
+        const handleClick = () => {
         handleSelect(summary);
     };
 
@@ -19,7 +18,7 @@ const SummaryRow = ({ summary, handleSelect, key }: Props) => {
         mentee_email,
         mentor_first_name,
         mentor_last_name,
-        mentor_email
+        mentor_email,
     } = summary;
     return (
         <>
@@ -28,13 +27,13 @@ const SummaryRow = ({ summary, handleSelect, key }: Props) => {
                     <p className="text-gray-900 whitespace-no-wrap">{`${mentee_first_name} ${mentee_last_name}`}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{mentee_email}</p>
+                    <p className="text-gray-900 whitespace-no-wrap"> {mentee_email} </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">{`${mentor_first_name} ${mentor_last_name}`}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{mentor_email}</p>
+                    <p className="text-gray-900 whitespace-no-wrap"> {mentor_email} </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
@@ -52,3 +51,6 @@ const SummaryRow = ({ summary, handleSelect, key }: Props) => {
 };
 
 export default SummaryRow;
+
+
+

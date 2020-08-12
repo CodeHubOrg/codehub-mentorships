@@ -32,22 +32,21 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
         // sorting mentor list to match selected mentee skills
         let menteeSkills = member.interests.split(",");
         let sortedMentors = [...mentors];
-            for (let i = 0; i < sortedMentors.length; i++) {
+            for (let i=0; i < sortedMentors.length; i++) {
                 let mentorSkills = sortedMentors[i].skillset.split(",");
-                let count = 0;
-                for(let menteeSkill of menteeSkills) {
+                let count=0;
+                for (let menteeSkill of menteeSkills) {
                     for (let mentorSkill of mentorSkills) {
-                        if (menteeSkill.toUpperCase().trim() === mentorSkill.toUpperCase().trim()) {
+                        if ( menteeSkill.toUpperCase().trim() === mentorSkill.toUpperCase().trim() ) {
                             count++;
                         }
                     } 
                 }
                 if (count > 0) {
-                    sortedMentors[i].count = count;
+                    sortedMentors[i].count=count;
                 } else {
-                    sortedMentors[i].count = 0;
-                }
-            
+                    sortedMentors[i].count=0;
+                } 
         }    
         sortedMentors = sortedMentors.sort(compareQuantity);
         setSelectedMentee(member);
@@ -70,18 +69,22 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
         setSelectedMentor(null);
     };
 
-    const handleDisplay = (value:string) => {
+    const handleDisplay = (value: string) => {
         setSelectDisplayComp(value);
     };
 
     const unpair = (summary: Summary) => {
-        console.log(summary)  
+        console.log(summary);  
     };
 
     return (
         <div>
-            <AppLayout heading="Mentor and Mentee Profiles" admin="true" handleDisplay={handleDisplay}>
-                {selectDisplayComp==="Paring" && <div className="flex justify-between w-full">
+            <AppLayout 
+                heading="Mentor and Mentee Profiles" 
+                admin="true" 
+                handleDisplay={handleDisplay}
+            >
+                {selectDisplayComp==="Paring" && ( <div className="flex justify-between w-full">
                     <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow mr-4">
                         <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
                             Mentee List
@@ -97,22 +100,22 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
                             Mentor List
                         </h1>
                         <Table
-                            members={selectedMentee ? sortedMentors : mentors}
-                            handleSelect={selectMentor}
+                            members={ selectedMentee ? sortedMentors : mentors }
+                            handleSelect={ selectMentor }
                             type="mentor"
                         />
                     </div>
-                </div>}
-                {selectedMentee && selectedMentor && selectDisplayComp!=="Summary" && (
+                </div> )}
+                { selectedMentee && selectedMentor && selectDisplayComp!=="Summary" && (
                     <button
                         type="button"
                         className="block mx-auto px-6 py-2 mt-10 border text-sm leading-5 font-medium rounded-md bg-white"
-                        onClick={addPair}
+                        onClick={ addPair }
                     >
                         Pair
                     </button>
                 )}
-                {selectDisplayComp==="Summary" && <div className="flex w-full">
+                 { selectDisplayComp==="Summary" && ( <div className="flex w-full">
                     <div className="h-screen w-full overflow-y-scroll bg-white shadow mr-4">
                         <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
                             Mentorship summary
@@ -122,8 +125,7 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
                             handleSelect={unpair}
                         />
                     </div>
-                </div>}
-                  
+                </div> )}        
             </AppLayout>
         </div>
     );

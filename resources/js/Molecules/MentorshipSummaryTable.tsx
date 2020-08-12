@@ -7,7 +7,7 @@ interface IProps {
     handleSelect: (summary: Summary) => void;
 }
 
-const MentorshipSummaryTable = ({ summary, handleSelect}: IProps) => {
+const MentorshipSummaryTable = ({ summary, handleSelect }: IProps) => {
     return (
         <table className="min-w-full">
             <thead>
