@@ -10,9 +10,16 @@ import { NavItemMobile } from "@/Molecules/NavItemMobile";
 interface Props {
     children: React.ReactNode;
     heading?: string;
+    admin?: string;
+    handleDisplay?: (value: string) => void;
 }
 
-export const AppLayout: FC<Props> = ({ children, heading }) => {
+export const AppLayout: FC<Props> = ({
+    children,
+    heading,
+    admin,
+    handleDisplay,
+}) => {
     const profileMenu = useRef();
     const [profileDropdownVisible, setProfileDropdownVisible] = useState(false);
     const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -22,6 +29,10 @@ export const AppLayout: FC<Props> = ({ children, heading }) => {
     useOutsideClick(profileMenu, () => {
         setProfileDropdownVisible(false);
     });
+
+    const handleClick = e => {
+        handleDisplay(e.target.value);
+    };
 
     return (
         <div className="min-h-screen bg-gray-50">
@@ -228,12 +239,28 @@ export const AppLayout: FC<Props> = ({ children, heading }) => {
             </nav>
 
             <div className="py-10">
-                <header>
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header className="flex justify-between">
+                    <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
                         <h1 className="text-3xl font-bold leading-tight text-gray-900">
                             {heading}
                         </h1>
                     </div>
+                    {admin && (
+                        <div className="px-4 sm:px-6 lg:px-8">
+                            <input
+                                className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                type="button"
+                                value="Summary"
+                                onClick={handleClick}
+                            />
+                            <input
+                                className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                type="button"
+                                value="Paring"
+                                onClick={handleClick}
+                            />
+                        </div>
+                    )}
                 </header>
                 <main>
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">

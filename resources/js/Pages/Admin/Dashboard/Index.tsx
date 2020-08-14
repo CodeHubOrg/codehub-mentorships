@@ -2,19 +2,14 @@ import React, { useState } from "react";
 import { AppLayout } from "@/Layouts/AppLayout";
 import Table from "@/Molecules/Table";
 import { Member } from "@/Models/Member";
-
-type Summary = {
-    mentor: string;
-    mentor_slack_handle: string;
-    mentor_email: string;
-    mentee: string;
-    mentee_slack_handle: string;
-    mentee_email: string;
-};
+import MentorshipSummaryTable from "@/Molecules/MentorshipSummaryTable";
+import { Summary } from "@/Models/Summary";
+import { Inertia } from "@inertiajs/inertia";
 
 interface IProps {
     mentors: Member[];
     mentees: Member[];
+    summary: Summary[];
 }
 
 const compareQuantity = (a: Member, b: Member): number => {
@@ -27,23 +22,27 @@ const compareQuantity = (a: Member, b: Member): number => {
     }
 };
 
-const Index = ({ mentors, mentees }: IProps) => {
+const Index = ({ mentors, mentees, summary }: IProps) => {
     const [selectedMentee, setSelectedMentee] = useState<Member | null>(null);
     const [selectedMentor, setSelectedMentor] = useState<Member | null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
+    const [selectDisplayComp, setSelectDisplayComp] = useState("Paring");
 
     const selectMentee = (member: Member) => {
         // sorting mentor list to match selected mentee skills
-        let menteeSkills = member.interests.toUpperCase();
+        let menteeSkills = member.interests.split(",");
         let sortedMentors = [...mentors];
-
         for (let i = 0; i < sortedMentors.length; i++) {
             let mentorSkills = sortedMentors[i].skillset.split(",");
-            let length = mentorSkills.length;
             let count = 0;
-            for (let j = 0; j < length; j++) {
-                if (menteeSkills.includes(mentorSkills[j].toUpperCase().trim()))
-                    count++;
+            for (let menteeSkill of menteeSkills) {
+                for (let mentorSkill of mentorSkills) {
+                    if (
+                        menteeSkill.toUpperCase().trim() ===
+                        mentorSkill.toUpperCase().trim()
+                    )
+                        count++;
+                }
             }
             if (count > 0) {
                 sortedMentors[i].count = count;
@@ -51,7 +50,6 @@ const Index = ({ mentors, mentees }: IProps) => {
                 sortedMentors[i].count = 0;
             }
         }
-
         sortedMentors = sortedMentors.sort(compareQuantity);
         setSelectedMentee(member);
         setSortedMentors(sortedMentors);
@@ -62,54 +60,81 @@ const Index = ({ mentors, mentees }: IProps) => {
     };
 
     const addPair = () => {
-        const mentorShipSummary: Summary = {
-            mentor: `${selectedMentor.first_name} ${selectedMentor.last_name}`,
-            mentor_slack_handle: selectedMentor.slack_handle,
-            mentor_email: selectedMentor.email,
-            mentee: `${selectedMentee.first_name} ${selectedMentee.last_name}`,
-            mentee_slack_handle: selectedMentee.slack_handle,
-            mentee_email: selectedMentee.email,
-        };
+        console.log(selectedMentor);
+        Inertia.post("/admin/", {
+            mentorId: selectedMentor.id,
+            menteeId: selectedMentee.id,
+        });
 
-        console.log(mentorShipSummary);
         setSortedMentors(mentors);
         setSelectedMentee(null);
         setSelectedMentor(null);
     };
 
+    const handleDisplay = (value: string) => {
+        setSelectDisplayComp(value);
+    };
+
+    const unpair = (summary: Summary) => {
+        console.log(summary);
+    };
+
     return (
         <div>
-            <AppLayout heading="Mentor and Mentee Profiles">
-                <div className="flex justify-between w-full">
-                    <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow mr-4">
-                        <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
-                            Mentee List
-                        </h1>
-                        <Table
-                            members={mentees}
-                            handleSelect={selectMentee}
-                            type="mentee"
-                        ></Table>
+            <AppLayout
+                heading="Mentor and Mentee Profiles"
+                admin="true"
+                handleDisplay={handleDisplay}
+            >
+                {selectDisplayComp === "Paring" && (
+                    <div className="flex justify-between w-full">
+                        <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow mr-4">
+                            <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
+                                Mentee List
+                            </h1>
+                            <Table
+                                members={mentees}
+                                handleSelect={selectMentee}
+                                type="mentee"
+                            />
+                        </div>
+                        <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow ml-2">
+                            <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
+                                Mentor List
+                            </h1>
+                            <Table
+                                members={
+                                    selectedMentee ? sortedMentors : mentors
+                                }
+                                handleSelect={selectMentor}
+                                type="mentor"
+                            />
+                        </div>
                     </div>
-                    <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow ml-2">
-                        <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
-                            Mentor List
-                        </h1>
-                        <Table
-                            members={selectedMentee ? sortedMentors : mentors}
-                            handleSelect={selectMentor}
-                            type="mentor"
-                        ></Table>
+                )}
+                {selectedMentee &&
+                    selectedMentor &&
+                    selectDisplayComp !== "Summary" && (
+                        <button
+                            type="button"
+                            className="block mx-auto px-6 py-2 mt-10 border text-sm leading-5 font-medium rounded-md bg-white"
+                            onClick={addPair}
+                        >
+                            Pair
+                        </button>
+                    )}
+                {selectDisplayComp === "Summary" && (
+                    <div className="flex w-full">
+                        <div className="h-screen w-full overflow-y-scroll bg-white shadow mr-4">
+                            <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
+                                Mentorship summary
+                            </h1>
+                            <MentorshipSummaryTable
+                                summary={summary}
+                                handleSelect={unpair}
+                            />
+                        </div>
                     </div>
-                </div>
-                {selectedMentee && selectedMentor && (
-                    <button
-                        type="button"
-                        className="block mx-auto px-8 py-2 m-10 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-                        onClick={addPair}
-                    >
-                        Pair
-                    </button>
                 )}
             </AppLayout>
         </div>

@@ -22,4 +22,9 @@ class MenteeProfile extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function mentorProfiles()
+    {
+        return $this->belongsToMany(MentorProfile::class);
+    }
 }

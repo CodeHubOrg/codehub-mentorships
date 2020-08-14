@@ -66,4 +66,6 @@ Route::name('admin.')
     ->group(function () {
         Route::get('/', [AdminDashboardController::class, 'index'])
             ->name('dashboard.index');
+        Route::post('/', [AdminDashboardController::class, 'store'])
+            ->name('dashboard.store');
     });
