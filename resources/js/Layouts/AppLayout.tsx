@@ -41,27 +41,36 @@ export const AppLayout: FC<Props> = ({
                     <div className="flex justify-between h-16">
                         <div className="flex">
                             <div className="flex-shrink-0 flex items-center">
-                                <img
-                                    className="block lg:hidden h-8 w-auto"
-                                    src="/img/codehub.svg"
-                                    alt="Code Hub logo"
-                                />
-                                <img
-                                    className="hidden lg:block h-8 w-auto"
-                                    src="/img/codehub.svg"
-                                    alt="Code Hub logo"
-                                />
+                                <a href="/">
+                                    <img
+                                        className="block lg:hidden h-8 w-auto"
+                                        src="/img/codehub.svg"
+                                        alt="Code Hub logo"
+                                    />
+                                    <img
+                                        className="hidden lg:block h-8 w-auto"
+                                        src="/img/codehub.svg"
+                                        alt="Code Hub logo"
+                                    />
+                                </a>
                             </div>
-                            <div className="hidden sm:-my-px sm:ml-12 sm:flex">
-                                {nav.map((item: NavItem, index: number) => {
-                                    return (
-                                        <NavItemDesktop
-                                            item={item}
-                                            key={index}
-                                        />
-                                    );
-                                })}
-                            </div>
+
+                            {auth.user ? (
+                                <div className="hidden sm:-my-px sm:ml-12 sm:flex">
+                                    {nav.map((item: NavItem, index: number) => {
+                                        return (
+                                            <NavItemDesktop
+                                                item={item}
+                                                key={index}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <h1 className="px-13 py-3 text-2xl text-gray-800 text-center font-extrabold">
+                                    Mentorship App
+                                </h1>
+                            )}
                         </div>
                         <div className="hidden sm:ml-6 sm:flex sm:items-center">
                             <button
@@ -241,31 +250,33 @@ export const AppLayout: FC<Props> = ({
                     )}
                 </div>
             </nav>
-
-            <div className="py-10">
-                <header className="flex justify-between">
-                    <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 className="text-3xl font-bold leading-tight text-gray-900">
-                            {heading}
-                        </h1>
-                    </div>
-                    {admin && (
-                        <div className="px-4 sm:px-6 lg:px-8">
-                            <input
-                                className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
-                                type="button"
-                                value="Summary"
-                                onClick={handleClick}
-                            />
-                            <input
-                                className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
-                                type="button"
-                                value="Paring"
-                                onClick={handleClick}
-                            />
+            <div className="py-5">
+                {heading && (
+                    <header className="flex justify-around">
+                        <div className="max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <h1 className="text-3xl font-bold leading-tight text-gray-900">
+                                {heading}
+                            </h1>
                         </div>
-                    )}
-                </header>
+
+                        {admin && (
+                            <div className="px-4 sm:px-6 lg:px-8">
+                                <input
+                                    className="px-3 mr-1 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                    type="button"
+                                    value="Summary"
+                                    onClick={handleClick}
+                                />
+                                <input
+                                    className="px-3 py-1 border text-sm leading-5 font-medium rounded-md bg-white"
+                                    type="button"
+                                    value="Pairing"
+                                    onClick={handleClick}
+                                />
+                            </div>
+                        )}
+                    </header>
+                )}
                 <main>
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div className="px-4 py-8 sm:px-0">{children}</div>

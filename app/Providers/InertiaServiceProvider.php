@@ -47,7 +47,7 @@ class InertiaServiceProvider extends ServiceProvider
             'nav' => function () {
                 return app(Navigation::class)
                     ->add('Home', route('dashboard.index'))
-                    ->add('My Profiles', '#')
+                    //->add('My Profiles', '#')
                     ->add('My Mentorships', '#')
                     ->tree();
             },

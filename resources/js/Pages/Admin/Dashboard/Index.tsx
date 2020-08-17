@@ -6,15 +6,6 @@ import MentorshipSummaryTable from "@/Molecules/MentorshipSummaryTable";
 import { Summary } from "@/Models/Summary";
 import { Inertia } from "@inertiajs/inertia";
 
-// type Summary = {
-//     mentor: string;
-//     mentorSlackHandle: string;
-//     mentorEmail: string;
-//     mentee: string;
-//     menteeSlackHandle: string;
-//     menteeEmail: string;
-// };
-
 interface IProps {
     mentors: Member[];
     mentees: Member[];
@@ -35,7 +26,7 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
     const [selectedMentee, setSelectedMentee] = useState<Member | null>(null);
     const [selectedMentor, setSelectedMentor] = useState<Member | null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
-    const [selectDisplayComp, setSelectDisplayComp] = useState("Paring");
+    const [selectDisplayComp, setSelectDisplayComp] = useState("Pairing");
 
     const selectMentee = (member: Member) => {
         // sorting mentor list to match selected mentee skills
@@ -74,15 +65,6 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
             menteeId: selectedMentee.id,
         });
 
-        // const mentorShipSummary: Summary = {
-        //     mentor: selectedMentor.name,
-        //     mentorSlackHandle: selectedMentor.slackHandle,
-        //     mentorEmail: selectedMentor.email,
-        //     mentee: selectedMentee.name,
-        //     menteeSlackHandle: selectedMentee.slackHandle,
-        //     menteeEmail: selectedMentee.email,
-        // };
-
         setSortedMentors(mentors);
         setSelectedMentee(null);
         setSelectedMentor(null);
@@ -103,7 +85,7 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
                 admin="true"
                 handleDisplay={handleDisplay}
             >
-                {selectDisplayComp === "Paring" && (
+                {selectDisplayComp === "Pairing" && (
                     <div className="flex justify-between w-full">
                         <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow mr-4">
                             <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">

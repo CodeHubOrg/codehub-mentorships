@@ -1,7 +1,8 @@
 import React from "react";
 import Form, { IErrors } from "@/Organisms/Form";
 import FormTextInput from "@/Molecules/FormTextInput";
-import AuthLayout from "@/Atoms/AuthLayout";
+import { AppLayout } from "@/Layouts/AppLayout";
+import AuthLayout from "@/Layouts/AuthLayout";
 
 type RegisterFormValues = {
     firstName: string;
@@ -36,99 +37,111 @@ const validate = (values: RegisterFormValues) => {
 
 const Create: React.FC = () => {
     return (
-        <AuthLayout
-            heading="Register"
-            message="Please register to create a profile"
-        >
-            <Form<RegisterFormValues>
-                action="/register"
-                initialValues={{
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    slackHandle: "",
-                    password: "",
-                    password_confirmation: "",
-                }}
-                validate={validate}
-                button="Register"
-                render={(values, handleChange, errors, errorsFromBackend) => (
-                    <React.Fragment>
-                        <FormTextInput
-                            type="text"
-                            name="firstName"
-                            label="First Name"
-                            value={values.firstName}
-                            helpText=""
-                            onChange={handleChange}
-                        />
+        <div>
+            <AppLayout admin="false">
+                <AuthLayout
+                    heading="Register"
+                    message="Please register to create a profile"
+                >
+                    <Form<RegisterFormValues>
+                        action="/register"
+                        initialValues={{
+                            firstName: "",
+                            lastName: "",
+                            email: "",
+                            slackHandle: "",
+                            password: "",
+                            password_confirmation: "",
+                        }}
+                        validate={validate}
+                        button="Register"
+                        render={(
+                            values,
+                            handleChange,
+                            errors,
+                            errorsFromBackend,
+                        ) => (
+                            <React.Fragment>
+                                <FormTextInput
+                                    type="text"
+                                    name="firstName"
+                                    label="First Name"
+                                    value={values.firstName}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
 
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.firstName || errorsFromBackend.firstName}
-                        </div>
-                        <FormTextInput
-                            type="text"
-                            name="lastName"
-                            label="Last Name"
-                            value={values.lastName}
-                            helpText=""
-                            onChange={handleChange}
-                        />
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.lastName || errorsFromBackend.lastName}
-                        </div>
-                        <FormTextInput
-                            type="email"
-                            name="email"
-                            label="Email address"
-                            value={values.email}
-                            helpText=""
-                            onChange={handleChange}
-                        />
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.email || errorsFromBackend.email}
-                        </div>
-                        <FormTextInput
-                            type="text"
-                            name="slackHandle"
-                            label="Slack handle"
-                            value={values.slackHandle}
-                            helpText=""
-                            onChange={handleChange}
-                        />
-                        <div className="block text-sm font-medium text-red-500 pb-5" />
-                        <FormTextInput
-                            type="password"
-                            name="password"
-                            label="Password"
-                            value={values.password}
-                            helpText=""
-                            onChange={handleChange}
-                        />
+                                <div className="block text-sm font-medium text-red-500 pb-5">
+                                    {errors.firstName ||
+                                        errorsFromBackend.firstName}
+                                </div>
+                                <FormTextInput
+                                    type="text"
+                                    name="lastName"
+                                    label="Last Name"
+                                    value={values.lastName}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
+                                <div className="block text-sm font-medium text-red-500 pb-5">
+                                    {errors.lastName ||
+                                        errorsFromBackend.lastName}
+                                </div>
+                                <FormTextInput
+                                    type="email"
+                                    name="email"
+                                    label="Email address"
+                                    value={values.email}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
+                                <div className="block text-sm font-medium text-red-500 pb-5">
+                                    {errors.email || errorsFromBackend.email}
+                                </div>
+                                <FormTextInput
+                                    type="text"
+                                    name="slackHandle"
+                                    label="Slack handle"
+                                    value={values.slackHandle}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
+                                <div className="block text-sm font-medium text-red-500 pb-5" />
+                                <FormTextInput
+                                    type="password"
+                                    name="password"
+                                    label="Password"
+                                    value={values.password}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
 
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.password || errorsFromBackend.password}
-                        </div>
-                        <FormTextInput
-                            type="password"
-                            name="password_confirmation"
-                            label="Confirm Password"
-                            value={values.password_confirmation}
-                            helpText=""
-                            onChange={handleChange}
-                        />
+                                <div className="block text-sm font-medium text-red-500 pb-5">
+                                    {errors.password ||
+                                        errorsFromBackend.password}
+                                </div>
+                                <FormTextInput
+                                    type="password"
+                                    name="password_confirmation"
+                                    label="Confirm Password"
+                                    value={values.password_confirmation}
+                                    helpText=""
+                                    onChange={handleChange}
+                                />
 
-                        <div className="block text-sm font-medium text-red-500 pb-5">
-                            {errors.password_confirmation ||
-                                errorsFromBackend.password_confirmation}
-                        </div>
-                    </React.Fragment>
-                )}
-            />
-            <div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                <a href="/login">Login</a>
-            </div>
-        </AuthLayout>
+                                <div className="block text-sm font-medium text-red-500 pb-5">
+                                    {errors.password_confirmation ||
+                                        errorsFromBackend.password_confirmation}
+                                </div>
+                            </React.Fragment>
+                        )}
+                    />
+                    <div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                        <a href="/login">Login</a>
+                    </div>
+                </AuthLayout>
+            </AppLayout>
+        </div>
     );
 };
 
