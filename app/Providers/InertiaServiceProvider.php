@@ -34,6 +34,9 @@ class InertiaServiceProvider extends ServiceProvider
                     ? Session::get('errors')->getBag('default')->getMessages()
                     : (object) [];
             },
+            'old' => function () {
+                return Session::get('_old_input');
+            },
             'auth' => function () {
                 return [
                     'user' => UserPresenter::make(Auth::user())
@@ -44,7 +47,7 @@ class InertiaServiceProvider extends ServiceProvider
             'nav' => function () {
                 return app(Navigation::class)
                     ->add('Home', route('dashboard.index'))
-                    ->add('My Profiles', '#')
+                    //->add('My Profiles', '#')
                     ->add('My Mentorships', '#')
                     ->tree();
             },

@@ -14,15 +14,17 @@ class AdminDashboardController
 {
     public function index()
     {
+        $h = resolve('\App\Helpers\GeneralHelper');
+
         $mentors = [];
         $mentorProfiles = MentorProfile::all();
+
         foreach ($mentorProfiles as $m) {
-            $attr = $m->getAttributes();
+            $attr = $h->addCamelsToModel($m)->getAttributes();
             $u = $m->user;
-            $attr['first_name'] = $u->first_name;
-            $attr['last_name'] = $u->last_name;
+            $attr['name'] = $u->Name;
             $attr['email'] = $u->email;
-            $attr['slack_handle'] = $u->slack_handle;
+            $attr['slackHandle'] = $u->slack_handle;
             $mentors[] = $attr;
         }
 
@@ -30,12 +32,11 @@ class AdminDashboardController
         $activeMentees = MentorProfileMenteeProfile::pluck('mentee_profile_id')->all();
         $menteeProfiles = MenteeProfile::whereNotIn('id', $activeMentees)->get();
         foreach ($menteeProfiles as $m) {
-            $attr = $m->getAttributes();
+            $attr = $h->addCamelsToModel($m)->getAttributes();
             $u = $m->user;
-            $attr['first_name'] = $u->first_name;
-            $attr['last_name'] = $u->last_name;
+            $attr['name'] = $u->Name;
             $attr['email'] = $u->email;
-            $attr['slack_handle'] = $u->slack_handle;
+            $attr['slackHandle'] = $u->slack_handle;
             $mentees[] = $attr;
         }
 

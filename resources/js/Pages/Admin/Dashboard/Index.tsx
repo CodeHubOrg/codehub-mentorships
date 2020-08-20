@@ -26,7 +26,7 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
     const [selectedMentee, setSelectedMentee] = useState<Member | null>(null);
     const [selectedMentor, setSelectedMentor] = useState<Member | null>(null);
     const [sortedMentors, setSortedMentors] = useState(mentors);
-    const [selectDisplayComp, setSelectDisplayComp] = useState("Paring");
+    const [selectDisplayComp, setSelectDisplayComp] = useState("Pairing");
 
     const selectMentee = (member: Member) => {
         // sorting mentor list to match selected mentee skills
@@ -60,7 +60,6 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
     };
 
     const addPair = () => {
-        console.log(selectedMentor);
         Inertia.post("/admin/", {
             mentorId: selectedMentor.id,
             menteeId: selectedMentee.id,
@@ -86,7 +85,7 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
                 admin="true"
                 handleDisplay={handleDisplay}
             >
-                {selectDisplayComp === "Paring" && (
+                {selectDisplayComp === "Pairing" && (
                     <div className="flex justify-between w-full">
                         <div className="w-1/2 h-screen overflow-y-scroll bg-white shadow mr-4">
                             <h1 className="px-4 py-2 text-center text-lg font-semibold text-gray-600">
