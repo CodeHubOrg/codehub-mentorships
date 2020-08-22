@@ -8,9 +8,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
 class RegisterController extends Controller
@@ -35,7 +33,6 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-
     /**
      * Create a new controller instance.
      *
@@ -54,7 +51,7 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         // logic from register method of the RegistersUsers trait
-       
+
         $user = User::make($request->validated());
         $user->password = Hash::make($request->get('password'));
         $user->save();
@@ -63,5 +60,4 @@ class RegisterController extends Controller
 
         return Inertia::render('Auth/Verify/Index', ['user' => $user]);
     }
-
 }

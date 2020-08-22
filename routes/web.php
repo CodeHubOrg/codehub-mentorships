@@ -52,7 +52,7 @@ Route::middleware(['auth'])->group(function () {
         });
 
     Route::name('profiles.')
-        ->prefix('profiles')        
+        ->prefix('profiles')
         ->group(function () {
             // should we have the GeneralProfileController ?
 
@@ -68,11 +68,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Admin application routes
     Route::name('admin.')
-        ->prefix('admin')        
+        ->prefix('admin')
         ->group(function () {
             Route::get('/', [AdminDashboardController::class, 'index'])
                 ->name('dashboard.index');
             Route::post('/', [AdminDashboardController::class, 'store'])
                 ->name('dashboard.store');
-    });
+        });
 });

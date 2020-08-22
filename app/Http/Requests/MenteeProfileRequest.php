@@ -2,12 +2,13 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Concerns\ConvertsInputKeys;
+use Illuminate\Foundation\Http\FormRequest;
 
 class MenteeProfileRequest extends FormRequest
 {
     use ConvertsInputKeys;
+
     /**
      * Get the validation rules that apply to the request.
      *
