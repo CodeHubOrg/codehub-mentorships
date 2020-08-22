@@ -35,21 +35,20 @@ Route::name('auth.')
             ->middleware('guest');
     });
 
+// Marketing page routes
+Route::view('/', 'marketing.home');
+
+
 Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
         ->name('dashboard.index');
 
-    // route only visible to email verified users,
-    // currently not linking to this
-    Route::get('/home', [HomeController::class, 'show'])
-        ->middleware(['verified'])
-        ->name('home.index');
 
-    // Mymentorships routes
     Route::get('/mentorships', [MentorshipsController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('mentorships.index');
+        ->middleware(['auth'])
+        ->name('mentorships.index');
+
     Route::name('account.')
         ->prefix('account')
         ->group(function () {
