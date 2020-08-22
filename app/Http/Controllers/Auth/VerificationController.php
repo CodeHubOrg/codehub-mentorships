@@ -50,6 +50,7 @@ class VerificationController extends Controller
 
     public function show(Request $request)
     {
+
         // this function is just for the case that user
         // is logged in and wants to have verify email sent again.
         $user = Auth::user();
