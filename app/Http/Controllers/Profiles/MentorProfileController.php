@@ -40,7 +40,6 @@ class MentorProfileController extends Controller
      */
     public function store(MentorProfileRequest $request)
     {
-
         $mentor = MentorProfile::make($request->validated());
         // temporary solution, turning array into string for now
         $interests = $request->interests ? implode(', ', $request->interests) : '';

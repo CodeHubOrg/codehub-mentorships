@@ -41,7 +41,6 @@ class MenteeProfileController extends Controller
      */
     public function store(MenteeProfileRequest $request)
     {
-
         $mentee = MenteeProfile::create($request->validated());
         // Associate this Mentee model with the authenticated User
         Auth::user()->menteeProfile()->save($mentee);
