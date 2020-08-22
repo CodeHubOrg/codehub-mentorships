@@ -49,8 +49,8 @@ class VerificationController extends Controller
 
     public function show(Request $request)
     {
-        $u = Auth::user();
-        if (is_object($u) && $u->hasVerifiedEmail()) {
+        $user = Auth::user();
+        if (is_object($user) && $user->hasVerifiedEmail()) {
             // $u is logged in and verified user
             return Inertia::render('Home/Index', ['user' => $u]);
         } else {
@@ -72,21 +72,21 @@ class VerificationController extends Controller
      */
     public function verify(Request $request)
     {
-        $u = User::findOrFail($request->route('id'));
-        Auth::login($u);
+        $user = User::findOrFail($request->route('id'));
+        Auth::login($user);
 
-        if (! hash_equals((string) $request->route('hash'), sha1($u->getEmailForVerification()))) {
+        if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
             throw new AuthorizationException;
         }
 
-        if ($u->hasVerifiedEmail()) {
+        if ($user->hasVerifiedEmail()) {
             return $request->wantsJson()
                         ? new Response('', 204)
                         : redirect($this->redirectPath());
         }
 
-        if ($u->markEmailAsVerified()) {
-            event(new Verified($u));
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
         }
 
         if ($response = $this->verified($request)) {
@@ -98,25 +98,14 @@ class VerificationController extends Controller
                     : redirect($this->redirectPath())->with('verified', true);
     }
 
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => '',
-            'slack_handle' => '',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-    }
-
     public function resend(Request $request)
     {
         $id = $request->get('userid');
-        $u = User::findOrFail($id);
-        if (is_object($u)) {
-            $u->sendEmailVerificationNotification();
+        $user = User::findOrFail($id);
+        if (is_object($user)) {
+            $user->sendEmailVerificationNotification();
 
-            return Inertia::render('Auth/Verify/Index', ['user' => $u]);
+            return Inertia::render('Auth/Verify/Index', ['user' => $user]);
         }
     }
 }

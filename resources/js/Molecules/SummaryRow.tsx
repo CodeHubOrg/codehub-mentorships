@@ -13,30 +13,30 @@ const SummaryRow = ({ summary, handleSelect, key }: Props) => {
     };
 
     const {
-        mentee_first_name,
-        mentee_last_name,
-        mentee_email,
-        mentor_first_name,
-        mentor_last_name,
-        mentor_email,
+        menteeFirstName,
+        menteeLastName,
+        menteeEmail,
+        mentorFirstName,
+        mentorLastName,
+        mentorEmail,
     } = summary;
     return (
         <>
             <tr key={key}>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{`${mentee_first_name} ${mentee_last_name}`}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{`${menteeFirstName} ${menteeLastName}`}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                        {mentee_email}
+                        {menteeEmail}
                     </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <p className="text-gray-900 whitespace-no-wrap">{`${mentor_first_name} ${mentor_last_name}`}</p>
+                    <p className="text-gray-900 whitespace-no-wrap">{`${mentorFirstName} ${mentorLastName}`}</p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
-                        {mentor_email}
+                        {mentorEmail}
                     </p>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">

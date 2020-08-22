@@ -3,32 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
+use App\Concerns\ConvertsInputKeys;
 
 class MentorProfileRequest extends FormRequest
 {
-    public $fields;
-
-    public function __construct()
-    {
-        $this->fields = [
-            'mentoringExperience' => 'required',
-            'skillset' => '',
-            'suitableTime' => '',
-            'extraInfo' => '',
-        ];
-    }
-
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return Auth::check();
-    }
-
+    use ConvertsInputKeys;
     /**
      * Get the validation rules that apply to the request.
      *
@@ -36,6 +15,11 @@ class MentorProfileRequest extends FormRequest
      */
     public function rules()
     {
-        return $this->fields;
+        return [
+            'mentoring_experience' => 'required',
+            'skillset' => '',
+            'suitable_time' => '',
+            'extra_info' => '',
+        ];
     }
 }

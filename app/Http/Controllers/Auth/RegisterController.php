@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -34,7 +35,6 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    public $fields;
 
     /**
      * Create a new controller instance.
@@ -44,14 +44,6 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
-
-        $this->fields = [
-            'firstName' => ['required', 'string', 'max:255'],
-            'lastName' => '',
-            'slackHandle' => '',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ];
     }
 
     public function create()
@@ -59,17 +51,11 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Register/Create');
     }
 
-    public function store(Request $request)
+    public function store(RegisterRequest $request)
     {
         // logic from register method of the RegistersUsers trait
-        $this->validator($request->all())->validate();
-
-        $formvals = $request->all();
-
-        $h = resolve('\App\Helpers\GeneralHelper');
-        $valsDB = $h->snakeArrayKeys($formvals);
-
-        $user = User::make($valsDB);
+       
+        $user = User::make($request->validated());
         $user->password = Hash::make($request->get('password'));
         $user->save();
 
@@ -78,14 +64,4 @@ class RegisterController extends Controller
         return Inertia::render('Auth/Verify/Index', ['user' => $user]);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, $this->fields);
-    }
 }
