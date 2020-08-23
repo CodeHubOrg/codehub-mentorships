@@ -51,12 +51,12 @@ class VerificationController extends Controller
     {
         $user = Auth::user();
         if (is_object($user) && $user->hasVerifiedEmail()) {
-            // $u is logged in and verified user
-            return Inertia::render('Home/Index', ['user' => $u]);
+            // $user is logged in and verified user
+            return Inertia::render('Home/Index', ['user' => $user]);
         } else {
-            // otherwise, $u is logged-in user
+            // otherwise, $user is logged-in user
             // without verification, or null
-            return Inertia::render('Auth/Verify/Index', ['user' => $u]);
+            return Inertia::render('Auth/Verify/Index', ['user' => $user]);
         }
     }
 
