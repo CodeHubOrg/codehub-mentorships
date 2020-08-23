@@ -9,8 +9,8 @@ class MenteeProfilePresenter extends FlexiblePresenter
     public function values(): array
     {
         return  [
-        	'id' => $this->id,
-        	'currentStatus' => $this->current_status,
+            'id' => $this->id,
+            'currentStatus' => $this->current_status,
             'previousExperience' => $this->previous_experience,
             'interests' => $this->interests,
             'specificInterests' => $this->specific_interests,
