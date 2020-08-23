@@ -32,10 +32,22 @@ interface IProps {
         extraInfo?: string;
         status?: number;
     };
+    pairedMentor: {
+        name: string;
+        email: string;
+        slackHandle?: string;
+    };
+    pairedMentees:{
+        name: string;
+        email: string;
+        slackHandle?: string;
+    }[];
 }
 
-const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
+const Show = ({ user, mentorProfile, menteeProfile ,pairedMentor,pairedMentees }: IProps) => {
     const { name, email, slackHandle } = user;
+ console.log(pairedMentor);
+ console.log(pairedMentees);
 
     return (
         <AppLayout heading="Welcome to CodeHub Mentorships">

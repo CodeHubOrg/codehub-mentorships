@@ -4,10 +4,10 @@ import { Summary } from "@/Models/Summary";
 interface Props {
     summary: Summary;
     handleSelect: (summary: Summary) => void;
-    key: number;
+    key?: number;
 }
 
-const SummaryRow = ({ summary, handleSelect, key }: Props) => {
+const SummaryRow = ({ summary, handleSelect }: Props) => {
     const handleClick = () => {
         handleSelect(summary);
     };
@@ -22,7 +22,7 @@ const SummaryRow = ({ summary, handleSelect, key }: Props) => {
     } = summary;
     return (
         <>
-            <tr key={key}>
+            <tr key={mentee_email}>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">{`${mentee_first_name} ${mentee_last_name}`}</p>
                 </td>
