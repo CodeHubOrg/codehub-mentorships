@@ -6,10 +6,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Mentorships\MentorshipsController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
-use App\Http\Controllers\Mentorships\MentorshipsController;
 
 Auth::routes(['verify' => true]);
 
@@ -43,7 +43,7 @@ Route::get('/dashboard', [DashboardController::class, 'show'])
 // Mymentorships routes
 Route::get('/mentorships', [MentorshipsController::class, 'show'])
     ->middleware(['auth'])
-    ->name('mentorships.index');    
+    ->name('mentorships.index');
 
 // this is where the user is redirected to after email verification
 Route::get('/home', [HomeController::class, 'show'])
