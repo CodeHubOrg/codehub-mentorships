@@ -11,16 +11,16 @@ type User = {
 
 interface IProps {
     heading?: string;
-    pairedMentor: User[];
+    pairedMentors: User[];
     pairedMentees: User[];
 }
 
-const Show = ({ pairedMentor, pairedMentees }: IProps) => {
+const Show = ({ pairedMentors, pairedMentees }: IProps) => {
     return (
         <AppLayout heading="Paired Mentee and Mentor">
             <div className="flex flex-col md:w-1/2 mx-auto">
-                {pairedMentor &&
-                    pairedMentor.map((mentor: User, i: number) => {
+                {pairedMentors &&
+                    pairedMentors.map((mentor: User, i: number) => {
                         return (
                             <div className="mb-6" key={i}>
                                 <Card header="Paired Mentor">
