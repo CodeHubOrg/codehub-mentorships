@@ -2,7 +2,6 @@ import React from "react";
 import { AppLayout } from "@/Layouts/AppLayout";
 import Card from "@/Molecules/Card";
 
-
 type User = {
     name: string;
     email: string;
