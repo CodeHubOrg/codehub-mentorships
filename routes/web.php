@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Home\HomeController;
 use App\Http\Controllers\Mentorships\MentorshipsController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
@@ -45,6 +46,13 @@ Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
         ->name('dashboard.index');
+
+    // route only visible to email verified users,
+    // currently not linking to this
+    Route::get('/home', [HomeController::class, 'show'])
+        ->middleware(['verified'])
+        ->name('home.index');
+
 
     // Mymentorships routes
     Route::get('/mentorships', [MentorshipsController::class, 'show'])
