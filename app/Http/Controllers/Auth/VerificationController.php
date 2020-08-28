@@ -50,14 +50,14 @@ class VerificationController extends Controller
 
     public function show(Request $request)
     {
-        // this function is just for the case that user 
+        // this function is just for the case that user
         // is logged in and wants to have verify email sent again.
         $user = Auth::user();
-        
+
         if (is_object($user)) {
             $userdata = UserPresenter::make($user);
             // $user is logged in and verified user
-            return $user->hasVerifiedEmail() 
+            return $user->hasVerifiedEmail()
                 ? Inertia::render('Home/Index', ['user' => $userdata])
                 : Inertia::render('Auth/Verify/Index', ['user' => $userdata]);
         } else {
@@ -103,8 +103,8 @@ class VerificationController extends Controller
                     ? new Response('', 204)
                     : Inertia::render('Dashboard/Show', [
                         'user' => UserPresenter::make($user),
-                        'justverified' => true
-                ]);
+                        'justverified' => true,
+                    ]);
     }
 
     public function resend(Request $request)
@@ -114,7 +114,7 @@ class VerificationController extends Controller
         if (is_object($user)) {
             $user->sendEmailVerificationNotification();
             // when user has just been registered and they
-            // click 'resend' they are redirected to 
+            // click 'resend' they are redirected to
             // the Register page, I can't figure out why
             return Inertia::render('Auth/Verify/Index', ['user' => UserPresenter::make($user)]);
         }
