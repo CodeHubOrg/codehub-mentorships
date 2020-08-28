@@ -46,7 +46,6 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['verified'])
         ->name('home.index');
 
-
     // Mymentorships routes
     Route::get('/mentorships', [MentorshipsController::class, 'show'])
     ->middleware(['auth'])
