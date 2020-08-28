@@ -63,7 +63,7 @@ const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
                                 menteeProfile={menteeProfile}
                             />
                         ) : (
-                            <MenteeCta></MenteeCta>
+                            <MenteeCta />
                         )}
                     </div>
                     <div className="w-full bg-white p-6 rounded shadow">
@@ -73,7 +73,7 @@ const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
                                 mentorProfile={mentorProfile}
                             />
                         ) : (
-                            <MentorCta></MentorCta>
+                            <MentorCta />
                         )}
                     </div>
                 </div>

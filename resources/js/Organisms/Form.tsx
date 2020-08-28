@@ -29,7 +29,7 @@ export interface IFormState<IValues extends Record<string, any>> {
 }
 
 export type IErrors<IValues extends Record<string, any>> = {
-    [P in keyof IValues]?: string;
+    [P in keyof IValues]?: string
 };
 
 const Form = <IValues extends Record<string, any>>({

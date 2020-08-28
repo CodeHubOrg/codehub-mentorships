@@ -50,17 +50,19 @@ class VerificationController extends Controller
 
     public function show(Request $request)
     {
-
-        // this function is just for the case that user
+        // this function is just for the case that user 
         // is logged in and wants to have verify email sent again.
         $user = Auth::user();
-        if (is_object($user) && $user->hasVerifiedEmail()) {
+        
+        if (is_object($user)) {
+            $userdata = UserPresenter::make($user);
             // $user is logged in and verified user
-            return Inertia::render('Home/Index', ['user' => $user]);
+            return $user->hasVerifiedEmail() 
+                ? Inertia::render('Home/Index', ['user' => $userdata])
+                : Inertia::render('Auth/Verify/Index', ['user' => $userdata]);
         } else {
-            // otherwise, $user is logged-in user
-            // without verification, or null
-            return Inertia::render('Auth/Verify/Index', ['user' => $user]);
+            // user not logged in and not been redirected from registration
+            return redirect('/');
         }
     }
 
@@ -103,7 +105,7 @@ class VerificationController extends Controller
                 'user' => UserPresenter::make($user),
                 'justVerified' => true,
             ]);
-    }
+   }
 
     public function resend(Request $request)
     {
