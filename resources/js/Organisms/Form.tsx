@@ -29,7 +29,7 @@ export interface IFormState<IValues extends Record<string, any>> {
 }
 
 export type IErrors<IValues extends Record<string, any>> = {
-    [P in keyof IValues]?: string;
+    [P in keyof IValues]?: string
 };
 
 const Form = <IValues extends Record<string, any>>({
@@ -161,11 +161,11 @@ const Form = <IValues extends Record<string, any>>({
                         The form was successfully submitted.
                     </div>
                 )}*/}
-                {submitSuccess === false && !haveErrors(errors) && (
+                {/* submitSuccess === false && !haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, an unexpected error has occurred
                     </div>
-                )}
+                ) */}
                 {submitSuccess === false && haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, the form is invalid. Please review, adjust and

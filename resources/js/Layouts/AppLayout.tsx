@@ -9,6 +9,7 @@ import { NavItemMobile } from "@/Molecules/NavItemMobile";
 
 interface Props {
     children: React.ReactNode;
+    verified?: string;
     heading?: string;
     admin?: string;
     handleDisplay?: (value: string) => void;

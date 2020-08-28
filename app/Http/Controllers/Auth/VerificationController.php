@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Presenters\UserPresenter;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
@@ -49,14 +50,19 @@ class VerificationController extends Controller
 
     public function show(Request $request)
     {
+        // this function is just for the case that user 
+        // is logged in and wants to have verify email sent again.
         $user = Auth::user();
-        if (is_object($user) && $user->hasVerifiedEmail()) {
+        
+        if (is_object($user)) {
+            $userdata = UserPresenter::make($user);
             // $user is logged in and verified user
-            return Inertia::render('Home/Index', ['user' => $user]);
+            return $user->hasVerifiedEmail() 
+                ? Inertia::render('Home/Index', ['user' => $userdata])
+                : Inertia::render('Auth/Verify/Index', ['user' => $userdata]);
         } else {
-            // otherwise, $user is logged-in user
-            // without verification, or null
-            return Inertia::render('Auth/Verify/Index', ['user' => $user]);
+            // user not logged in and not been redirected from registration
+            return redirect('/');
         }
     }
 
@@ -95,7 +101,10 @@ class VerificationController extends Controller
 
         return $request->wantsJson()
                     ? new Response('', 204)
-                    : redirect($this->redirectPath())->with('verified', true);
+                    : Inertia::render('Dashboard/Show', [
+                        'user' => UserPresenter::make($user),
+                        'justverified' => true
+                ]);
     }
 
     public function resend(Request $request)
@@ -104,8 +113,10 @@ class VerificationController extends Controller
         $user = User::findOrFail($id);
         if (is_object($user)) {
             $user->sendEmailVerificationNotification();
-
-            return Inertia::render('Auth/Verify/Index', ['user' => $user]);
+            // when user has just been registered and they
+            // click 'resend' they are redirected to 
+            // the Register page, I can't figure out why
+            return Inertia::render('Auth/Verify/Index', ['user' => UserPresenter::make($user)]);
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Presenters\UserPresenter;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -58,6 +59,6 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        return Inertia::render('Auth/Verify/Index', ['user' => $user]);
+        return Inertia::render('Auth/Verify/Index', ['user' => UserPresenter::make($user)->only('id')]);
     }
 }
