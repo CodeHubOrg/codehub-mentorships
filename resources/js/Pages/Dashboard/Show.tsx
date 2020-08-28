@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import ProfileMenteeSection from "@/Organisms/ProfileMenteeSection";
 import ProfileMentorSection from "@/Organisms/ProfileMentorSection";
 import { AppLayout } from "@/Layouts/AppLayout";
-import { SuccessBanner } from '@/Molecules/Banners/SuccessBanner';
-import { User } from '@/Interfaces/User';
-import { MentorProfile } from '@/Interfaces/MentorProfile';
-import { MenteeProfile } from '@/Interfaces/MenteeProfile';
-import { MenteeCta } from '@/Organisms/MenteeCta';
-import { MentorCta } from '@/Organisms/MentorCta';
+import { SuccessBanner } from "@/Molecules/Banners/SuccessBanner";
+import { User } from "@/Interfaces/User";
+import { MentorProfile } from "@/Interfaces/MentorProfile";
+import { MenteeProfile } from "@/Interfaces/MenteeProfile";
+import { MenteeCta } from "@/Organisms/MenteeCta";
+import { MentorCta } from "@/Organisms/MentorCta";
 
 interface IProps {
     heading?: string;
@@ -19,7 +19,9 @@ interface IProps {
 
 const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
     // const { name, email, slackHandle } = user;
-    const [verificationBannerVisible, setVerificationBannerVisible] = useState(justVerified)
+    const [verificationBannerVisible, setVerificationBannerVisible] = useState(
+        justVerified,
+    );
 
     return (
         <AppLayout>
@@ -30,7 +32,7 @@ const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
             )}
 
             <h1 className="text-3xl font-semibold leading-tight text-gray-900 mb-8">
-                Hello {user.firstName}!  Welcome to CodeHub Mentorships
+                Hello {user.firstName}! Welcome to CodeHub Mentorships
             </h1>
 
             <div className="flex flex-col">
@@ -61,7 +63,7 @@ const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
                                 menteeProfile={menteeProfile}
                             />
                         ) : (
-                            <MenteeCta></MenteeCta>
+                            <MenteeCta />
                         )}
                     </div>
                     <div className="w-full bg-white p-6 rounded shadow">
@@ -71,7 +73,7 @@ const Show = ({ user, mentorProfile, menteeProfile, justVerified }: IProps) => {
                                 mentorProfile={mentorProfile}
                             />
                         ) : (
-                            <MentorCta></MentorCta>
+                            <MentorCta />
                         )}
                     </div>
                 </div>
