@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Home\HomeController;
+use App\Http\Controllers\Mentorships\MentorshipsController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
@@ -39,19 +40,18 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'show'])
         ->name('dashboard.index');
 
-    // this is where the user is redirected to after email verification
-    Route::get('/home', [HomeController::class, 'show'])
-        ->middleware(['verified'])
-        ->name('home.index');
-
-    Route::name('account.')
+// Mymentorships routes
+Route::get('/mentorships', [MentorshipsController::class, 'show'])
+    ->middleware(['auth'])
+    ->name('mentorships.index');
+Route::name('account.')
         ->prefix('account')
         ->group(function () {
             Route::get('/', [AccountController::class, 'edit'])
                 ->name('edit');
         });
 
-    Route::name('profiles.')
+Route::name('profiles.')
         ->prefix('profiles')
         ->group(function () {
             // should we have the GeneralProfileController ?
