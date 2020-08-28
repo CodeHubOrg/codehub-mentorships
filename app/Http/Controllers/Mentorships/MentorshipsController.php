@@ -23,6 +23,8 @@ class MentorshipsController
 
         $pairedMentors = $mentee ? $mentee->mentorProfiles : null;
 
+        $pairedMentorlist = [];
+
         if ($pairedMentors) {
             foreach ($pairedMentors as $pairedmentor) {
                 $attr['name'] = $pairedmentor->user->name;
@@ -33,6 +35,8 @@ class MentorshipsController
         }
 
         $pairedMentees = $mentor ? $mentor->menteeProfiles : null;
+
+        $pairedMenteelist = [];
 
         if ($pairedMentees) {
             foreach ($pairedMentees as $mentee) {
