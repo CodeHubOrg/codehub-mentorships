@@ -48,7 +48,7 @@ class MentorshipsController
         }
 
         return Inertia::render('Mentorships/Show', [
-            'pairedMentor' => $pairedMentorlist,
+            'pairedMentors' => $pairedMentorlist,
             'pairedMentees' => $pairedMenteelist,
         ]);
     }
