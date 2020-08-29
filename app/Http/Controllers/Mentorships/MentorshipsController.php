@@ -23,6 +23,8 @@ class MentorshipsController
 
         $pairedMentors = $mentee ? $mentee->mentorProfiles : null;
 
+        $pairedMentorlist = [];
+
         if ($pairedMentors) {
             foreach ($pairedMentors as $pairedmentor) {
                 $attr['name'] = $pairedmentor->user->name;
@@ -34,6 +36,8 @@ class MentorshipsController
 
         $pairedMentees = $mentor ? $mentor->menteeProfiles : null;
 
+        $pairedMenteelist = [];
+
         if ($pairedMentees) {
             foreach ($pairedMentees as $mentee) {
                 $attr['name'] = $mentee->user->name;
@@ -44,7 +48,7 @@ class MentorshipsController
         }
 
         return Inertia::render('Mentorships/Show', [
-            'pairedMentor' => $pairedMentorlist,
+            'pairedMentors' => $pairedMentorlist,
             'pairedMentees' => $pairedMenteelist,
         ]);
     }
