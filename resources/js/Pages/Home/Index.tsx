@@ -1,23 +1,27 @@
 import React from "react";
 import { AppLayout } from "@/Layouts/AppLayout";
 
+type User = {
+    user: {
+        name: string;
+    };
+};
+
 interface IProps {
     heading?: string;
-    user: {
-        first_name: string;
-        last_name: string;
-        email: string;
-        slack_handle?: string;
-    };
+    auth: User;
 }
 
-const Show = ({ user }: IProps) => {
+const Show = ({ auth }: IProps) => {
     return (
-        <AppLayout heading="Email verification successful">
+        <AppLayout heading="Dashboard for verified users">
             <div className="flex flex-col">
-                <p>
-                    Thank you {user.first_name}, your account has been verified.
-                </p>
+                <div className="text-center">
+                    <p>
+                        You are logged in as {auth.user.name}, and the email for
+                        your account has been verified.
+                    </p>
+                </div>
             </div>
         </AppLayout>
     );

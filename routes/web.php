@@ -35,51 +35,50 @@ Route::name('auth.')
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
-// User application routes
-Route::get('/dashboard', [DashboardController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('dashboard.index');
+Route::middleware(['auth'])->group(function () {
+    // User application routes
+    Route::get('/dashboard', [DashboardController::class, 'show'])
+        ->name('dashboard.index');
 
-// Mymentorships routes
-Route::get('/mentorships', [MentorshipsController::class, 'show'])
+    // route only visible to email verified users,
+    // currently not linking to this
+    Route::get('/home', [HomeController::class, 'show'])
+        ->middleware(['verified'])
+        ->name('home.index');
+
+    // Mymentorships routes
+    Route::get('/mentorships', [MentorshipsController::class, 'show'])
     ->middleware(['auth'])
     ->name('mentorships.index');
+    Route::name('account.')
+        ->prefix('account')
+        ->group(function () {
+            Route::get('/', [AccountController::class, 'edit'])
+                ->name('edit');
+        });
 
-// this is where the user is redirected to after email verification
-Route::get('/home', [HomeController::class, 'show'])
-    ->middleware(['auth', 'verified'])
-    ->name('home.index');
+    Route::name('profiles.')
+        ->prefix('profiles')
+        ->group(function () {
+            // should we have the GeneralProfileController ?
 
-Route::name('account.')
-    ->prefix('account')
-    ->group(function () {
-        Route::get('/', [AccountController::class, 'edit'])
-            ->name('edit');
-    });
+            Route::get('/mentor/new', [MentorProfileController::class, 'create'])
+                ->name('mentor.create');
+            Route::post('/mentor/new', [MentorProfileController::class, 'store'])
+                ->name('mentor.store');
+            Route::get('/mentee/new', [MenteeProfileController::class, 'create'])
+                ->name('mentee.create');
+            Route::post('/mentee/new', [MenteeProfileController::class, 'store'])
+                ->name('mentee.store');
+        });
 
-Route::name('profiles.')
-    ->prefix('profiles')
-    ->middleware('auth')
-    ->group(function () {
-        // should we have the GeneralProfileController ?
-
-        Route::get('/mentor/new', [MentorProfileController::class, 'create'])
-            ->name('mentor.create');
-        Route::post('/mentor/new', [MentorProfileController::class, 'store'])
-            ->name('mentor.store');
-        Route::get('/mentee/new', [MenteeProfileController::class, 'create'])
-            ->name('mentee.create');
-        Route::post('/mentee/new', [MenteeProfileController::class, 'store'])
-            ->name('mentee.store');
-    });
-
-// Admin application routes
-Route::name('admin.')
-    ->prefix('admin')
-    ->middleware('auth')
-    ->group(function () {
-        Route::get('/', [AdminDashboardController::class, 'index'])
-            ->name('dashboard.index');
-        Route::post('/', [AdminDashboardController::class, 'store'])
-            ->name('dashboard.store');
-    });
+    // Admin application routes
+    Route::name('admin.')
+        ->prefix('admin')
+        ->group(function () {
+            Route::get('/', [AdminDashboardController::class, 'index'])
+                ->name('dashboard.index');
+            Route::post('/', [AdminDashboardController::class, 'store'])
+                ->name('dashboard.store');
+        });
+});

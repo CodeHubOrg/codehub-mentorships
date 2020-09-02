@@ -9,8 +9,8 @@ class HomeController
 {
     public function show()
     {
-        return Inertia::render('Home/Index', [
-            'user' => Auth::user(),
-        ]);
+        // on the frontend, using data from the auth user for now.
+        // so we don't need to pass the user in
+        return Inertia::render('Home/Index');
     }
 }

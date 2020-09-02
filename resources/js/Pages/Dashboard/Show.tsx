@@ -6,6 +6,7 @@ import { AppLayout } from "@/Layouts/AppLayout";
 
 interface IProps {
     heading?: string;
+    justverified?: boolean;
     user: {
         name: string;
         email: string;
@@ -34,11 +35,18 @@ interface IProps {
     };
 }
 
-const Show = ({ user, mentorProfile, menteeProfile }: IProps) => {
+const Show = ({ user, mentorProfile, menteeProfile, justverified }: IProps) => {
     const { name, email, slackHandle } = user;
 
     return (
         <AppLayout heading="Welcome to CodeHub Mentorships">
+            {justverified && (
+                <div className="flex flex-col">
+                    <div className="mx-auto text-center rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
+                        <p>Thank you, your email has just been verified.</p>
+                    </div>
+                </div>
+            )}
             <div className="flex flex-col">
                 <div className="mx-auto rounded-md p-6 bg-gray shadow border w-full mb-12 flex flex-col bg-gray-100">
                     <div className=" flex w-full md:w-1/3 justify-center mx-auto mb-6 text-sm text-gray-900">
