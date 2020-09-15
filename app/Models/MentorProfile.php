@@ -12,6 +12,7 @@ class MentorProfile extends Model
         'skillset',
         'suitable_time',
         'extra_info',
+        'status',
     ];
 
     public function user()
