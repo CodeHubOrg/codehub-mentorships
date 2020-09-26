@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Mentorships\MentorshipsController;
 use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
+
 
 Auth::routes(['verify' => true]);
 
@@ -90,5 +92,10 @@ Route::middleware(['auth'])->group(function () {
                 ->name('dashboard.store');
             Route::post('/delete', [AdminDashboardController::class, 'destroy'])
                 ->name('dashboard.destroy');
+            Route::get('/users/', [UserController::class, 'index'])
+                ->name('users.index');
+            Route::post('/users/', [UserController::class, 'editUser'])
+                ->name('users.update');
         });
+
 });

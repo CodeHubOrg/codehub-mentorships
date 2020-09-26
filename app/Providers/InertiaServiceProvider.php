@@ -43,12 +43,30 @@ class InertiaServiceProvider extends ServiceProvider
                         ->get(),
                 ];
             },
-            'nav' => function () {
-                return app(Navigation::class)
-                    ->add('Dashboard', route('dashboard.index'))
-                    //->add('My Profiles', '#')
-                    ->add('My Mentorships', route('mentorships.index'))
-                    ->tree();
+            'nav' => function () {  
+
+                // attempt to use roles and permissions below, but the two lower
+                // ones after a while disappear even if user is authorised
+
+                // $user = Auth::user();
+
+                // $nav = app(Navigation::class)
+                //     ->add('Home', route('dashboard.index'))
+                //     ->add('My Mentorships', route('mentorships.index'));
+                // if (is_object($user) && $user->can('mange users')) {
+                //     $nav->add('Manage users', route('admin.users.index'));
+                // }
+                // if (is_object($user) && $user->can('make mentorship pairing')) {
+                //     $nav->add('Manage mentorships', route('admin.dashboard.index'));
+                // }
+
+                $nav = app(Navigation::class)
+                    ->add('Home', route('dashboard.index'))
+                    ->add('My Mentorships', route('mentorships.index'))                    
+                    ->add('Manage users', route('admin.users.index'))
+                    ->add('Manage mentorships', route('admin.dashboard.index'));
+
+                return $nav->tree();
             },
         ]);
     }
