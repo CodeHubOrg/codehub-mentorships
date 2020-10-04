@@ -16,7 +16,7 @@ export const MentorCta: React.FC = () => {
                     complete your mentor profile
                 </h3>
                 <InertiaLink
-                    href="/profiles/mentee/new"
+                    href="/profiles/mentor/new"
                     className="inline-flex self-center items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150 sm:self-start lg:self-center"
                 >
                     Apply to become a mentor
