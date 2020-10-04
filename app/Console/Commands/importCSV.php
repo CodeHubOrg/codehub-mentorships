@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 
 class importCSV extends Command
 {
@@ -59,6 +61,8 @@ class importCSV extends Command
         $fields = array_shift($importData_arr);        
         $count = count($fields);
 
+        echo "count ".$count;
+
 
         // Insert to MySQL database
         foreach($importData_arr as $importData){
@@ -66,9 +70,20 @@ class importCSV extends Command
             foreach (range(0, $count-1) as $i) {
                 $insertData[$fields[$i]] = $importData[$i]; 
             }
-            var_dump($insertData);
-            MentorProfile::insertData($insertData);
+//            var_dump($insertData);
+
+            //MentorProfile::insertData($insertData);
+            $this->insertData($insertData);
         }
 
+    }
+
+    public function insertData($data)
+    {
+        if ($this->argument('name') === "mentors.csv") {
+            MentorProfile::insertData($data);
+        } else {
+            MenteeProfile::insertData($data);
+        }        
     }
 }

@@ -8,8 +8,11 @@ use App\Models\MentorProfile;
 use App\Models\User;
 use App\Presenters\MenteeProfilePresenter;
 use App\Presenters\MentorProfilePresenter;
+use App\Presenters\UserPresenter;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
+
 
 class AdminDashboardController
 {
@@ -21,26 +24,26 @@ class AdminDashboardController
         $mentorProfiles = MentorProfile::all();
 
         foreach ($mentorProfiles as $m) {
-            $mentor = MentorProfilePresenter::make($m);
-            $attr = $mentor->getAttributes();
-            $user = $mentor->user;
-            $attr['name'] = $user->Name;
-            $attr['email'] = $user->email;
-            $attr['slackHandle'] = $user->slack_handle;
-            $mentors[] = $attr;
+            $mentor = MentorProfilePresenter::make($m)->toArray();
+            $u = $m->user;
+            if($u) {
+                $user = UserPresenter::make($u)->toArray();
+                $mentor = array_merge($mentor, $user);            
+            }        
+            $mentors[] = $mentor;
         }
 
         $mentees = [];
         $activeMentees = MenteeProfile::whereHas('mentorProfiles')->get('id')->pluck('id');
         $menteeProfiles = MenteeProfile::whereNotIn('id', $activeMentees)->get();
         foreach ($menteeProfiles as $m) {
-            $mentee = MenteeProfilePresenter::make($m);
-            $attr = $mentee->getAttributes();
-            $user = $mentee->user;
-            $attr['name'] = $user->Name;
-            $attr['email'] = $user->email;
-            $attr['slackHandle'] = $user->slack_handle;
-            $mentees[] = $attr;
+            $mentee = MenteeProfilePresenter::make($m)->toArray();
+            $u = $m->user;
+            if($u) {
+                $user = UserPresenter::make($u)->toArray();
+                $mentee = array_merge($mentee, $user);            
+            }           
+            $mentees[] = $mentee;
         }
 
         $mentorshipSummary = [];
