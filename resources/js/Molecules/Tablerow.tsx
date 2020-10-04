@@ -40,12 +40,13 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
                                 name={type}
                                 onChange={selectMember}
                             />
-                        </div>
-                        <div className="ml-3">
                             <p className="text-gray-900 whitespace-no-wrap">
                                 {slackHandle}
                             </p>
                         </div>
+                        {/*            <div className="ml-3">
+                            
+                        </div>*/}
                     </div>
                 </td>
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -80,10 +81,19 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
                                 <b>Current status:</b> {currentStatus}
                             </p>
                         )}
+                        {previousExperience && (
+                            <p className="px-5 py-2 text-sm border-b border-gray-200">
+                                <b>Previous experience:</b> {previousExperience}
+                            </p>
+                        )}
                         {interests && (
                             <p className="px-5 py-1 text-sm">
-                                <b>Interests:</b>{" "}
-                                {interests || specificInterests}
+                                <b>Interests/ Type of mentoring:</b> {interests}
+                            </p>
+                        )}
+                        {specificInterests && (
+                            <p className="px-5 py-1 text-sm">
+                                <b>Specific interests:</b> {specificInterests}
                             </p>
                         )}
                         {skillset && (
@@ -91,21 +101,20 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
                                 <b>Skills:</b> {skillset}
                             </p>
                         )}
-                        {suitableTime && (
-                            <p className="px-5 py-2 text-sm border-b border-gray-200">
-                                <b>Suitable time:</b>{" "}
-                                {suitableTime || timeframe}
-                            </p>
-                        )}
-                        {previousExperience && (
-                            <p className="px-5 py-2 text-sm border-b border-gray-200">
-                                <b>Previous experience:</b> {previousExperience}
-                            </p>
-                        )}
                         {mentoringType && (
                             <p className="px-5 py-2 text-sm border-b border-gray-200">
                                 <b>Are you after general mentoring?:</b>{" "}
                                 {mentoringType}
+                            </p>
+                        )}
+                        {timeframe && (
+                            <p className="px-5 py-2 text-sm border-b border-gray-200">
+                                <b>Time investment:</b> {timeframe}
+                            </p>
+                        )}
+                        {suitableTime && (
+                            <p className="px-5 py-2 text-sm border-b border-gray-200">
+                                <b>Suitable time:</b> {suitableTime}
                             </p>
                         )}
                         {extraInfo && (

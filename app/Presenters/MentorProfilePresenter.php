@@ -11,6 +11,7 @@ class MentorProfilePresenter extends FlexiblePresenter
         return [
             'id' => $this->id,
             'mentoringExperience' => $this->mentoring_experience,
+            'interests' => $this->interests,
             'skillset' => $this->skillset,
             'suitableTime' => $this->suitable_time,
             'extraInfo' => $this->extra_info,
