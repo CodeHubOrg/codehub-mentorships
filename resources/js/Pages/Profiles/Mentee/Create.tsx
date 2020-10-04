@@ -25,8 +25,6 @@ export default function Create() {
                     />
                 </div>
             </div>
-
-
         </AppLayout>
     );
 }
