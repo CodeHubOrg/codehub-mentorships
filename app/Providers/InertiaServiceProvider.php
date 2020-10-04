@@ -18,7 +18,6 @@ class InertiaServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 
     /**
