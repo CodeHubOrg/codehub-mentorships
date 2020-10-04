@@ -22,12 +22,12 @@ const FormTextInput: React.FC<IProps> = ({
             {label && (
                 <label
                     htmlFor={name}
-                    className="block text-sm font-medium leading-5 text-gray-700"
+                    className="block text-sm font-medium leading-5 text-gray-700 mb-2"
                 >
                     {label}
                 </label>
             )}
-            <div className="mt-1 relative rounded-md shadow-sm">
+            <div className="relative rounded-md shadow-sm">
                 <input
                     id={name}
                     name={name}
@@ -38,7 +38,6 @@ const FormTextInput: React.FC<IProps> = ({
                     placeholder={helpText}
                 />
             </div>
-
         </div>
     );
 };
