@@ -13,6 +13,9 @@ use App\Http\Controllers\Profiles\MentorProfileController;
 
 Auth::routes(['verify' => true]);
 
+// Marketing page routes
+Route::view('/', 'marketing.home');
+
 Route::name('auth.')
     ->group(function () {
         Route::get('/login', [LoginController::class, 'create'])
@@ -31,9 +34,6 @@ Route::name('auth.')
             ->name('register.store')
             ->middleware('guest');
     });
-
-// Marketing page routes
-Route::view('/', 'marketing.home');
 
 Route::middleware(['auth'])->group(function () {
     // User application routes
