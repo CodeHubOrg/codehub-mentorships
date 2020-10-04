@@ -8,10 +8,9 @@ interface Props{
 
 export default function AuthLayout({ children, title } : Props) {
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-            <AuthBackground />
+        <div className="relative min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
 
-            <div className="sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="relative z-20 sm:mx-auto sm:w-full sm:max-w-md">
                 <img
                     className="block mx-auto h-8 w-auto"
                     src="/img/codehub.svg"
@@ -22,9 +21,11 @@ export default function AuthLayout({ children, title } : Props) {
                 </h2>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <div className="relative z-20 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                 { children }
             </div>
+
+            <AuthBackground />
         </div>
     );
 }
