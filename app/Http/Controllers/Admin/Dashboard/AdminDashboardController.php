@@ -87,7 +87,7 @@ class AdminDashboardController
 
     public function destroy(MentorMenteeRequest $request)
     {
-       // $validated = $request->validated();
+        // $validated = $request->validated();
 
         $mentor = MentorProfile::findOrFail($request['mentorId']);
         $mentee = MenteeProfile::findOrFail($request['menteeId']);
