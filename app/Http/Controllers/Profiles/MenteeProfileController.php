@@ -41,15 +41,9 @@ class MenteeProfileController extends Controller
      */
     public function store(MenteeProfileRequest $request)
     {
-        $validated = $request->validated();
-
-        $h = resolve('\App\Helpers\GeneralHelper');
-        $valsDB = $h->snakeArrayKeys($validated);
-
-        $m = MenteeProfile::create($valsDB);
+        $mentee = MenteeProfile::create($request->validated());
         // Associate this Mentee model with the authenticated User
-        $m->user()->associate(Auth::user());
-        $m->save();
+        Auth::user()->menteeProfile()->save($mentee);
 
         return Redirect::route('dashboard.index');
     }

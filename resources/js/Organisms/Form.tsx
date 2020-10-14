@@ -161,11 +161,11 @@ const Form = <IValues extends Record<string, any>>({
                         The form was successfully submitted.
                     </div>
                 )}*/}
-                {submitSuccess === false && !haveErrors(errors) && (
+                {/* submitSuccess === false && !haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, an unexpected error has occurred
                     </div>
-                )}
+                ) */}
                 {submitSuccess === false && haveErrors(errors) && (
                     <div className="alert alert-danger" role="alert">
                         Sorry, the form is invalid. Please review, adjust and

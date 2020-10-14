@@ -1,4 +1,5 @@
 export type Summary = {
+<<<<<<< HEAD
     mentee_first_name: string;
     mentee_last_name: string;
     mentee_email: string;
@@ -9,4 +10,14 @@ export type Summary = {
     mentor_slack_handle: string;
     mentee_id: number;
     mentor_id: number;
+=======
+    menteeFirstName: string;
+    menteeLastName: string;
+    menteeEmail: string;
+    menteeSlackHandle: string;
+    mentorFirstName: string;
+    mentorLastName: string;
+    mentorEmail: string;
+    mentorSlackHandle: string;
+>>>>>>> master
 };

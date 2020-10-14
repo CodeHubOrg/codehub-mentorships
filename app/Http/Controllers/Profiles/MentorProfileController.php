@@ -40,22 +40,13 @@ class MentorProfileController extends Controller
      */
     public function store(MentorProfileRequest $request)
     {
-
-        // Creating a new Mentor model with the data from the form - turning camel case from frontend into snake case first.
-        // Give this profile a 'Pending' status
-        $validated = $request->validated();
-
-        $h = resolve('\App\Helpers\GeneralHelper');
-        $valsDB = $h->snakeArrayKeys($validated);
-
-        $m = MentorProfile::make($valsDB);
+        $mentor = MentorProfile::make($request->validated());
         // temporary solution, turning array into string for now
         $interests = $request->interests ? implode(', ', $request->interests) : '';
-        $m->interests = $interests;
+        $mentor->interests = $interests;
 
         // Associate this Mentor model with the authenticated User
-        $m->user()->associate(Auth::user());
-        $m->save();
+        Auth::user()->mentorProfile()->save($mentor);
 
         // Sending a notification to the relevant CodeHub admins
         // to alert them that a new registration has taken place.
