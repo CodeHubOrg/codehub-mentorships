@@ -77,8 +77,8 @@ const Index = ({ mentors, mentees, summary }: IProps) => {
     const unpair = (summary: Summary) => {
         console.log(summary);
         Inertia.delete("/admin/", {
-            mentorId: summary.mentor_id,
-            menteeId: summary.mentee_id,
+            mentorId: summary.mentorId,
+            menteeId: summary.menteeId,
         });
     };
 
