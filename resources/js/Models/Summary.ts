@@ -7,4 +7,6 @@ export type Summary = {
     mentor_last_name: string;
     mentor_email: string;
     mentor_slack_handle: string;
+    mentee_id: number;
+    mentor_id: number;
 };

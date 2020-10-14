@@ -50,6 +50,7 @@ class AdminDashboardController
             $summary['mentee_first_name'] = $mentee->first_name;
             $summary['mentee_last_name'] = $mentee->last_name;
             $summary['mentee_email'] = $mentee->email;
+            $summary['mentee_id'] = $m['mentee_profile_id'];
 
             $activeMentorId = $m['mentor_profile_id'];
             $activeMentorUserId = MentorProfile::find($activeMentorId)->user_id;
@@ -57,6 +58,7 @@ class AdminDashboardController
             $summary['mentor_first_name'] = $mentor->first_name;
             $summary['mentor_last_name'] = $mentor->last_name;
             $summary['mentor_email'] = $mentor->email;
+            $summary['mentor_id'] = $m['mentor_profile_id'];
             $mentorshipSummary[] = $summary;
         }
 
@@ -77,5 +79,15 @@ class AdminDashboardController
         $mentee->mentorProfiles()->attach($mentor);
 
         return Redirect::route('admin.dashboard.index');
+    }
+
+    public function destroy(MentorMenteeRequest $request)
+    {
+       // $validated = $request->validated();
+
+        $mentor = MentorProfile::findOrFail($request['mentorId']);
+        $mentee = MenteeProfile::findOrFail($request['menteeId']);
+
+        $mentee->mentorProfiles()->detach($mentor);
     }
 }

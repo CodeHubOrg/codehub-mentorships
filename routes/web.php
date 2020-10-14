@@ -82,4 +82,6 @@ Route::name('admin.')
             ->name('dashboard.index');
         Route::post('/', [AdminDashboardController::class, 'store'])
             ->name('dashboard.store');
+        Route::delete('/', [AdminDashboardController::class, 'destroy'])
+            ->name('dashboard.destroy');    
     });
