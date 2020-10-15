@@ -66,7 +66,6 @@ class AdminDashboardController
                 $summary['mentorId'] = $mentor['id'];
                 $mentorshipSummary[] = $summary;
             }
-
         }
 
         return Inertia::render('Admin/Dashboard/Index', [
