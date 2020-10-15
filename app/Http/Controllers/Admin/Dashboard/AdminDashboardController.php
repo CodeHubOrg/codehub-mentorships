@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use App\Http\Requests\MentorMenteeRequest;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
-use App\Models\MentorProfileMenteeProfile;
 use App\Models\User;
 use App\Presenters\MenteeProfilePresenter;
 use App\Presenters\MentorProfilePresenter;
@@ -32,7 +31,7 @@ class AdminDashboardController
         }
 
         $mentees = [];
-        $activeMentees = MentorProfileMenteeProfile::pluck('mentee_profile_id')->all();
+        $activeMentees = MenteeProfile::whereHas('mentorProfiles')->get('id')->pluck('id');
         $menteeProfiles = MenteeProfile::whereNotIn('id', $activeMentees)->get();
         foreach ($menteeProfiles as $m) {
             $mentee = MenteeProfilePresenter::make($m);
@@ -45,25 +44,29 @@ class AdminDashboardController
         }
 
         $mentorshipSummary = [];
-        $menteeMentorProfiles = MentorProfileMenteeProfile::all();
+        $menteeMentorProfiles = MenteeProfile::whereHas('mentorProfiles')->get();
         foreach ($menteeMentorProfiles as $m) {
             $summary;
-            $activeMenteeId = $m['mentee_profile_id'];
+            $activeMenteeId = $m['id'];
             $activeMenteeUserId = MenteeProfile::find($activeMenteeId)->user_id;
             $mentee = User::find($activeMenteeUserId);
             $summary['menteeFirstName'] = $mentee->first_name;
             $summary['menteeLastName'] = $mentee->last_name;
             $summary['menteeEmail'] = $mentee->email;
-            $summary['menteeId'] = $m['mentee_profile_id'];
+            $summary['menteeId'] = $m['id'];
 
-            $activeMentorId = $m['mentor_profile_id'];
-            $activeMentorUserId = MentorProfile::find($activeMentorId)->user_id;
-            $mentor = User::find($activeMentorUserId);
-            $summary['mentorFirstName'] = $mentor->first_name;
-            $summary['mentorLastName'] = $mentor->last_name;
-            $summary['mentorEmail'] = $mentor->email;
-            $summary['mentorId'] = $m['mentor_profile_id'];
-            $mentorshipSummary[] = $summary;
+            $pairedmentors = $m->mentorProfiles;
+            foreach ($pairedmentors as $mentor) {
+                $activeMentorId = $mentor['id'];
+                $activeMentorUserId = MentorProfile::find($activeMentorId)->user_id;
+                $mentor = User::find($activeMentorUserId);
+                $summary['mentorFirstName'] = $mentor->first_name;
+                $summary['mentorLastName'] = $mentor->last_name;
+                $summary['mentorEmail'] = $mentor->email;
+                $summary['mentorId'] = $mentor['id'];
+                $mentorshipSummary[] = $summary;
+            }
+
         }
 
         return Inertia::render('Admin/Dashboard/Index', [
@@ -87,11 +90,13 @@ class AdminDashboardController
 
     public function destroy(MentorMenteeRequest $request)
     {
-       // $validated = $request->validated();
+        $validated = $request->validated();
 
-        $mentor = MentorProfile::findOrFail($request['mentorId']);
-        $mentee = MenteeProfile::findOrFail($request['menteeId']);
+        $mentor = MentorProfile::findOrFail($request['mentor_id']);
+        $mentee = MenteeProfile::findOrFail($request['mentee_id']);
 
         $mentee->mentorProfiles()->detach($mentor);
+
+        return Redirect::route('admin.dashboard.index');
     }
 }
