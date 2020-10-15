@@ -92,8 +92,8 @@ class AdminDashboardController
     {
         $validated = $request->validated();
 
-        $mentor = MentorProfile::findOrFail($request['mentor_id']);
-        $mentee = MenteeProfile::findOrFail($request['mentee_id']);
+        $mentor = MentorProfile::findOrFail($validated['mentor_id']);
+        $mentee = MenteeProfile::findOrFail($validated['mentee_id']);
 
         $mentee->mentorProfiles()->detach($mentor);
 
