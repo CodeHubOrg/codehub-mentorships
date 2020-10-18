@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function () {
                 ->name('dashboard.index');
             Route::post('/', [AdminDashboardController::class, 'store'])
                 ->name('dashboard.store');
-            Route::delete('/', [AdminDashboardController::class, 'destroy'])
+            Route::post('/delete', [AdminDashboardController::class, 'destroy'])
                 ->name('dashboard.destroy');
         });
 });
