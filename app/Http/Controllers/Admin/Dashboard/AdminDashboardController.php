@@ -89,17 +89,16 @@ class AdminDashboardController
 
     public function destroy(MentorMenteeRequest $request)
     {
-
         $mentorId = $request->mentor_id;
         $menteeId = $request->mentee_id;
-        
+
         if ($mentorId && $menteeId) {
             $mentee = MenteeProfile::findOrFail($menteeId);
 
             $mentee->mentorProfiles()->detach();
         }
         // else error handling
-        
+
         return Redirect::route('admin.dashboard.index');
     }
 }

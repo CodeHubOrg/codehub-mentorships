@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Mentorships;
 
-use App\Presenters\MenteeProfilePresenter;
-use App\Presenters\MentorProfilePresenter;
 use App\Presenters\UserPresenter;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-
 
 class MentorshipsController
 {
