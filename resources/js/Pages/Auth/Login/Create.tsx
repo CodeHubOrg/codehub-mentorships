@@ -1,103 +1,91 @@
-import React from "react";
-import Form, { IErrors } from "@/Organisms/Form";
+import React, {useState} from "react";
 import FormTextInput from "@/Molecules/FormTextInput";
-import { AppLayout } from "@/Layouts/AppLayout";
 import AuthLayout from "@/Layouts/AuthLayout";
-
-type LoginFormValues = {
-    email: string;
-    password: string;
-};
-
-const validate = (values: LoginFormValues) => {
-    let errors: IErrors<LoginFormValues> = {};
-
-    let validEmail = /^.+@.+\..+$/;
-    if (!validEmail.test(values.email)) {
-        errors.email = "Please enter valid email address";
-    }
-
-    if (!values.password || values.password.trim().length === 0) {
-        errors.password = "Please enter a password.";
-    }
-    return errors;
-};
+import { Inertia } from '@inertiajs/inertia';
+import { InertiaLink, usePage } from '@inertiajs/inertia-react';
+import { useHasErrors } from '@/Hooks/useHasErrors';
 
 const Create: React.FC = () => {
+
+    const [values, setValues] = useState({
+        email: '',
+        password: ''
+    });
+
+    const handleChange = (e) => {
+        const key = e.target.id;
+        const value = e.target.value
+        setValues(values => ({
+            ...values,
+            [key]: value,
+        }))
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        Inertia.post('/login', values, {
+            preserveScroll: true,
+            preserveState: useHasErrors,
+        })
+    }
+
+    const { errors } = usePage();
+
     return (
-        <div>
-            <AppLayout admin="false">
-                <AuthLayout heading="Login" message="Log into your account">
-                    <Form<LoginFormValues>
-                        action="/login"
-                        initialValues={{ email: "", password: "" }}
-                        validate={validate}
-                        button="Login"
-                        render={(
-                            values,
-                            handleChange,
-                            errors,
-                            errorsFromBackend,
-                        ) => (
-                            <React.Fragment>
-                                <FormTextInput
-                                    type="email"
-                                    name="email"
-                                    label="Email address"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                />
-                                <div className="block text-sm font-medium text-red-500 pb-5">
-                                    {errors.email || errorsFromBackend.email}
-                                </div>
-                                <FormTextInput
-                                    type="password"
-                                    name="password"
-                                    label="Password"
-                                    value={values.password}
-                                    helpText=""
-                                    onChange={handleChange}
-                                />
-                                <div className="block text-sm font-medium text-red-500 pb-5">
-                                    {errors.password ||
-                                        errorsFromBackend.password}
-                                </div>
-                                <div className="mt-6 flex items-center justify-between">
-                                    {/*<div className="flex items-center">
-                                <FormChoiceField
-                                    type="checkbox"
-                                    label=""
-                                    selected={values.rememberme}
-                                    choices={[
-                                        {
-                                            label: "Remember me",
-                                            helptext: "",
-                                            value: "yes",
-                                        },
-                                    ]}
-                                    onChange={handleChange}
-                                    name="rememberme"
-                                />
-                                </div>*/}
-                                    <div className="text-sm leading-5">
-                                        <a
-                                            href="#"
-                                            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
-                                        >
-                                            Forgot your password?
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="block text-sm font-medium text-red-500 pb-5" />
-                            </React.Fragment>
-                        )}
-                    />
-                    <div className="font-medium text-indigo-600 pt-5 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
-                        <a href="/register">Register</a>
+        <AuthLayout title="Sign in to your account">
+            <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                <form onSubmit={handleSubmit}>
+
+                    <div className="mb-6">
+                        <FormTextInput
+                            type="email"
+                            name="email"
+                            label="Email"
+                            value={values.email}
+                            onChange={handleChange}
+                        />
+                        <span className="text-sm text-red-600">{errors.email}</span>
                     </div>
-                </AuthLayout>
-            </AppLayout>
-        </div>
+                    <div className="mb-6">
+                        <FormTextInput
+                            type="password"
+                            name="password"
+                            label="Password"
+                            value={values.password}
+                            onChange={handleChange}
+                        />
+                        <span className="text-sm text-red-600">{errors.password}</span>
+                    </div>
+                    <div className="text-sm leading-5 mb-6">
+                        <a
+                            href="#"
+                            className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                        >
+                            Forgot your password?
+                        </a>
+                    </div>
+                    <button
+                        type="submit"
+                        className="flex py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition duration-150 ease-in-out"
+                    >
+                        Log in
+                    </button>
+                </form>
+            </div>
+
+            <p className="flex flex-col items-center mt-4 text-sm leading-5 text-gray-600 max-w sm:flex-row">
+                <a
+                    href="/"
+                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    Back to homepage
+                </a>
+                <InertiaLink
+                    href="/register"
+                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150 sm:ml-auto">
+                    Create an account
+                </InertiaLink>
+            </p>
+        </AuthLayout>
     );
 };
 

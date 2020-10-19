@@ -19,7 +19,7 @@ export const Textarea: React.FC<iFieldProps> = ({
         <div>
             <label
                 htmlFor={name}
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-2"
             >
                 {label}
             </label>
@@ -27,7 +27,7 @@ export const Textarea: React.FC<iFieldProps> = ({
                 id={name}
                 name={name}
                 value={value}
-                className="form-input block bg-gray-100 w-full pl-7 pr-12 sm:text-sm sm:leading-5"
+                className="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
                 onChange={onChange}
                 placeholder={helpText}
             />

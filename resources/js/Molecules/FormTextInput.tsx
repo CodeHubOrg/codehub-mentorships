@@ -22,20 +22,22 @@ const FormTextInput: React.FC<IProps> = ({
             {label && (
                 <label
                     htmlFor={name}
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium leading-5 text-gray-700 mb-2"
                 >
                     {label}
                 </label>
             )}
-            <input
-                id={name}
-                name={name}
-                type={type}
-                value={value}
-                className="form-input bg-gray-100 block w-full pl-3 pr-12 sm:text-sm sm:leading-5"
-                onChange={onChange}
-                placeholder={helpText}
-            />
+            <div className="relative rounded-md shadow-sm">
+                <input
+                    id={name}
+                    name={name}
+                    type={type}
+                    value={value}
+                    className="form-input block w-full sm:text-sm sm:leading-5"
+                    onChange={onChange}
+                    placeholder={helpText}
+                />
+            </div>
         </div>
     );
 };
