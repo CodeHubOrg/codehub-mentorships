@@ -16,7 +16,7 @@ class MentorshipsController
         //$u->name = $u->Name;
 
         if (is_object($u)) {
-            $u = UserPresenter($u);
+            $u = UserPresenter::make($u);
         }
 
         $mentor = $u->mentorProfile ? $h->addCamelsToModel($u->mentorProfile) : null;
