@@ -47,6 +47,11 @@
                 </div>
                 <div class="hidden md:flex md:space-x-10">
                     <a href="#"
+<<<<<<< HEAD
+=======
+                       class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">FAQs</a>
+                    <a href="#"
+>>>>>>> master
                        class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">About
                         CodeHub</a>
                     <a href="#"
@@ -102,6 +107,12 @@
                     </div>
                     <div class="px-2 pt-2 pb-3">
                         <a href="#"
+<<<<<<< HEAD
+=======
+                           class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
+                           role="menuitem">FAQs</a>
+                        <a href="#"
+>>>>>>> master
                            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
                            role="menuitem">About CodeHub</a>
                         <a href="/register"
