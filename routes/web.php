@@ -16,6 +16,9 @@ Auth::routes(['verify' => true]);
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
+// Privacy page routes
+Route::view('/privacy', 'privacy.privacypage');
+
 Route::name('auth.')
     ->group(function () {
         Route::get('/login', [LoginController::class, 'create'])

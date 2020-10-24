@@ -31,6 +31,11 @@
                     Partners
                 </a>
             </div>
+            <div class="px-5 py-2">
+                <a href="privacy" class="text-base leading-6 text-gray-500 hover:text-gray-900">
+                    Privacy
+                </a>
+            </div>
         </nav>
         <div class="mt-8 flex justify-center">
             <a href="#" class="text-gray-400 hover:text-gray-500">
