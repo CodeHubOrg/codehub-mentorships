@@ -49,7 +49,8 @@ const MenteeForm: React.FC = () => {
                                 Your background
                             </h3>
                             <p className="mt-1 text-sm leading-5 text-gray-500">
-                                Tell us a bit about your current situation and past experience
+                                Tell us a bit about your current situation and
+                                past experience
                             </p>
                         </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -66,7 +67,7 @@ const MenteeForm: React.FC = () => {
                                     errorsFromBackend.currentStatus) && (
                                     <div className="block text-sm font-medium text-red-500 pb-5">
                                         {errors.currentStatus ||
-                                        errorsFromBackend.currentStatus}
+                                            errorsFromBackend.currentStatus}
                                     </div>
                                 )}
                             </div>
@@ -184,7 +185,9 @@ const MenteeForm: React.FC = () => {
                                 Anything else
                             </h3>
                             <p className="mt-1 text-sm leading-5 text-gray-500">
-                                Tell us about anything else that you feel is important to getting the most out of your mentorship
+                                Tell us about anything else that you feel is
+                                important to getting the most out of your
+                                mentorship
                             </p>
                         </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

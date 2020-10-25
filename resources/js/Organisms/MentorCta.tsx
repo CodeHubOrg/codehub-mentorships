@@ -1,5 +1,5 @@
 import React from "react";
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 export const MentorCta: React.FC = () => {
     return (
@@ -11,9 +11,8 @@ export const MentorCta: React.FC = () => {
             />
             <div className="flex flex-col justify-center">
                 <h3 className="text-center py-6 sm:pt-0 sm:text-left lg:pt-6 lg:text-center">
-                    Are you interested in mentoring people
-                    and sharing your knowledge? If so,please
-                    complete your mentor profile
+                    Are you interested in mentoring people and sharing your
+                    knowledge? If so,please complete your mentor profile
                 </h3>
                 <InertiaLink
                     href="/profiles/mentor/new"
