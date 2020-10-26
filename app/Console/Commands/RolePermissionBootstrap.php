@@ -43,8 +43,8 @@ class RolePermissionBootstrap extends Command
         $roles = ["Super Admin", "Mentorship Manager", "User Manager", "Mentor", "Mentee"];
 
         $permissions = [
-            "make mentorship pairing",
-            "undo mentorship pairing",
+            "pair",
+            "unpair",
             "manage users",
             "assign role",
             "unassign role",
@@ -81,7 +81,10 @@ class RolePermissionBootstrap extends Command
 
         // assign permissions to roles
         $mentorManager = Role::where('name', "Mentorship Manager")->first();
-        $mentorManager->givePermissionTo("make mentorship pairing","undo mentorship pairing");
+        $mentorManager->givePermissionTo("pair","unpair");
+
+        $userManager = Role::where('name', "User Manager")->first();
+        $userManager->givePermissionTo("assign role","unassign role", "create user", "update user", "delete user");
 
         // make test example Super Admin
         $testuser = User::where('email', "test@example.com")->first();
