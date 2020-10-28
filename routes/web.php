@@ -84,11 +84,13 @@ Route::middleware(['auth'])->group(function () {
         ->prefix('admin')
         ->group(function () {
             Route::get('/', [AdminDashboardController::class, 'index'])
-                ->name('dashboard.index');
+                ->name('dashboard.index')
+                ->middleware(['permission:pair|unpair']);
             Route::post('/', [AdminDashboardController::class, 'store'])
-                ->name('dashboard.store');
+                ->name('dashboard.store');                ;
             Route::get('/users/', [UserController::class, 'index'])
-                ->name('users.index');
+                ->name('users.index')
+                ->middleware(['permission:manage-users']);
             Route::post('/users/', [UserController::class, 'editUser'])
                 ->name('users.update');
         });

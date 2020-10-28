@@ -45,15 +45,13 @@ class RolePermissionBootstrap extends Command
         $permissions = [
             "pair",
             "unpair",
-            "manage users",
-            "assign role",
-            "unassign role",
-            "create user",
-            "update user",
-            "delete user",
-            "view all permissions",
-            "view all roles",
-            "view all profiles"
+            "manage-users",
+            "assign-role",
+            "unassign-role",
+            "create-user",
+            "update-user",
+            "delete-user",
+           
         ];
 
         $this->line('------------ Settting up roles:');
@@ -84,7 +82,7 @@ class RolePermissionBootstrap extends Command
         $mentorManager->givePermissionTo("pair","unpair");
 
         $userManager = Role::where('name', "User Manager")->first();
-        $userManager->givePermissionTo("assign role","unassign role", "create user", "update user", "delete user");
+        $userManager->givePermissionTo("manage-users", "assign-role","unassign-role", "create-user", "update-user", "delete-user", "pair", "unpair");
 
         // make test example Super Admin
         $testuser = User::where('email', "test@example.com")->first();
