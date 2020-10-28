@@ -10,7 +10,6 @@ use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Spatie\Navigation\Navigation;
 
-
 class InertiaServiceProvider extends ServiceProvider
 {
     /**
@@ -45,8 +44,7 @@ class InertiaServiceProvider extends ServiceProvider
                         ->get(),
                 ];
             },
-            'nav' => function () {  
-
+            'nav' => function () {
                 $nav = app(Navigation::class)
                     ->add('Home', route('dashboard.index'))
                     ->add('My Mentorships', route('mentorships.index'));

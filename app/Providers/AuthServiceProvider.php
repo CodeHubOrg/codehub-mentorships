@@ -5,7 +5,6 @@ namespace App\Providers;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
-
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -26,11 +25,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('mentorship-admin', function($user) {
+        Gate::define('mentorship-admin', function ($user) {
             return $user->can('pair') || $user->can('unpair');
         });
 
-        Gate::define('user-admin', function($user) {
+        Gate::define('user-admin', function ($user) {
             return $user->can('manage-users');
         });
     }

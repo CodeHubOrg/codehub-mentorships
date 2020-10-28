@@ -4,7 +4,6 @@ namespace App\Concerns;
 
 use Illuminate\Support\Str;
 
-
 trait ConvertsInputKeys
 {
     public function prepareForValidation()
