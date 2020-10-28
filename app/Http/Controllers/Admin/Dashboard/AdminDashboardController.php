@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MentorMenteeRequest;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
-use App\Models\User;
 use App\Presenters\MenteeProfilePresenter;
 use App\Presenters\MentorProfilePresenter;
 use Illuminate\Support\Facades\Redirect;

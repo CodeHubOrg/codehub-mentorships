@@ -12,9 +12,7 @@ class MentorshipsController
 {
     public function show()
     {
-
         $u = Auth::user();
-
 
         if (is_object($u)) {
             $u = UserPresenter::make($u);
