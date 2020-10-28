@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class importCSV extends Command
 {
@@ -41,49 +40,47 @@ class importCSV extends Command
     public function handle()
     {
         $filename = $this->argument('name');
-        $filepath = public_path("csv/".$filename);
+        $filepath = public_path('csv/'.$filename);
         echo $filepath;
-        $file = fopen($filepath,"r");
+        $file = fopen($filepath, 'r');
 
-        $importData_arr = array();
+        $importData_arr = [];
         $i = 0;
         $fieldnames = [];
 
-        while (($filedata = fgetcsv($file, 1000, ",")) !== FALSE) {
-             $num = count($filedata );
-             for ($c=0; $c < $num; $c++) {
+        while (($filedata = fgetcsv($file, 1000, ',')) !== false) {
+            $num = count($filedata);
+            for ($c = 0; $c < $num; $c++) {
                 $importData_arr[$i][] = $filedata[$c];
-             }
-             $i++;
+            }
+            $i++;
         }
         fclose($file);
 
-        $fields = array_shift($importData_arr);        
+        $fields = array_shift($importData_arr);
         $count = count($fields);
 
-        echo "count ".$count;
-
+        echo 'count '.$count;
 
         // Insert to MySQL database
-        foreach($importData_arr as $importData){
+        foreach ($importData_arr as $importData) {
             $insertData = [];
-            foreach (range(0, $count-1) as $i) {
-                $insertData[$fields[$i]] = $importData[$i]; 
+            foreach (range(0, $count - 1) as $i) {
+                $insertData[$fields[$i]] = $importData[$i];
             }
 //            var_dump($insertData);
 
             //MentorProfile::insertData($insertData);
             $this->insertData($insertData);
         }
-
     }
 
     public function insertData($data)
     {
-        if ($this->argument('name') === "mentors.csv") {
+        if ($this->argument('name') === 'mentors.csv') {
             MentorProfile::insertData($data);
         } else {
             MenteeProfile::insertData($data);
-        }        
+        }
     }
 }

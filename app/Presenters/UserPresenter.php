@@ -6,7 +6,6 @@ use AdditionApps\FlexiblePresenter\FlexiblePresenter;
 use Creativeorange\Gravatar\Facades\Gravatar;
 use Illuminate\Support\Str;
 
-
 class UserPresenter extends FlexiblePresenter
 {
     public function values(): array
@@ -21,7 +20,7 @@ class UserPresenter extends FlexiblePresenter
             'avatar' => Gravatar::exists($this->email)
                 ? Gravatar::get($this->email)
                 : 'https://avatars.dicebear.com/api/bottts/'.Str::slug($this->first_name).'.svg',
-            'role' => $this->roles->count() > 0 ? $this->first()->only('id','name') : null
+            'role' => $this->roles->count() > 0 ? $this->first()->only('id', 'name') : null,
         ];
     }
 
@@ -34,5 +33,4 @@ class UserPresenter extends FlexiblePresenter
     {
         return $this->only('name', 'email', 'slackHandle', 'role');
     }
-
 }

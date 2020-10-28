@@ -29,15 +29,16 @@ class MenteeProfile extends Model
         return $this->belongsToMany(MentorProfile::class);
     }
 
-    public static function insertData($data) {
+    public static function insertData($data)
+    {
         $email = User::where('email', $data['email'])->get();
-        if($email->count() == 0){
+        if ($email->count() == 0) {
             $user = new User(
                 [
-                    'first_name' => $data['first_name'], 
+                    'first_name' => $data['first_name'],
                     'last_name' => $data['last_name'],
                     'email' => $data['email'],
-                    'password' => Hash::make('password')
+                    'password' => Hash::make('password'),
                 ]);
             $user->save();
 
@@ -52,7 +53,7 @@ class MenteeProfile extends Model
                 'suitable_time',
                 'extra_info',
             ] as $field) {
-               $menteeArr[$field] = $data[$field];
+                $menteeArr[$field] = $data[$field];
             }
             $mentee = new MenteeProfile($menteeArr);
             $mentee->user()->associate($user);
