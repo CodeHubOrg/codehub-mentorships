@@ -6858,13 +6858,10 @@
             "keywords": [
                 "tokenizer"
             ],
-<<<<<<< HEAD
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-token-stream/issues",
                 "source": "https://github.com/sebastianbergmann/php-token-stream/tree/3.1.1"
             },
-=======
->>>>>>> add custom command to import csv files
             "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
