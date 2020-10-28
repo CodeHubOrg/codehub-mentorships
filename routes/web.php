@@ -87,7 +87,7 @@ Route::middleware(['auth'])->group(function () {
                 ->name('dashboard.index')
                 ->middleware(['permission:pair|unpair']);
             Route::post('/', [AdminDashboardController::class, 'store'])
-                ->name('dashboard.store'); 
+                ->name('dashboard.store');
             Route::post('/delete', [AdminDashboardController::class, 'destroy'])
                 ->name('dashboard.destroy');
             Route::get('/users/', [UserController::class, 'index'])

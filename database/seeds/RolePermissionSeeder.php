@@ -1,13 +1,11 @@
 <?php
 
 use App\Models\User;
-use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-
-class RolePermissionSeeder extends Seeder 
+class RolePermissionSeeder extends Seeder
 {
     public function run()
     {
@@ -31,7 +29,7 @@ class RolePermissionSeeder extends Seeder
             echo 'Created '.$role->name.' Role'.PHP_EOL;
         }
 
-        echo '------------- Setting up permissions:'. PHP_EOL;
+        echo '------------- Setting up permissions:'.PHP_EOL;
 
         $superAdminRole = Role::where('name', 'Super Admin')->first();
 
