@@ -50,7 +50,8 @@ const MentorForm: React.FC = () => {
                                 Your experience
                             </h3>
                             <p className="mt-1 text-sm leading-5 text-gray-500">
-                                Tell us a bit about your background and past mentoring experience
+                                Tell us a bit about your background and past
+                                mentoring experience
                             </p>
                         </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
@@ -88,13 +89,17 @@ const MentorForm: React.FC = () => {
                                     selected={values.interests}
                                     choices={[
                                         {
-                                            label: "Specific Programming Language",
-                                            helptext: "Specific Programming Language",
-                                            value: "Specific Programming Language",
+                                            label:
+                                                "Specific Programming Language",
+                                            helptext:
+                                                "Specific Programming Language",
+                                            value:
+                                                "Specific Programming Language",
                                         },
                                         {
                                             label: "Specific Framework/Library",
-                                            helptext: "Specific Framework/Library",
+                                            helptext:
+                                                "Specific Framework/Library",
                                             value: "Specific Framework/Library",
                                         },
                                         {
@@ -151,7 +156,9 @@ const MentorForm: React.FC = () => {
                                 Anything else
                             </h3>
                             <p className="mt-1 text-sm leading-5 text-gray-500">
-                                Tell us about anything else that you feel is important to getting the most out of your mentorship
+                                Tell us about anything else that you feel is
+                                important to getting the most out of your
+                                mentorship
                             </p>
                         </div>
                         <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">

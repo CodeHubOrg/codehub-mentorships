@@ -16,6 +16,9 @@ Auth::routes(['verify' => true]);
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
+// Privacy page routes
+Route::view('/privacy', 'privacy.privacypage');
+
 Route::name('auth.')
     ->group(function () {
         Route::get('/login', [LoginController::class, 'create'])
@@ -80,5 +83,7 @@ Route::middleware(['auth'])->group(function () {
                 ->name('dashboard.index');
             Route::post('/', [AdminDashboardController::class, 'store'])
                 ->name('dashboard.store');
+            Route::post('/delete', [AdminDashboardController::class, 'destroy'])
+                ->name('dashboard.destroy');
         });
 });

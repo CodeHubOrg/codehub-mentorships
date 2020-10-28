@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mentorships;
 
+use App\Presenters\UserPresenter;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
@@ -9,13 +10,13 @@ class MentorshipsController
 {
     public function show()
     {
-        $h = resolve('\App\Helpers\GeneralHelper');
+        //$h = resolve('\App\Helpers\GeneralHelper');
 
-        $u = (Auth::user());
-        $u->name = $u->Name;
+        $u = Auth::user();
+        //$u->name = $u->Name;
 
         if (is_object($u)) {
-            $u = $h->addCamelsToModel($u);
+            $u = UserPresenter::make($u);
         }
 
         $mentor = $u->mentorProfile ? $h->addCamelsToModel($u->mentorProfile) : null;

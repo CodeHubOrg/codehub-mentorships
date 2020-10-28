@@ -1,37 +1,36 @@
 import React, { useState } from "react";
 import FormTextInput from "@/Molecules/FormTextInput";
 import AuthLayout from "@/Layouts/AuthLayout";
-import { InertiaLink, usePage } from '@inertiajs/inertia-react';
-import { Inertia } from '@inertiajs/inertia';
-import { useHasErrors } from '@/Hooks/useHasErrors';
+import { InertiaLink, usePage } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
+import { useHasErrors } from "@/Hooks/useHasErrors";
 
 const Create: React.FC = () => {
-
     const [values, setValues] = useState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        slackHandle: '',
-        password: '',
-        password_confirmation: '',
+        firstName: "",
+        lastName: "",
+        email: "",
+        slackHandle: "",
+        password: "",
+        password_confirmation: "",
     });
 
-    const handleChange = (e) => {
+    const handleChange = e => {
         const key = e.target.id;
-        const value = e.target.value
+        const value = e.target.value;
         setValues(values => ({
             ...values,
             [key]: value,
-        }))
+        }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        Inertia.post('/register', values, {
+    const handleSubmit = e => {
+        e.preventDefault();
+        Inertia.post("/register", values, {
             preserveScroll: true,
             preserveState: useHasErrors,
-        })
-    }
+        });
+    };
 
     const { errors } = usePage();
 
@@ -48,7 +47,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.firstName}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.firstName}
+                        </span>
                     </div>
 
                     <div className="mb-6">
@@ -60,7 +61,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.lastName}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.lastName}
+                        </span>
                     </div>
 
                     <div className="mb-6">
@@ -72,7 +75,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.email}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.email}
+                        </span>
                     </div>
 
                     <div className="mb-6">
@@ -84,7 +89,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.slackHandle}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.slackHandle}
+                        </span>
                     </div>
 
                     <div className="mb-6">
@@ -96,7 +103,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.password}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.password}
+                        </span>
                     </div>
 
                     <div className="mb-6">
@@ -108,7 +117,9 @@ const Create: React.FC = () => {
                             helpText=""
                             onChange={handleChange}
                         />
-                        <span className="text-sm text-red-600">{errors.password_confirmation}</span>
+                        <span className="text-sm text-red-600">
+                            {errors.password_confirmation}
+                        </span>
                     </div>
 
                     <button
@@ -123,12 +134,14 @@ const Create: React.FC = () => {
             <p className="flex flex-col items-center mt-4 text-sm leading-5 text-gray-600 max-w sm:flex-row">
                 <a
                     href="/"
-                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150">
+                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+                >
                     Back to homepage
                 </a>
                 <InertiaLink
                     href="/login"
-                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150 sm:ml-auto">
+                    className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150 sm:ml-auto"
+                >
                     Log in
                 </InertiaLink>
             </p>

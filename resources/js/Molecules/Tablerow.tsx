@@ -32,29 +32,27 @@ const Tablerow = ({ member, handleSelect, type }: Props) => {
     return (
         <>
             <tr key={slackHandle}>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                    <div className="flex">
-                        <div className="flex-shrink-0 w-10 h-10">
-                            <input
-                                type="radio"
-                                name={type}
-                                onChange={selectMember}
-                            />
-                        </div>
-                        <div className="ml-3">
-                            <p className="text-gray-900 whitespace-no-wrap">
-                                {slackHandle}
-                            </p>
-                        </div>
-                    </div>
+                <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                        <input
+                            type="radio"
+                            name={type}
+                            onChange={selectMember}
+                        />
+                    </p>
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
+                    <p className="text-gray-900 whitespace-no-wrap">
+                        {slackHandle}
+                    </p>
+                </td>
+                <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">{name}</p>
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">{email}</p>
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="px-3 py-5 border-b border-gray-200 bg-white text-sm">
                     <p className="text-gray-900 whitespace-no-wrap">
                         <button
                             onClick={() =>

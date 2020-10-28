@@ -10,7 +10,8 @@ export default function Create() {
                 Create a mentee profile
             </h1>
             <h2 className="text-lg text-gray-600 mb-8">
-                Please fill out the questionnaire below if you are interested in finding someone to mentor you
+                Please fill out the questionnaire below if you are interested in
+                finding someone to mentor you
             </h2>
             <div className="grid grid-cols-12 gap-8">
                 <div className="col-span-12 lg:col-span-8">
