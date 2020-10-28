@@ -3,13 +3,9 @@
 namespace App\Presenters;
 
 use AdditionApps\FlexiblePresenter\FlexiblePresenter;
-use App\Presenters\UserPresenter;
-use Illuminate\Support\Collection;
-
 
 class MentorProfilePresenter extends FlexiblePresenter
 {
-
     public function values(): array
     {
         $user = $this->user;
@@ -28,5 +24,4 @@ class MentorProfilePresenter extends FlexiblePresenter
             'email' => $user->email,
         ];
     }
-
 }

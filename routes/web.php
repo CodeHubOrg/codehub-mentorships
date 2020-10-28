@@ -12,7 +12,6 @@ use App\Http\Controllers\Profiles\GeneralProfileController;
 use App\Http\Controllers\Profiles\MenteeProfileController;
 use App\Http\Controllers\Profiles\MentorProfileController;
 
-
 Auth::routes(['verify' => true]);
 
 // Marketing page routes
@@ -43,7 +42,6 @@ Route::name('auth.')
 // Marketing page routes
 Route::view('/', 'marketing.home');
 
-
 Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
@@ -54,7 +52,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'show'])
         ->middleware(['verified'])
         ->name('home.index');
-
 
     // Mymentorships routes
     Route::get('/mentorships', [MentorshipsController::class, 'show'])
@@ -99,5 +96,4 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/users/', [UserController::class, 'editUser'])
                 ->name('users.update');
         });
-
 });

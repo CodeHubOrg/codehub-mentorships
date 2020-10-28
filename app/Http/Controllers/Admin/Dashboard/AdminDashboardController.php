@@ -9,15 +9,11 @@ use App\Models\MentorProfile;
 use App\Models\User;
 use App\Presenters\MenteeProfilePresenter;
 use App\Presenters\MentorProfilePresenter;
-use App\Presenters\UserPresenter;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
-
 class AdminDashboardController extends Controller
 {
-
     public function index()
     {
         $mentorProfiles = MentorProfile::all();
