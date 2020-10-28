@@ -2,23 +2,21 @@
 
 namespace App\Http\Controllers\Admin\Users;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Presenters\UserPresenter;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Role;
 
-class UserController
+class UserController extends Controller
 {
-    
+   
     public function index() 
     {
-        // I tried to use the Presenter, but did not manage in a way that wasn't slow. My attempts below:
-        // $users = User::all()->map(function($user, $key) {return UserPresenter::make($user)->only('id','name','email','slackHandle','role');});
-        // $users = UserPresenter::collection(User::all())->presetTableSummary()->get();
-        
+        // tried with user presenter but did not manage in a way
+        // that wasn't slow
         $users = User::all()->map(function($user, $key) {
             return [
                 'id' => $user->id,
@@ -28,6 +26,8 @@ class UserController
                 'role' => $user->roles->count() > 0 ? $user->roles->first()->only('id','name') : null  
             ];
         });
+
+
         $roles = Role::where('name', '!=', "Super Admin")->get()->map(function($role, $key) {return ['id' => $role->id, 'name' => $role->name];});
 
         return Inertia::render('Admin/Users/Index', ['users' => $users, 'roles' => $roles]);

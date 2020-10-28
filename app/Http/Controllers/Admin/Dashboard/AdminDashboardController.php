@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Dashboard;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MentorMenteeRequest;
 use App\Models\MenteeProfile;
 use App\Models\MentorProfile;
@@ -14,37 +15,21 @@ use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 
-class AdminDashboardController
+class AdminDashboardController extends Controller
 {
+
     public function index()
     {
-        //$h = resolve('\App\Helpers\GeneralHelper');
-
-        $mentors = [];
         $mentorProfiles = MentorProfile::all();
+        $mentors = $mentorProfiles->map(function ($mentor) {
+            return MentorProfilePresenter::make($mentor)->all();
+        });
 
-        foreach ($mentorProfiles as $m) {
-            $mentor = MentorProfilePresenter::make($m)->toArray();
-            $u = $m->user;
-            if($u) {
-                $user = UserPresenter::make($u)->toArray();
-                $mentor = array_merge($mentor, $user);            
-            }        
-            $mentors[] = $mentor;
-        }
-
-        $mentees = [];
         $activeMentees = MenteeProfile::whereHas('mentorProfiles')->get('id')->pluck('id');
         $menteeProfiles = MenteeProfile::whereNotIn('id', $activeMentees)->get();
-        foreach ($menteeProfiles as $m) {
-            $mentee = MenteeProfilePresenter::make($m)->toArray();
-            $u = $m->user;
-            if($u) {
-                $user = UserPresenter::make($u)->toArray();
-                $mentee = array_merge($mentee, $user);            
-            }           
-            $mentees[] = $mentee;
-        }
+        $mentees = $menteeProfiles->map(function ($mentee) {
+            return MenteeProfilePresenter::make($mentee)->all();
+        });
 
         $mentorshipSummary = [];
         $menteeMentorProfiles = MenteeProfile::whereHas('mentorProfiles')->get();
