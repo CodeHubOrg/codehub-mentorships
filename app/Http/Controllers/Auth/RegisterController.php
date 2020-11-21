@@ -52,7 +52,6 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request)
     {
         // logic from register method of the RegistersUsers trait
-
         $user = User::make($request->validated());
         $user->password = Hash::make($request->get('password'));
         $user->save();

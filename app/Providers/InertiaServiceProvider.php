@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Presenters\UserPresenter;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
@@ -44,11 +45,17 @@ class InertiaServiceProvider extends ServiceProvider
                 ];
             },
             'nav' => function () {
-                return app(Navigation::class)
-                    ->add('Dashboard', route('dashboard.index'))
-                    //->add('My Profiles', '#')
-                    ->add('My Mentorships', route('mentorships.index'))
-                    ->tree();
+                $nav = app(Navigation::class)
+                    ->add('Home', route('dashboard.index'))
+                    ->add('My Mentorships', route('mentorships.index'));
+                if (Gate::allows('user-admin')) {
+                    $nav = $nav->add('Manage users', route('admin.users.index'));
+                }
+                if (Gate::allows('mentorship-admin')) {
+                    $nav = $nav->add('Manage mentorships', route('admin.dashboard.index'));
+                }
+
+                return $nav->tree();
             },
         ]);
     }

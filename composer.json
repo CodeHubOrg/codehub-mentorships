@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "spatie/laravel-navigation": "dev-master",
+        "spatie/laravel-permission": "^3.16",
         "tightenco/ziggy": "^0.9.4"
     },
     "require-dev": {

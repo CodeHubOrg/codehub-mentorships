@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Mentorships;
 
+use App\Presenters\MenteeProfilePresenter;
+use App\Presenters\MentorProfilePresenter;
 use App\Presenters\UserPresenter;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -10,29 +12,23 @@ class MentorshipsController
 {
     public function show()
     {
-        //$h = resolve('\App\Helpers\GeneralHelper');
-
         $u = Auth::user();
-        //$u->name = $u->Name;
 
         if (is_object($u)) {
             $u = UserPresenter::make($u);
         }
 
-        $mentor = $u->mentorProfile ? $h->addCamelsToModel($u->mentorProfile) : null;
-        $mentee = $u->menteeProfile ? $h->addCamelsToModel($u->menteeProfile) : null;
+        $mentor = $u->mentorProfile ? MentorProfilePresenter::make($u->mentorProfile) : null;
+        $mentee = $u->menteeProfile ? MentorProfilePresenter::make($u->menteeProfile) : null;
 
         $pairedMentors = $mentee ? $mentee->mentorProfiles : null;
 
         $pairedMentorlist = [];
 
         if ($pairedMentors) {
-            foreach ($pairedMentors as $pairedmentor) {
-                $attr['name'] = $pairedmentor->user->name;
-                $attr['email'] = $pairedmentor->user->email;
-                $attr['slackHandle'] = $pairedmentor->user->slack_handle;
-                $pairedMentorlist[] = $attr;
-            }
+            $pairedMentorlist = $pairedMentors->map(function ($mentor) {
+                return MentorProfilePresenter::make($mentor);
+            });
         }
 
         $pairedMentees = $mentor ? $mentor->menteeProfiles : null;
@@ -40,12 +36,9 @@ class MentorshipsController
         $pairedMenteelist = [];
 
         if ($pairedMentees) {
-            foreach ($pairedMentees as $mentee) {
-                $attr['name'] = $mentee->user->name;
-                $attr['email'] = $mentee->user->email;
-                $attr['slackHandle'] = $mentee->user->slack_handle;
-                $pairedMenteelist[] = $attr;
-            }
+            $pairedMenteelist = $pairedMentees->map(function ($mentee) {
+                return MenteeProfilePresenter::make($mentee);
+            });
         }
 
         return Inertia::render('Mentorships/Show', [

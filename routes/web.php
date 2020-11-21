@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Account\AccountController;
 use App\Http\Controllers\Admin\Dashboard\AdminDashboardController;
+use App\Http\Controllers\Admin\Users\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Dashboard\DashboardController;
@@ -38,6 +39,9 @@ Route::name('auth.')
             ->middleware('guest');
     });
 
+// Marketing page routes
+Route::view('/', 'marketing.home');
+
 Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
@@ -51,8 +55,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Mymentorships routes
     Route::get('/mentorships', [MentorshipsController::class, 'show'])
-    ->middleware(['auth'])
-    ->name('mentorships.index');
+        ->middleware(['auth'])
+        ->name('mentorships.index');
     Route::name('account.')
         ->prefix('account')
         ->group(function () {
@@ -80,10 +84,16 @@ Route::middleware(['auth'])->group(function () {
         ->prefix('admin')
         ->group(function () {
             Route::get('/', [AdminDashboardController::class, 'index'])
-                ->name('dashboard.index');
+                ->name('dashboard.index')
+                ->middleware(['permission:pair|unpair']);
             Route::post('/', [AdminDashboardController::class, 'store'])
                 ->name('dashboard.store');
             Route::post('/delete', [AdminDashboardController::class, 'destroy'])
                 ->name('dashboard.destroy');
+            Route::get('/users/', [UserController::class, 'index'])
+                ->name('users.index')
+                ->middleware(['permission:manage-users']);
+            Route::post('/users/', [UserController::class, 'editUser'])
+                ->name('users.update');
         });
 });

@@ -100,11 +100,12 @@ class VerificationController extends Controller
         }
 
         return $request->wantsJson()
-            ? new Response('', 204)
-            : Inertia::render('Dashboard/Show', [
-                'user' => UserPresenter::make($user),
-                'justVerified' => true,
-            ]);
+
+                    ? new Response('', 204)
+                    : Inertia::render('Dashboard/Show', [
+                        'user' => UserPresenter::make($user),
+                        'justverified' => true,
+                    ]);
     }
 
     public function resend(Request $request)
