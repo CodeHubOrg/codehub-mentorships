@@ -31,5 +31,5 @@ return [
     ],
     'postmark' => [
         'secret' => env('POSTMARK_SECRET'),
-    ]
+    ],
 ];
