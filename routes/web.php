@@ -47,6 +47,7 @@ Route::view('/', 'marketing.home');
 Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
+        ->middleware(['verified'])
         ->name('dashboard.index');
 
     // route only visible to email verified users,
