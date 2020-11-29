@@ -36,7 +36,7 @@
                         <div class="-mr-2 flex items-center md:hidden">
                             <button type="button"
                                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                                    id="main-menu" aria-label="Main menu" aria-haspopup="true">
+                                    id="main-menu" aria-label="Main menu" aria-haspopup="true" onclick="toggle()">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M4 6h16M4 12h16M4 18h16" />
@@ -83,8 +83,8 @@
         -->
         <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
             <div class="rounded-lg shadow-md">
-                <div class="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical"
-                     aria-labelledby="main-menu">
+                <div class="rounded-lg bg-white shadow-xs overflow-hidden hidden" role="menu" aria-orientation="vertical"
+                     aria-labelledby="main-menu" id="menu">
                     <div class="px-5 pt-4 flex items-center justify-between">
                         <div>
                             <img class="h-8 w-auto" src="/img/codehub.svg" alt="">
@@ -92,7 +92,7 @@
                         <div class="-mr-2">
                             <button type="button"
                                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                                    aria-label="Close menu">
+                                    aria-label="Close menu" onclick="toggle()">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M6 18L18 6M6 6l12 12" />
