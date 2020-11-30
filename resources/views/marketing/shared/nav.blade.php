@@ -17,13 +17,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="hidden md:flex md:space-x-10">                                      
+                <div class="hidden md:flex md:space-x-10">
                     <a href="/about"
-                       class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">About
-                        CodeHub</a>
-                    <a href="/about-mentorships"
                        class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">
-                        Mentorships</a>  
+                       About
+                    </a>
                     @if(!auth()->check())
                     <a href="/register"
                        class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Register</a>
@@ -80,10 +78,7 @@
                     <div class="px-2 pt-2 pb-3">
                         <a href="/about"
                            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                           role="menuitem">About CodeHub</a>
-                        <a href="/about-mentorships"
-                           class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"
-                           role="menuitem">Mentorships</a>
+                           role="menuitem">About</a>
                         @if(!auth()->check())
                         <a href="/register"
                            class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50 focus:outline-none focus:text-gray-900 focus:bg-gray-50 transition duration-150 ease-in-out"

@@ -20,7 +20,6 @@ Route::view('/', 'marketing.home');
 // Privacy page routes
 Route::view('/privacy', 'marketing.privacypage');
 Route::view('/about', 'marketing.about');
-Route::view('/about-mentorships', 'marketing.mentorships');
 
 Route::name('auth.')
     ->group(function () {
