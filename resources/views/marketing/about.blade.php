@@ -1,10 +1,8 @@
 @extends('marketing')
 
-@section('content')
+@section('content')    
 
-    @include('marketing.shared.navhero')
-
-    @include('marketing.about.content')
+    @include('marketing.about.page')
 
     @include('marketing.shared.footer')
 

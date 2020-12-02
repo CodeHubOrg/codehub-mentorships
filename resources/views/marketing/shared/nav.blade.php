@@ -8,7 +8,7 @@
                         <div class="-mr-2 flex items-center md:hidden">
                             <button type="button"
                                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                                    id="main-menu" aria-label="Main menu" aria-haspopup="true">
+                                    id="main-menu" aria-label="Main menu" aria-haspopup="true" onclick="toggle()">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M4 6h16M4 12h16M4 18h16" />
@@ -25,25 +25,27 @@
                     @if(!auth()->check())
                     <a href="/register"
                        class="font-medium text-gray-500 hover:text-gray-900 transition duration-150 ease-in-out">Register</a>
-                    @endif
+                     @endif
                 </div>
                 <div class="hidden md:absolute md:flex md:items-center md:justify-end md:inset-y-0 md:right-0">
-                  <span class="inline-flex rounded-md shadow">
-                      @if(auth()->check())
-                          <a href="/dashboard"
-                             class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out">
-                            My account
-                          </a>
-                      @else
-                          <a href="/login"
-                             class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out">
-                            Log in
-                            </a>
-                      @endif
-                  </span>
+          <span class="inline-flex rounded-md shadow">
+              @if(auth()->check())
+                  <a href="/dashboard"
+                     class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out">
+                    My account
+                  </a>
+              @else
+                  <a href="/login"
+                     class="inline-flex items-center px-4 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-600 bg-white hover:text-indigo-500 focus:outline-none focus:border-indigo-300 focus:shadow-outline-indigo active:bg-gray-50 active:text-indigo-700 transition duration-150 ease-in-out">
+                    Log in
+                    </a>
+              @endif
+
+          </span>
                 </div>
             </nav>
         </div>
+
         <!--
           Mobile menu, show/hide based on menu open state.
 
@@ -56,18 +58,16 @@
         -->
         <div class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
             <div class="rounded-lg shadow-md">
-                <div class="rounded-lg bg-white shadow-xs overflow-hidden" role="menu" aria-orientation="vertical"
-                     aria-labelledby="main-menu">
+                <div class="rounded-lg bg-white shadow-xs overflow-hidden hidden" role="menu" aria-orientation="vertical"
+                     aria-labelledby="main-menu" id="menu">
                     <div class="px-5 pt-4 flex items-center justify-between">
                         <div>
-                          <a href="/">
                             <img class="h-8 w-auto" src="/img/codehub.svg" alt="">
-                          </a>
                         </div>
                         <div class="-mr-2">
                             <button type="button"
                                     class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                                    aria-label="Close menu">
+                                    aria-label="Close menu" onclick="toggle()">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                           d="M6 18L18 6M6 6l12 12" />
@@ -103,4 +103,3 @@
                 </div>
             </div>
         </div>
-

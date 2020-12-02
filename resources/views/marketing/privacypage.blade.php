@@ -1,8 +1,6 @@
 @extends('marketing')
 
-@section('content')
-
-    @include('marketing.shared.navhero')
+@section('content')    
 
     @include('marketing.privacy.privacy')
 
