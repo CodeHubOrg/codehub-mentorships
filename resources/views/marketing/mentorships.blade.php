@@ -2,10 +2,10 @@
 
 @section('content')
 
-    @include('marketing.home.navhero')
+    @include('marketing.shared.navhero')
 
-    @include('marketing.home.stats')
-  
+    @include('marketing.mentorships.content')
+
     @include('marketing.shared.footer')
 
 @endsection

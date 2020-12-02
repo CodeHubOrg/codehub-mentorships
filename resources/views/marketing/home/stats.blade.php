@@ -14,7 +14,7 @@
                     Mentors
                 </dt>
                 <dd class="order-1 text-5xl leading-none font-extrabold text-white">
-                    12
+                    15
                 </dd>
             </div>
             <div class="flex flex-col mt-10 sm:mt-0">
@@ -22,16 +22,19 @@
                     Mentees
                 </dt>
                 <dd class="order-1 text-5xl leading-none font-extrabold text-white">
-                    32
+                    13
                 </dd>
             </div>
             <div class="flex flex-col mt-10 sm:mt-0">
-                <dt class="order-2 mt-2 text-lg leading-6 font-medium text-indigo-200">
+                <!-- <dt class="order-2 mt-2 text-lg leading-6 font-medium text-indigo-200">
                     Technologies covered
                 </dt>
                 <dd class="order-1 text-5xl leading-none font-extrabold text-white">
                     7
-                </dd>
+                </dd> -->
+
+                <span class="text-lg leading-none font-extrabold text-white">
+                    HTML, CSS, JavaScript, Python, Java, PHP, Docker, Testing, React, Angular &hellip;
             </div>
         </dl>
     </div>
