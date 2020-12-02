@@ -18,7 +18,9 @@ Auth::routes(['verify' => true]);
 Route::view('/', 'marketing.home');
 
 // Privacy page routes
-Route::view('/privacy', 'privacy.privacypage');
+Route::view('/privacy', 'marketing.privacypage');
+Route::view('/about', 'marketing.about');
+Route::view('/about-mentorships', 'marketing.mentorships');
 
 Route::name('auth.')
     ->group(function () {
@@ -45,6 +47,7 @@ Route::view('/', 'marketing.home');
 Route::middleware(['auth'])->group(function () {
     // User application routes
     Route::get('/dashboard', [DashboardController::class, 'show'])
+        ->middleware(['verified'])
         ->name('dashboard.index');
 
     // route only visible to email verified users,
