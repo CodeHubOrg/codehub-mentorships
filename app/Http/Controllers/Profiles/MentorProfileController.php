@@ -35,7 +35,7 @@ class MentorProfileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\MentorProfileRequest $request
+     * @param  \App\Http\Requests\MentorProfileRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(MentorProfileRequest $request)
