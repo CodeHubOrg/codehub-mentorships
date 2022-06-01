@@ -28,7 +28,6 @@ class AdminDashboardController extends Controller
         $mentorshipSummary = [];
         $menteeMentorProfiles = MenteeProfile::whereHas('mentorProfiles')->get();
         foreach ($menteeMentorProfiles as $mentee) {
-            $summary;
             $menteeUser = $mentee->user;
             $summary['menteeFirstName'] = $menteeUser->first_name;
             $summary['menteeLastName'] = $menteeUser->last_name;
